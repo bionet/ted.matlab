@@ -1,0 +1,204 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   
+      <!--
+This HTML is auto-generated from an M-file.
+To make changes, update the M-file and republish this document.
+      -->
+      <title>Generating a Test Signal</title>
+      <meta name="generator" content="MATLAB 7.7">
+      <meta name="date" content="2009-05-01">
+      <meta name="m-file" content="gen_test_signal_demo"><style type="text/css">
+
+body {
+  background-color: white;
+  margin:10px;
+}
+
+h1 {
+  color: #990000; 
+  font-size: x-large;
+}
+
+h2 {
+  color: #990000;
+  font-size: medium;
+}
+
+/* Make the text shrink to fit narrow windows, but not stretch too far in 
+wide windows. */ 
+p,h1,h2,div.content div {
+  max-width: 600px;
+  /* Hack for IE6 */
+  width: auto !important; width: 600px;
+}
+
+pre.codeinput {
+  background: #EEEEEE;
+  padding: 10px;
+}
+@media print {
+  pre.codeinput {word-wrap:break-word; width:100%;}
+} 
+
+span.keyword {color: #0000FF}
+span.comment {color: #228B22}
+span.string {color: #A020F0}
+span.untermstring {color: #B20000}
+span.syscmd {color: #B28C00}
+
+pre.codeoutput {
+  color: #666666;
+  padding: 10px;
+}
+
+pre.error {
+  color: red;
+}
+
+p.footer {
+  text-align: right;
+  font-size: xx-small;
+  font-weight: lighter;
+  font-style: italic;
+  color: gray;
+}
+
+  </style></head>
+   <body>
+      <div class="content">
+         <h1>Generating a Test Signal</h1>
+         <!--introduction-->
+         <p>It is often useful to be able to quickly generate band-limited test signals for the purposes of testing signal processing
+            programs. This file describes how to do so using the <b>gen_test_signal</b> function.
+         </p>
+         <p>Rather than compute the sum of several sinusoids (which can be quite time consuming when done at a high sampling rate), <b>gen_test_signal</b> constructs a Fourier representation of the desired signal and computes its inverse transform.
+         </p>
+         <!--/introduction-->
+         <h2>Contents</h2>
+         <div>
+            <ul>
+               <li><a href="#1">A Simple Test Signal</a></li>
+               <li><a href="#2">Adding Noise</a></li>
+               <li><a href="#6">Specifying the Number of Frequency Components</a></li>
+            </ul>
+         </div>
+         <h2>A Simple Test Signal<a name="1"></a></h2>
+         <p>To generate 1 second of a signal sampled at 10 kHz containing 3 frequency components no greater than 10 Hz, use the following
+            parameters:
+         </p><pre class="codeinput">dur = 1;
+fs = 10^4;
+dt = 1/fs;
+fmax = 10;
+t = linspace(0,dur,floor(dur/dt));
+</pre><h2>Adding Noise<a name="2"></a></h2>
+         <p>Generating a simple signal with no added noise is easy:</p><pre class="codeinput">fig_title = <span class="string">'test signal with no noise (default)'</span>;
+rand(<span class="string">'twister'</span>,0); randn(<span class="string">'state'</span>,0);
+u = gen_test_signal(dur,dt,fmax);
+plot_signal(t,u,fig_title)
+</pre><img vspace="5" hspace="5" src="gen_test_signal_demo_01.png" alt=""> <p>One can explicitly set the noise power (in dB); hence, if the power is -inf, no noise will be added:</p><pre class="codeinput">fig_title = <span class="string">'test signal with no noise'</span>;
+rand(<span class="string">'twister'</span>,0); randn(<span class="string">'state'</span>,0);
+u = gen_test_signal(dur,dt,fmax,-inf);
+plot_signal(t,u,fig_title)
+</pre><img vspace="5" hspace="5" src="gen_test_signal_demo_02.png" alt=""> <p>Here are some examples with added noise:</p><pre class="codeinput">np = 1;
+fig_title = sprintf(<span class="string">'test signal with %d dB of noise'</span>,np);
+rand(<span class="string">'twister'</span>,0); randn(<span class="string">'state'</span>,0);
+u = gen_test_signal(dur,dt,fmax,np);
+plot_signal(t,u,fig_title)
+</pre><img vspace="5" hspace="5" src="gen_test_signal_demo_03.png" alt=""> <pre class="codeinput">np = -5;
+fig_title = sprintf(<span class="string">'test signal with %d dB of noise'</span>,np);
+rand(<span class="string">'twister'</span>,0); randn(<span class="string">'state'</span>,0);
+u = gen_test_signal(dur,dt,fmax,np);
+plot_signal(t,u,fig_title)
+</pre><img vspace="5" hspace="5" src="gen_test_signal_demo_04.png" alt=""> <h2>Specifying the Number of Frequency Components<a name="6"></a></h2>
+         <p>Once can also adjust the number of frequency components:</p><pre class="codeinput">np = -5;
+c = 8;
+fig_title = sprintf(<span class="string">'test signal with %d dB of noise and %d components'</span>,np,c);
+rand(<span class="string">'twister'</span>,0); randn(<span class="string">'state'</span>,0);
+u = gen_test_signal(dur,dt,fmax,np,c);
+plot_signal(t,u,fig_title)
+</pre><img vspace="5" hspace="5" src="gen_test_signal_demo_05.png" alt=""> <pre class="codeinput">fmax = 50;
+np = -10;
+c = 20;
+fig_title = sprintf(<span class="string">'test signal with %d dB of noise and %d components'</span>,np,c);
+rand(<span class="string">'twister'</span>,0); randn(<span class="string">'state'</span>,0);
+u = gen_test_signal(dur,dt,fmax,np,c);
+plot_signal(t,u,fig_title)
+</pre><img vspace="5" hspace="5" src="gen_test_signal_demo_06.png" alt=""> <p class="footer"><br>
+            Published with MATLAB&reg; 7.7<br></p>
+      </div>
+      <!--
+##### SOURCE BEGIN #####
+%% Generating a Test Signal
+% It is often useful to be able to quickly generate band-limited test
+% signals for the purposes of testing signal processing programs. This
+% file describes how to do so using the *gen_test_signal* function.
+%
+% Rather than compute the sum of several sinusoids (which can be
+% quite time consuming when done at a high sampling rate),
+% *gen_test_signal* constructs a Fourier representation of the
+% desired signal and computes its inverse transform.
+
+%% A Simple Test Signal
+% To generate 1 second of a signal sampled at 10 kHz containing 3 frequency
+% components no greater than 10 Hz, use the following parameters:
+dur = 1;
+fs = 10^4;     
+dt = 1/fs; 
+fmax = 10;   
+t = linspace(0,dur,floor(dur/dt));
+
+%% Adding Noise
+% Generating a simple signal with no added noise is easy:
+fig_title = 'test signal with no noise (default)';
+rand('twister',0); randn('state',0);
+u = gen_test_signal(dur,dt,fmax);
+plot_signal(t,u,fig_title)
+
+%% 
+% One can explicitly set the noise power (in dB); hence, if the
+% power is -inf, no noise will be added:
+fig_title = 'test signal with no noise';
+rand('twister',0); randn('state',0);
+u = gen_test_signal(dur,dt,fmax,-inf);
+plot_signal(t,u,fig_title)
+
+%%
+% Here are some examples with added noise:
+np = 1;
+fig_title = sprintf('test signal with %d dB of noise',np);
+rand('twister',0); randn('state',0);
+u = gen_test_signal(dur,dt,fmax,np);
+plot_signal(t,u,fig_title)
+%%
+np = -5;
+fig_title = sprintf('test signal with %d dB of noise',np);
+rand('twister',0); randn('state',0);
+u = gen_test_signal(dur,dt,fmax,np);
+plot_signal(t,u,fig_title)
+
+%% Specifying the Number of Frequency Components
+% Once can also adjust the number of frequency components:
+np = -5;
+c = 8;
+fig_title = sprintf('test signal with %d dB of noise and %d components',np,c);
+rand('twister',0); randn('state',0);
+u = gen_test_signal(dur,dt,fmax,np,c);
+plot_signal(t,u,fig_title)
+%%
+fmax = 50;
+np = -10;
+c = 20;
+fig_title = sprintf('test signal with %d dB of noise and %d components',np,c);
+rand('twister',0); randn('state',0);
+u = gen_test_signal(dur,dt,fmax,np,c);
+plot_signal(t,u,fig_title)
+
+##### SOURCE END #####
+-->
+   </body>
+</html>

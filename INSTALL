@@ -1,0 +1,18 @@
+Installation Instructions
+=========================
+
+1. Unpack the archive into an installation directory. Assuming that
+   Matlab is installed in the directory $MATLAB, one may wish to
+   install the software in $MATLAB/toolbox/tdc if one has
+   administrative access to the machine.
+
+2. Add the subdirectories of the installation directory to Matlab's
+   search path. For example, if the software is installed in
+   $MATLAB/toolbox/utils, one may add the following lines to the list of
+   paths in $MATLAB/toolbox/local/pathdef.m and restart Matlab to make the 
+   toolbox contents available:
+
+   matlabroot,'/toolbox/utils:', ...
+   matlabroot,'/toolbox/utils/utils:', ...
+   matlabroot,'/toolbox/utils/demos:', ...
+

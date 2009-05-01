@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<demos>
+
+<name>Bionet Matlab Utilities - Demos</name>
+<type>toolbox</type>
+<icon>$toolbox/matlab/icons/matlabicon.gif</icon>
+<description>Demos of how to use the Bionet Matlab Utilities.</description>
+
+<website></website>
+
+<demosection>
+   <label>Demos</label>
+   <demoitem>
+      <label>Test signal generation example.</label>
+      <type>M-file</type>
+      <file>html/gen_test_signal_demo.html</file>
+   </demoitem>
+</demosection>
+
+</demos>
