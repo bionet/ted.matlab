@@ -3,17 +3,17 @@ Installation Instructions
 
 1. Unpack the archive into an installation directory. Assuming that
    Matlab is installed in the directory $MATLAB, one may wish to
-   install the software in $MATLAB/toolbox/tdc if one has
+   install the software in $MATLAB/toolbox/ted if one has
    administrative access to the machine.
 
 2. Add the subdirectories of the installation directory to Matlab's
    search path so that the functions comprised by the toolbox may be
    easily accessed. For example, if the software is installed in
-   $MATLAB/toolbox/tdc, one may add the following lines to the list of
+   $MATLAB/toolbox/ted, one may add the following lines to the list of
    paths in $MATLAB/toolbox/local/pathdef.m and restart Matlab to make 
    the toolbox contents available:
 
-   matlabroot,'/toolbox/tdc/:', ...
-   matlabroot,'/toolbox/tdc/tdc:', ...
-   matlabroot,'/toolbox/tdc/demos:', ...
+   matlabroot,'/toolbox/ted/:', ...
+   matlabroot,'/toolbox/ted/ted:', ...
+   matlabroot,'/toolbox/ted/demos:', ...
 

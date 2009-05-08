@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <demos>
 
-<name>Bionet Time Domain Coding Toolbox - Demos</name>
+<name>Bionet Time Encoding and Decoding Toolbox - Demos</name>
 <type>toolbox</type>
 <icon>$toolbox/matlab/icons/matlabicon.gif</icon>
-<description>Demos of how to use the Bionet Time Domain Coding Toolbox.</description>
+<description>Demos of how to use the Bionet Time Encoding and Decoding Toolbox.</description>
 
 <website></website>
 
 <demosection>
    <label>Demos</label>
    <demoitem>
-      <label>Time domain encoding and decoding with an asynchronous sigma-delta modulator.</label>
+      <label>Time encoding and decoding with an asynchronous sigma-delta modulator.</label>
       <file>html/gen_test_signal_demo.html</file>
    </demoitem>
    <demoitem>
-      <label>Time domain encoding and decoding with an integrate-and-fire neuron.</label>
+      <label>Time encoding and decoding with an integrate-and-fire neuron.</label>
       <file>html/iaf_demo.html</file>
    </demoitem>
 </demosection>

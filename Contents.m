@@ -1,5 +1,5 @@
-% Time Domain Coding Toolbox
-% Version 0.01
+% Time Encoding and Decoding Toolbox
+% Version 0.011
 %
 % Asynchronous Sigma-Delta Modulator Functions
 %   asdm_decode      - ASDM time decoding machine.
