@@ -19,7 +19,7 @@ clf;
 dt = t(2)-t(1);
 cs = cumsum(s);
 a = axes('position',[0.13,0.3,0.775,0.6150]);
-stem(cs,u(round(cs/dt)));
+stem(cs,u(round(cs/dt)),'MarkerSize',0);
 hold on;
 plot(t,u);
 xlabel('t (seconds)');
