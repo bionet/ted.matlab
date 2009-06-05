@@ -52,7 +52,7 @@ while length(ci) < nc,
   end
   ci = [ci, temp];
 end
-p = -pi*rand(1,nc);
+p = -2*pi*rand(1,nc);
 f(ci) = (n/2)*exp(1j*p);
 %f(end-ci+2) = (n/2)*exp(1j*-p);
 
