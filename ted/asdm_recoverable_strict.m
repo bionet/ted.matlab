@@ -3,7 +3,7 @@
 %   be recovered using an ASDM decoder with capacitance K,
 %   threshold D, bias B, and bandwidth BW (in rad/s).
 
-%   Author(s): Lev Givon
+%   Author: Lev Givon
 %   Copyright 2009 Trustees of Columbia University
 
 function result = asdm_recoverable_strict(u,bw,b,d,k)

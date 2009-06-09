@@ -7,7 +7,7 @@
 %   1/DT Hz. This function uses a fast decoding algorithm; M
 %   specifies the number of bins used by this algorithm.
 
-%   Author(s): Lev Givon
+%   Author: Lev Givon
 %   Copyright 2009 Trustees of Columbia University
 
 function u_rec = asdm_decode_fast(s,dur,dt,bw,M,b,d,k)

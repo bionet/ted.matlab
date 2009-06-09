@@ -9,7 +9,7 @@
 %   threshold and integration constant of the encoder to recover
 %   the encoded signal.
 
-%   Author(s): Lev Givon
+%   Author: Lev Givon
 %   Copyright 2009 Trustees of Columbia University
 
 function u_rec = asdm_decode_ins(s,dur,dt,bw,b)

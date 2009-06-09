@@ -19,7 +19,7 @@
 %   the values of the state Y of the IAF neuron, and the time INT since
 %   the last emitted spike.
 
-%   Author(s): Lev Givon
+%   Author: Lev Givon
 %   Copyright 2009 Trustees of Columbia University
 
 function [varargout] = iaf_encode(u,dt,b,d,varargin)

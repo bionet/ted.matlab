@@ -3,11 +3,8 @@
 %   recovered using an IAF decoder with bias B, threshold D,
 %   resistance R, capacitance C, and bandwidth W (in rad/s).
 %
-%   Author(s):     L. Givon, E. Pnevmatikakis
-%   Copyright 2008 L. Givon, E. Pnevmatikakis
-%                  Bionet Research Group
-%                  Dept. of Electrical Engineering
-%                  Columbia University
+%   Author: Lev Givon
+%   Copyright 2009 Trustees of Columbia University 
 
 function res = iaf_recoverable(u,W,b,d,R,C)
 

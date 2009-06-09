@@ -5,7 +5,7 @@
 %   Note that the bound assumed by this check is not as strict as
 %   that described in most of Prof. Lazar's papers.
 
-%   Author(s): Lev Givon
+%   Author: Lev Givon
 %   Copyright 2009 Trustees of Columbia University
 
 function result = asdm_recoverable(u,bw,b,d,k)

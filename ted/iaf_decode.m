@@ -10,7 +10,7 @@
 %   non-leaky neuron model is used. C is assumed to be 1 if not
 %   specified.
 
-%   Author(s): Lev Givon
+%   Author: Lev Givon
 %   Copyright 2009 Trustees of Columbia University
 
 function u_rec = iaf_decode(s,dur,dt,bw,b,d,varargin)

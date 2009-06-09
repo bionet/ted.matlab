@@ -5,7 +5,7 @@
 %   B, Schmitt trigger threshold D, and integration constant K. The
 %   recovered signal is assumed to be sampled at sampling rate 1/DT Hz.
 
-%   Author(s): Lev Givon
+%   Author: Lev Givon
 %   Copyright 2009 Trustees of Columbia University
 
 function u_rec = asdm_decode(s,dur,dt,bw,b,d,k)
