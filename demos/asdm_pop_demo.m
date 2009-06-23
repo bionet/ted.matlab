@@ -62,3 +62,8 @@ fprintf(1,'%s\n',fig_title);
 u_rec = func_timer(@asdm_decode_pop,{s1,s2},dur,dt,bw, ...
                    {b1,b2},{d1,d2},{k1,k2});
 plot_compare(t,u,u_rec,fig_title);
+%%
+fig_title = 'decoding using threshold-insensitive ASDM population algorithm';
+fprintf(1,'%s\n',fig_title);
+u_rec = func_timer(@asdm_decode_pop_ins,{s1,s2},dur,dt,bw,{b1,b2});
+plot_compare(t,u,u_rec,fig_title);
