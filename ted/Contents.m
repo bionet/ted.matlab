@@ -17,9 +17,7 @@
 % Utility Functions
 %   gen_test_signal     - Generate bandlimited test signals.
 %
-% Demonstrations
-%   asdm_demo           - Demos that use the ASDM encoder/decoders.
-%   iaf_demo            - Demos that use the IAF encoder/decoders.
+% See also TEDDEMOS
 
 % Author: Lev Givon
 % Copyright 2009 Trustees of Columbia University
