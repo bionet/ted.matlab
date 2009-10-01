@@ -1,21 +1,21 @@
-function G=G_block_computing(tk1,tk2,d1,d2,W,dt)
-
-% Computing the block of G^{ij} of G matrix for ideal IAF Neurons with
-% delay
-
+% Compute the block G^{ij} of the G matrix for ideal IAF neurons with
+% delay.
+%
 % Inputs
-% tk1: spike times of neuron i
-% tk2: spike times of neuron j
-% d1 : delay of neuron i
-% d2 : delay of neuron j
-% W  : Bandwidth
-% dt : Time Step
-
+%   tk1 - spike times of neuron i
+%   tk2 - spike times of neuron j
+%   d1  - delay of neuron i
+%   d2  - delay of neuron j
+%   W   - bandwidth
+%   dt  - time step
+%
 % Output
-% G: Block G^{ij} of G matrix
+%   G   - block G^{ij} of G matrix
 
-%   Author(s): Eftychios A. Pnevmatikakis
-%   Copyright 2009 Trustees of Columbia University
+% Author: Eftychios A. Pnevmatikakis
+% Copyright 2009 Trustees of Columbia University
+
+function G = G_block_computing(tk1, tk2, d1, d2, W, dt)
 
 if nargin ~= 6,
   error('Wrong number of input arguments.');
