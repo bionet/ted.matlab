@@ -3,7 +3,7 @@ Installation Instructions
 
 1. Unpack the archive into an installation directory. Assuming that
    Matlab is installed in the directory $MATLAB, one may wish to
-   install the software in $MATLAB/toolbox/tdc if one has
+   install the software in $MATLAB/toolbox/utils if one has
    administrative access to the machine.
 
 2. Add the subdirectories of the installation directory to Matlab's
