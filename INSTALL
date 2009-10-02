@@ -1,9 +1,8 @@
 Installation Instructions
 =========================
 
-1. The Time Encoding and Decoding Toolbox requires that the Bionet
-   Matlab Utilities (available at http://bionet.ee.columbia.edu/code)
-   be installed in order to run.
+1. This package requires that the Bionet Matlab Utilities (available at 
+   http://bionet.ee.columbia.edu/code) be installed in order to run.
 
 2. Unpack the archive into an installation directory. Assuming that
    Matlab is installed in the directory $MATLAB, one may wish to
