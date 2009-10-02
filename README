@@ -8,7 +8,7 @@ delay the encoded signal by arbitrary known lengths of time.
 Author & Acknowledgements
 =========================
 
-The implementation in this package was written by Eftychios Pnevmatikakis,
+The implementation in this package was written by Eftychios A. Pnevmatikakis,
 currently at the Bionet Group [1] at Columbia University. The code was
 reviewed and packaged by Lev Givon, also of the Bionet Group.
 
@@ -17,7 +17,7 @@ Contact Information
 
 Please direct all questions and comments pertaining to this software to
 
-Eftychios Pnevmatikakis <eap2111@columbia.edu>
+Eftychios A. Pnevmatikakis <eap2111@columbia.edu>
 
 References
 ==========
