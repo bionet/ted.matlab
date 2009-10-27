@@ -11,7 +11,7 @@ To make changes, update the M-file and republish this document.
       -->
       <title>Generating a Test Signal</title>
       <meta name="generator" content="MATLAB 7.7">
-      <meta name="date" content="2009-06-05">
+      <meta name="date" content="2009-10-26">
       <meta name="m-file" content="gen_test_signal_demo"><style type="text/css">
 
 body {
@@ -94,7 +94,7 @@ p.footer {
 fs = 10^4;
 dt = 1/fs;
 fmax = 10;
-t = linspace(0,dur,floor(dur/dt));
+t = [0:dt:dur];
 </pre><h2>Adding Noise<a name="2"></a></h2>
          <p>Generating a simple signal with no added noise is easy:</p><pre class="codeinput">fig_title = <span class="string">'test signal with no noise (default)'</span>;
 rand(<span class="string">'twister'</span>,0); randn(<span class="string">'state'</span>,0);
@@ -150,7 +150,7 @@ dur = 1;
 fs = 10^4;     
 dt = 1/fs; 
 fmax = 10;   
-t = linspace(0,dur,floor(dur/dt));
+t = [0:dt:dur];
 
 %% Adding Noise
 % Generating a simple signal with no added noise is easy:
