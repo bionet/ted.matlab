@@ -1,5 +1,5 @@
 % Bionet Matlab Utilities
-% Version 0.011
+% Version 0.012
 %
 % Utility Functions
 %   func_timer      - Time the execution of a function.

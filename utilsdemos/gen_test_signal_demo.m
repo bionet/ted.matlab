@@ -15,7 +15,7 @@ dur = 1;
 fs = 10^4;     
 dt = 1/fs; 
 fmax = 10;   
-t = linspace(0,dur,floor(dur/dt));
+t = [0:dt:dur];
 
 %% Adding Noise
 % Generating a simple signal with no added noise is easy:

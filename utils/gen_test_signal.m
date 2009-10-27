@@ -33,7 +33,9 @@ if nargin > 4,
   nc = varargin{2};
 end
 
-n = floor(dur/dt);
+% Determine number of entries in generated signal. This corresponds
+% to the length of [0:dt:dur]:
+n = fix(dur/dt)+1;
 
 % Randomly set nc frequency components:
 f = zeros(1,n);
