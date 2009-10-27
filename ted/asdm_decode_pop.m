@@ -66,9 +66,8 @@ end
 c = pinv(G)*q;
 
 % Reconstruct the signal using the coefficients:
-Nt = floor(dur/dt);
-t = linspace(0,dur,Nt);
-u_rec = zeros(1,Nt);
+t = [0:dt:dur];
+u_rec = zeros(1,length(t));
 for m=1:M,
     for k=1:Nsh_list(m),
         u_rec = u_rec + sinc(bwpi*(t-tsh_list{m}(k)))*bwpi* ...

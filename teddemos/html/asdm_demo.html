@@ -11,7 +11,7 @@ To make changes, update the M-file and republish this document.
       -->
       <title>Time Encoding and Decoding with an Asynchronous Sigma-Delta Modulator</title>
       <meta name="generator" content="MATLAB 7.7">
-      <meta name="date" content="2009-05-01">
+      <meta name="date" content="2009-10-26">
       <meta name="m-file" content="asdm_demo"><style type="text/css">
 
 body {
@@ -89,7 +89,7 @@ fs = 1e6;
 dt = 1/fs;
 f = 32;
 bw = 2*pi*f;
-t = linspace(0,dur,floor(dur/dt));
+t = [0:dt:dur];
 
 np = -inf;
 
@@ -103,7 +103,7 @@ fprintf(1,<span class="string">'%s\n'</span>,fig_title);
 u = func_timer(@gen_test_signal,dur,dt,f,np);
 plot_signal(t,u,fig_title);
 </pre><pre class="codeoutput">ASDM input signal with no noise
-execution time = 0.051 s
+execution time = 0.117 s
 </pre><img vspace="5" hspace="5" src="asdm_demo_01.png" alt=""> <h2>Time Encoding<a name="2"></a></h2>
          <p>The encoding parameters are validated to ensure that signal recovery will be possible:</p><pre class="codeinput">b = 3.5;    <span class="comment">% bias</span>
 d = 0.7;    <span class="comment">% threshold</span>
@@ -118,20 +118,20 @@ fprintf(1,<span class="string">'%s\n'</span>,fig_title);
 s = func_timer(@asdm_encode,u,dt,b,d,k);
 plot_encoded(t,u,s,fig_title);
 </pre><pre class="codeoutput">encoding using nonleaky ASDM algorithm
-execution time = 0.561 s
+execution time = 0.493 s
 </pre><img vspace="5" hspace="5" src="asdm_demo_02.png" alt=""> <h2>Time Decoding<a name="3"></a></h2>
          <p>The encoded signal can be recovered using one of several different decoding algorithms:</p><pre class="codeinput">fig_title = <span class="string">'decoding using ASDM algorithm'</span>;
 fprintf(1,<span class="string">'%s\n'</span>,fig_title);
 u_rec = func_timer(@asdm_decode,s,dur,dt,bw,b,d,k);
 plot_compare(t,u,u_rec,fig_title);
 </pre><pre class="codeoutput">decoding using ASDM algorithm
-execution time = 0.456 s
+execution time = 0.492 s
 </pre><img vspace="5" hspace="5" src="asdm_demo_03.png" alt=""> <pre class="codeinput">fig_title = <span class="string">'decoding using threshold-insensitive ASDM algorithm'</span>;
 fprintf(1,<span class="string">'%s\n'</span>,fig_title);
 u_rec = func_timer(@asdm_decode_ins,s,dur,dt,bw,b);
 plot_compare(t,u,u_rec,fig_title);
 </pre><pre class="codeoutput">decoding using threshold-insensitive ASDM algorithm
-execution time = 0.438 s
+execution time = 0.341 s
 </pre><img vspace="5" hspace="5" src="asdm_demo_04.png" alt=""> <pre class="codeinput">M = 5;    <span class="comment">% fast decoding parameter</span>
 
 fig_title = <span class="string">'decoding using fast ASDM algorithm'</span>;
@@ -139,7 +139,7 @@ fprintf(1,<span class="string">'%s\n'</span>,fig_title);
 u_rec = func_timer(@asdm_decode_fast,s,dur,dt,bw,M,b,d,k);
 plot_compare(t,u,u_rec,fig_title);
 </pre><pre class="codeoutput">decoding using fast ASDM algorithm
-execution time = 0.228 s
+execution time = 0.182 s
 </pre><img vspace="5" hspace="5" src="asdm_demo_05.png" alt=""> <p class="footer"><br>
             Published with MATLAB&reg; 7.7<br></p>
       </div>
@@ -157,7 +157,7 @@ fs = 1e6;
 dt = 1/fs;
 f = 32;      
 bw = 2*pi*f;
-t = linspace(0,dur,floor(dur/dt));
+t = [0:dt:dur];
 
 np = -inf;    
 

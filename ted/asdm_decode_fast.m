@@ -21,8 +21,7 @@ ts = cumsum(s);
 tsh = (ts(1:end-1)+ts(2:end))/2;
 nsh = length(tsh);
 
-nt = floor(dur/dt);
-t = linspace(0,dur,nt);
+t = [0:dt:dur];
 
 jbwM = j*bw/M;
 

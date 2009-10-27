@@ -22,8 +22,7 @@ end
 ts = cumsum(s);
 tsh = (ts(1:end-1)+ts(2:end))/2;
 
-nt = floor(dur/dt);
-t = linspace(0,dur,nt);
+t = [0:dt:dur];
 nsh = length(tsh);
 
 bwpi = bw/pi;
@@ -44,7 +43,7 @@ Bq = ((-1).^[0:nsh-1].*(s(2:end)-s(1:end-1))*b)';
 % Reconstruct signal by adding up the weighted sinc functions; the
 % first row of B is removed to eliminate boundary issues. The
 % weighted sinc functions are computed on the fly here to save memory:
-u_rec = zeros(1,nt);
+u_rec = zeros(1,length(t));
 c = pinv(B(2:end,:)*G)*Bq(2:end);
 for i=1:nsh,
   u_rec = u_rec + sinc(bwpi*(t-tsh(i)))*bwpi*c(i);

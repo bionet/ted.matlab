@@ -37,8 +37,7 @@ ts = cumsum(s);
 tsh = (ts(1:end-1)+ts(2:end))/2;
 nsh = length(tsh);
 
-nt = floor(dur/dt);
-t = linspace(0,dur,nt);
+t = [0:dt:dur];
 
 bwpi = bw/pi;
 RC = R*C;
@@ -65,7 +64,7 @@ end
 G_inv = pinv(G);
 
 % Reconstruct signal by adding up the weighted sinc functions:
-u_rec = zeros(1,nt);
+u_rec = zeros(1,length(t));
 c = G_inv*q;
 for i=1:nsh,
   u_rec = u_rec + sinc(bwpi*(t-tsh(i)))*bwpi*c(i);

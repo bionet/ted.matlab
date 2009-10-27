@@ -10,7 +10,7 @@ fs = 1e6;
 dt = 1/fs;
 f = 32;      
 bw = 2*pi*f;
-t = linspace(0,dur,floor(dur/dt));
+t = [0:dt:dur];
 
 np = -inf;    
 
