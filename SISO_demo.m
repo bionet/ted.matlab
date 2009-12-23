@@ -30,7 +30,6 @@ R = 50;
 tk  = iaf_encode_leaky(u, t, b, d, R, C);
 
 u_rec = consistent_decoding_LIF(tk,t, b, d, R, C);
-
 %% plot
 
 figure;plot(t,u,t,u_rec); 

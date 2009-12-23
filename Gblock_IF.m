@@ -5,7 +5,7 @@ lj=length(tj)-1;
 
 Gb = zeros(li,lj);
 
-if sum(ti(1:min(li,lj)+1)==tj(1:min(li,lj)+1))==length(ti)
+if isequal(ti,tj) %sum(ti(1:min(li,lj)+1)==tj(1:min(li,lj)+1))==length(ti)
     for i=1:li
         for j=1:li
             tmz=ti(min(i,j));
