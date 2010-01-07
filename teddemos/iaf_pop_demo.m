@@ -26,8 +26,9 @@ u = func_timer(@gen_test_signal,dur,dt,f,np);
 plot_signal(t,u,fig_title);
 
 %% Encoding and Decoding with Leaky Neurons
-% The encoding parameters are validated to ensure that signal
-% recovery will possible:
+% In this example, the input signal is encoded using two leaky IAF
+% neurons with different encoding parameters. The parameters are
+% validated to ensure that signal recovery will be possible:
 b1 = 3.5;    % bias
 d1 = 0.7;    % threshold
 R1 = 10;     % resistance
@@ -37,6 +38,11 @@ if ~iaf_recoverable(u,bw,b1,d1,R1,C1),
   return
 end
 
+fig_title = 'encoding using leaky IAF algorithm (encoder #1)';
+fprintf(1,'%s\n',fig_title);
+s1 = func_timer(@iaf_encode,u,dt,b1,d1,R1,C1);
+plot_encoded(t,u,s1,fig_title);
+%%
 b2 = 3.4;    % bias
 d2 = 0.8;    % threshold
 R2 = 9.0;    % resistance
@@ -46,34 +52,28 @@ if ~iaf_recoverable(u,bw,b2,d2,R2,C2),
   return
 end
 
-% fig_title = 'encoding using leaky IAF algorithm (encoder #1)';
-% fprintf(1,'%s\n',fig_title);
-% s1 = func_timer(@iaf_encode,u,dt,b1,d1,R1,C1);
-% plot_encoded(t,u,s1,fig_title);
-
-% fig_title = 'encoding using leaky IAF algorithm (encoder #2)';
-% fprintf(1,'%s\n',fig_title);
-% s2 = func_timer(@iaf_encode,u,dt,b2,d2,R2,C2);
-% plot_encoded(t,u,s2,fig_title);
-% %%
-% fig_title = 'decoding using leaky IAF algorithm';
-% fprintf(1,'%s\n',fig_title);
-% u_rec = func_timer(@iaf_decode_pop,{s1,s2},dur,dt,bw, ...
-%                    {b1,b2},{d1,d2},{R1,R2},{C1,C2});
-% plot_compare(t,u,u_rec,fig_title);
+fig_title = 'encoding using leaky IAF algorithm (encoder #2)';
+fprintf(1,'%s\n',fig_title);
+s2 = func_timer(@iaf_encode,u,dt,b2,d2,R2,C2);
+plot_encoded(t,u,s2,fig_title);
+%%
+fig_title = 'decoding using leaky IAF algorithm';
+fprintf(1,'%s\n',fig_title);
+u_rec = func_timer(@iaf_decode_pop,{s1,s2},dur,dt,bw, ...
+                  {b1,b2},{d1,d2},{R1,R2},{C1,C2});
+plot_compare(t,u,u_rec,fig_title);
 
 %% Encoding and Decoding with Non-leaky Neurons
-% Setting the neuron's resistance to infinity is equivalent to
-% using a non-leaky neuron model for encoding and decoding the
-% signal: 
+% The above example is repeated with neurons whose resistance is
+% infinite:
 R1 = inf;
 R2 = inf;
-
+%%
 fig_title = 'encoding using non-leaky IAF algorithm (encoder #1)';
 fprintf(1,'%s\n',fig_title);
 s1 = func_timer(@iaf_encode,u,dt,b1,d1,R1,C1);
 plot_encoded(t,u,s1,fig_title);
-
+%%
 fig_title = 'encoding using non-leaky IAF algorithm (encoder #2)';
 fprintf(1,'%s\n',fig_title);
 s2 = func_timer(@iaf_encode,u,dt,b2,d2,R2,C2);

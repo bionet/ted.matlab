@@ -1,3 +1,8 @@
+Release 0.03 - (January 07, 2010)
+=================================
+* Add IAF population decoding algorithms.
+* Speed up decoding algorithms with faster sine integral approximation.
+
 Release 0.02 - (October 26, 2009)
 =================================
 * Add ASDM population decoding algorithms.
