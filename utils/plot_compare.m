@@ -2,6 +2,9 @@
 %   PLOT_COMPARE(T,U,V) plots the signal U and V on the same
 %   axis. It also plots the difference between them.
 
+%   Author(s): Lev Givon
+%   Copyright 2009 Trustees of Columbia University
+
 function plot_compare(t,u,v,varargin)
 
 if nargin > 5,
@@ -15,7 +18,7 @@ xlabel('t (seconds)');
 ylabel('u(t)');
 set(gca,'XLim',[min(t),max(t)]);
 subplot(212);
-plot(t,20*log10(abs(v)));
+plot(t,20*log10(abs(u-v)));
 xlabel('t (seconds)'); ylabel('error (dB)');
 set(gca,'XLim',[min(t),max(t)]);
 
