@@ -2,8 +2,8 @@
 %   PLOT_COMPARE(T,U,V) plots the signal U and V on the same
 %   axis. It also plots the difference between them.
 
-%   Author(s): Lev Givon
-%   Copyright 2009 Trustees of Columbia University
+%   Author: Lev Givon
+%   Copyright 2009-2010 Trustees of Columbia University
 
 function plot_compare(t,u,v,varargin)
 

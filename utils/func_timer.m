@@ -2,6 +2,9 @@
 %   FUNC_TIMER(F,ARG1,ARG2,...) times the execution of function
 %   with handle F called with arguments ARG1, ARG2, etc.
 
+%   Author: Lev Givon
+%   Copyright 2009-2010 Trustees of Columbia University
+
 function [varargout] = func_timer(f,varargin)
 
 varargout = cell(1,nargout);

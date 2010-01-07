@@ -7,6 +7,9 @@
 %  
 %   PLOT_SIGNAL(T,U,FIG_TITLE,FILENAME) saves the plot in FILENAME.
 
+%   Author: Lev Givon
+%   Copyright 2009-2010 Trustees of Columbia University
+
 function plot_signal(t,u,varargin)
 
 if nargin > 4,

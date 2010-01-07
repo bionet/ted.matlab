@@ -8,6 +8,9 @@
 %   PLOT_SPECTRUM(U,FS,FMIN,FMAX) plots the portion of the spectrum
 %   between FMIN and FMAX Hz.
 
+%   Author: Lev Givon
+%   Copyright 2009-2010 Trustees of Columbia University
+
 function plot_spectrum(u,fs,varargin)
 
 if nargin > 2,

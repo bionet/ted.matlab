@@ -12,8 +12,8 @@
 %   3). If NC is 0, the generated signal will either be zero if NP
 %   is -inf or pure filtered Gaussian white noise otherwise.
 
-%   Author(s): Lev Givon
-%   Copyright 2009 Trustees of Columbia University
+%   Author: Lev Givon
+%   Copyright 2009-2010 Trustees of Columbia University
 
 function u = gen_test_signal(dur,dt,fmax,varargin)
 
