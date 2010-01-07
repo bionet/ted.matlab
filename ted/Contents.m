@@ -12,6 +12,7 @@
 % Integrate-and-Fire Functions
 %   iaf_decode          - IAF time decoding machine.
 %   iaf_decode_fast     - Fast IAF time decoding machine.
+%   iaf_decode_pop      - Population-based IAF time decoding machine.
 %   iaf_encode          - IAF time encoding machine.
 %
 % Utility Functions
