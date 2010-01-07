@@ -12,7 +12,7 @@
 %   specified.
 
 %   Author: Lev Givon
-%   Copyright 2009 Trustees of Columbia University
+%   Copyright 2009-2010 Trustees of Columbia University
 
 function u_rec = iaf_decode_fast(s,dur,dt,bw,M,b,d,varargin)
 

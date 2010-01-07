@@ -8,7 +8,7 @@
 %   specifies the number of bins used by this algorithm.
 
 %   Author: Lev Givon
-%   Copyright 2009 Trustees of Columbia University
+%   Copyright 2009-2010 Trustees of Columbia University
 
 function u_rec = asdm_decode_fast(s,dur,dt,bw,M,b,d,k)
 

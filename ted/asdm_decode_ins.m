@@ -10,7 +10,7 @@
 %   the encoded signal.
 
 %   Author: Lev Givon
-%   Copyright 2009 Trustees of Columbia University
+%   Copyright 2009-2010 Trustees of Columbia University
 
 function u_rec = asdm_decode_ins(s,dur,dt,bw,b)
 
