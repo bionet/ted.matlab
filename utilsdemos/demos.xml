@@ -4,7 +4,8 @@
 <name>Bionet Matlab Utilities - Demos</name>
 <type>toolbox</type>
 <icon>$toolbox/matlab/icons/matlabicon.gif</icon>
-<description>Demos of how to use the Bionet Matlab Utilities.</description>
+<description>Programs that demonstrate how to use the Bionet Matlab
+  Utilities.</description>
 
 <website></website>
 
