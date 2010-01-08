@@ -1,4 +1,4 @@
-%% Time Encoding and Decoding with an Ensemble of IAF Neuron
+%% Time Encoding and Decoding with Multiple IAF Neurons
 % This demo illustrates the time encoding and decoding of a
 % bandlimited signal using an ensemble of integrate-and-fire 
 % neurons.

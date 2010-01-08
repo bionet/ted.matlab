@@ -6,7 +6,7 @@
    <!--
 This HTML is auto-generated from an M-file.
 To make changes, update the M-file and republish this document.
-      --><title>Time Encoding and Decoding with an Ensemble of IAF Neuron</title><meta name="generator" content="MATLAB 7.9"><meta name="date" content="2010-01-07"><meta name="m-file" content="iaf_pop_demo"><style type="text/css">
+      --><title>Time Encoding and Decoding with Multiple IAF Neurons</title><meta name="generator" content="MATLAB 7.9"><meta name="date" content="2010-01-07"><meta name="m-file" content="iaf_pop_demo"><style type="text/css">
 
 body {
   background-color: white;
@@ -62,7 +62,7 @@ p.footer {
   color: gray;
 }
 
-  </style></head><body><div class="content"><h1>Time Encoding and Decoding with an Ensemble of IAF Neuron</h1><!--introduction--><p>This demo illustrates the time encoding and decoding of a bandlimited signal using an ensemble of integrate-and-fire neurons.</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">A Simple Test Signal</a></li><li><a href="#2">Encoding and Decoding with Leaky Neurons</a></li><li><a href="#5">Encoding and Decoding with Non-leaky Neurons</a></li></ul></div><h2>A Simple Test Signal<a name="1"></a></h2><p>Generate a noiseless signal 0.1 s long sampled at 1 GHz containing 3 components no greater than 32 Hz:</p><pre class="codeinput">dur = 0.1;
+  </style></head><body><div class="content"><h1>Time Encoding and Decoding with Multiple IAF Neurons</h1><!--introduction--><p>This demo illustrates the time encoding and decoding of a bandlimited signal using an ensemble of integrate-and-fire neurons.</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">A Simple Test Signal</a></li><li><a href="#2">Encoding and Decoding with Leaky Neurons</a></li><li><a href="#5">Encoding and Decoding with Non-leaky Neurons</a></li></ul></div><h2>A Simple Test Signal<a name="1"></a></h2><p>Generate a noiseless signal 0.1 s long sampled at 1 GHz containing 3 components no greater than 32 Hz:</p><pre class="codeinput">dur = 0.1;
 fs = 1e6;
 dt = 1/fs;
 f = 32;
@@ -81,7 +81,7 @@ fprintf(1,<span class="string">'%s\n'</span>,fig_title);
 u = func_timer(@gen_test_signal,dur,dt,f,np);
 plot_signal(t,u,fig_title);
 </pre><pre class="codeoutput">IAF input signal with no noise
-execution time = 0.023 s
+execution time = 0.524 s
 </pre><img vspace="5" hspace="5" src="iaf_pop_demo_01.png" alt=""> <h2>Encoding and Decoding with Leaky Neurons<a name="2"></a></h2><p>In this example, the input signal is encoded using two leaky IAF neurons with different encoding parameters. The parameters are validated to ensure that signal recovery will be possible:</p><pre class="codeinput">b1 = 3.5;    <span class="comment">% bias</span>
 d1 = 0.7;    <span class="comment">% threshold</span>
 R1 = 10;     <span class="comment">% resistance</span>
@@ -96,7 +96,7 @@ fprintf(1,<span class="string">'%s\n'</span>,fig_title);
 s1 = func_timer(@iaf_encode,u,dt,b1,d1,R1,C1);
 plot_encoded(t,u,s1,fig_title);
 </pre><pre class="codeoutput">encoding using leaky IAF algorithm (encoder #1)
-execution time = 0.264 s
+execution time = 0.308 s
 </pre><img vspace="5" hspace="5" src="iaf_pop_demo_02.png" alt=""> <pre class="codeinput">b2 = 3.4;    <span class="comment">% bias</span>
 d2 = 0.8;    <span class="comment">% threshold</span>
 R2 = 9.0;    <span class="comment">% resistance</span>
@@ -111,14 +111,14 @@ fprintf(1,<span class="string">'%s\n'</span>,fig_title);
 s2 = func_timer(@iaf_encode,u,dt,b2,d2,R2,C2);
 plot_encoded(t,u,s2,fig_title);
 </pre><pre class="codeoutput">encoding using leaky IAF algorithm (encoder #2)
-execution time = 0.274 s
+execution time = 0.289 s
 </pre><img vspace="5" hspace="5" src="iaf_pop_demo_03.png" alt=""> <pre class="codeinput">fig_title = <span class="string">'decoding using leaky IAF algorithm'</span>;
 fprintf(1,<span class="string">'%s\n'</span>,fig_title);
 u_rec = func_timer(@iaf_decode_pop,{s1,s2},dur,dt,bw, <span class="keyword">...</span>
                   {b1,b2},{d1,d2},{R1,R2},{C1,C2});
 plot_compare(t,u,u_rec,fig_title);
 </pre><pre class="codeoutput">decoding using leaky IAF algorithm
-execution time = 2.811 s
+execution time = 3.543 s
 </pre><img vspace="5" hspace="5" src="iaf_pop_demo_04.png" alt=""> <h2>Encoding and Decoding with Non-leaky Neurons<a name="5"></a></h2><p>The above example is repeated with neurons whose resistance is infinite:</p><pre class="codeinput">R1 = inf;
 R2 = inf;
 </pre><pre class="codeinput">fig_title = <span class="string">'encoding using non-leaky IAF algorithm (encoder #1)'</span>;
@@ -126,24 +126,24 @@ fprintf(1,<span class="string">'%s\n'</span>,fig_title);
 s1 = func_timer(@iaf_encode,u,dt,b1,d1,R1,C1);
 plot_encoded(t,u,s1,fig_title);
 </pre><pre class="codeoutput">encoding using non-leaky IAF algorithm (encoder #1)
-execution time = 0.244 s
+execution time = 0.266 s
 </pre><img vspace="5" hspace="5" src="iaf_pop_demo_05.png" alt=""> <pre class="codeinput">fig_title = <span class="string">'encoding using non-leaky IAF algorithm (encoder #2)'</span>;
 fprintf(1,<span class="string">'%s\n'</span>,fig_title);
 s2 = func_timer(@iaf_encode,u,dt,b2,d2,R2,C2);
 plot_encoded(t,u,s2,fig_title);
 </pre><pre class="codeoutput">encoding using non-leaky IAF algorithm (encoder #2)
-execution time = 0.245 s
+execution time = 0.281 s
 </pre><img vspace="5" hspace="5" src="iaf_pop_demo_06.png" alt=""> <pre class="codeinput">fig_title = <span class="string">'decoding using non-leaky IAF algorithm'</span>;
 fprintf(1,<span class="string">'%s\n'</span>,fig_title);
 u_rec = func_timer(@iaf_decode_pop,{s1,s2},dur,dt,bw, <span class="keyword">...</span>
                    {b1,b2},{d1,d2},{R1,R2},{C1,C2});
 plot_compare(t,u,u_rec,fig_title);
 </pre><pre class="codeoutput">decoding using non-leaky IAF algorithm
-execution time = 0.600 s
+execution time = 0.603 s
 </pre><img vspace="5" hspace="5" src="iaf_pop_demo_07.png" alt=""> <p class="footer"><br>
       Published with MATLAB&reg; 7.9<br></p></div><!--
 ##### SOURCE BEGIN #####
-%% Time Encoding and Decoding with an Ensemble of IAF Neuron
+%% Time Encoding and Decoding with Multiple IAF Neurons
 % This demo illustrates the time encoding and decoding of a
 % bandlimited signal using an ensemble of integrate-and-fire 
 % neurons.
