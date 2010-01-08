@@ -15,9 +15,6 @@
 %   iaf_decode_pop      - Population-based IAF time decoding machine.
 %   iaf_encode          - IAF time encoding machine.
 %
-% Utility Functions
-%   gen_test_signal     - Generate bandlimited test signals.
-%
 % See also TEDDEMOS
 
 % Author: Lev Givon
