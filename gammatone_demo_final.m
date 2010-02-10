@@ -1,21 +1,14 @@
-% Time encoding and decoding of a bandpass stimulus
-% with a gammatone filterbank and an ensemble of 
-% integrate-and-fire neurons
+% Time encoding and decoding of a bandpass stimulus with a gammatone 
+% filterbank and an ensemble of integrate-and-fire neurons
 
-% Author: Eftychios A. Pnevmatikakis
+% Author: Eftychios A. Pnevmatikakis and Robert J. Turetsky
 % Bionet Group
 % Department of Electrical Engineering
 % Columbia University
-% April 2009
-
-% Note: Malcolm's Slaney auditory toolbox is needed
-% http://cobweb.ecn.purdue.edu/~malcolm/interval/1998-010/
-
-
+% January 2010
 
 clear all;
 close all;
-addpath AuditoryToolbox
 
 %% sampling rates
 
@@ -34,7 +27,8 @@ tr_vc = round(0.1*length(t)):round(0.9*length(t)); % interval of interest
 %% Bandpass Signal Construction
 
 fmin = 110;  % minimum frequency of bandpass signal
-fmax = 390;  % maximum frequency of bandpass signal   
+fmax = 390;  % maximum frequency of bandpass signal
+W  = 2*pi*fmax; 
 
 mc = floor(floor(t(end)/dt)*(fmax-fmin-1)*dt); % maximum sinusoidal components
 u =  gen_test_bp_signal(t(end)+(2*round(0.15*length(t))+1)*dt,dt,fmin,fmax,-Inf,mc);
@@ -55,113 +49,89 @@ subplot(1,2,2);plot(f,2*abs(U(1:np2/2+1)));
     axis([0,Fs/2,0,1.1*max(2*abs(U(1:np2/2+1)))]);
     xlabel('Frequency [Hz]'); ylabel('Spectrum'); title('Signal in the frequency domain');
 
-%% Filterbank Construction & Filtering
+%% Filterbank Construction and Filtering
 
-x_n = resample(u,1,Ns);   % resample input signal to the filter rate
+Nf = 16; % # of filters/ neurons
+flen = ceil(.03/dt);  % length of filters
+[h,fc,tg,fg] = gammatone(Nf,flen,fmin,fmax,Ft,0);
+ty = 0:dt:dt*(length(u)+flen-2);  % extended time vector for dendritic outputs
+fy = (0:length(ty)-1)*Ft/length(ty);
 
-Fmin = 100;  % minimum frequency of filterbank
-Nf = 16;     % number of filters
-Ln = 1.1*length(t_f); 
-
-fcoefs = MakeERBFilters(Fs,Nf,Fmin);  % constract filter coefficients
-
-h = ERBFilterBank([zeros(1,Ln-1) 1 zeros(1,Ln-1)], fcoefs); % calculate impulse responses [eq. (4.4)]
-h_resp = 20*log10(abs(fft(h(:,Ln:end)'))); 
-freqScale = (0:(Ln-1))/Ln*Fs; 
-
-figure; subplot(1,2,1);plot(freqScale(1:(Ln/2)-1),h_resp(1:Ln/2-1,:)); % plot impulse responses and filterbank gain
-    axis([Fmin Fs/2 -60 5]); xlabel('Frequency [Hz]'); ylabel('Filter Response [dB]'); 
-
-if Nf>1
-    Gc=sum((10.^(h_resp'/20)).^2);  %filterbank gain
-    subplot(1,2,2);plot(freqScale(1:(Ln/2)-1),Gc(1:(Ln/2)-1)); % [Fig. 9]
-        xlabel('Frequency [Hz]'); ylabel('Filterbank Gain')
-    Gf=mean(Gc(round(1*length(Gc)/8):round(3*length(Gc)/8)));
+y = zeros(Nf,length(u)+flen-1);
+for i=1:Nf
+    ['Applying filter ' num2str(i) ' of ' num2str(Nf)]
+    y(i,:) = fftconv(u,h(i,:));
 end
 
-y_n = ERBFilterBank(x_n, fcoefs);  % pass original signal through the filterbank [eq. (2.2)]
-
-%% Synthesis Filters \tilde(h)
-
-t_nr = (-(Ln-1):(Ln-1))*dt_f;
-W_l = 2*pi*420;
-sinc_n = W_l/pi*sinc(W_l/pi*t_nr);
-
-sinc_f = ERBFilterBank(sinc_n, fcoefs); 
-
-h_bs = sinc_f(:,end:-1:1);  % synthesis filters
-
 %% Time Encoding
-y_r = resample(y_n',Ns,1)';
 
+% pick parameters (larger bias for wider frequency range)
 b = logspace(log10(1.3),log10(2.5),Nf); %1.3 + rand(1,Nf);
 d = 1 + rand(1,Nf);
 kd=0.01*ones(1,Nf);
 
-for i=1:Nf
-    tk = [0,cumsum(iaf_encode(y_r(i,:), dt, b(i), kd(i)*d(i)))];%, kd(i));
-    %sk = (tk(1:end-1) + tk(2:end))./2; 
-    TK(1:length(tk),i)=tk';
-    %SK(1:length(sk),i)=sk';
+for i = 1:Nf
+    tk = [dt,cumsum(iaf_encode(y(i,:), dt, b(i), d(i), Inf, kd(i)))];
+    TK(1:length(tk),i) = tk';
     LN(i)=length(tk);
 end
-
-t_f=(-(Ln*Ns-1):(Ln*Ns-1))/Fs/Ns;
 
 ln = LN-1;
 ln2= cumsum([0,ln]);
 
+
 %% t-transform calculation
 
-for i=1:Nf
-    tk=TK(1:LN(i),i)';
-    q=kd(i)*d(i)-b(i)*diff(tk);
-    q_v(ln2(i)+1:ln2(i+1),1)=q;
+for i = 1:Nf
+    tk = TK(1:LN(i),i)';
+    q = kd(i)*d(i)-b(i)*diff(tk);
+    q_v(ln2(i)+1:ln2(i+1),1)= q;
 end
 
-%% G matrix computing  [eq. (3.18)]
+%% G matrix calculation
 
-H_conv=cell(1,Nf);
-for i=1:Nf
-    H_conv{1,i} = ERBFilterBank(h_bs(i,:), fcoefs); 
+t2 = -ty(end):dt:ty(end);
+g2 = W/pi*sinc(W/pi*t2);
+
+G = zeros(ln2(end),ln2(end));
+
+for i = 1:Nf
+    ti = round(TK(1:LN(i),i)'/dt);
+    for j = 1:Nf
+      ['Creating G^{' num2str(i) ',' num2str(j) '}']
+      tj = round(TK(1:LN(j),j)'/dt);
+      hht = fftconv(h(i,:),h(j,end:-1:1));
+      hhtg = fftconv(g2,hht);
+      for k=1:ln(i)
+          for l=1:ln(j)
+              G(ln2(i)+k,ln2(j)+l) = dt*trapz(hhtg(length(u)+2*flen+(ti(k):ti(k+1))-tj(l)));
+          end
+      end
+   end      
 end
 
-HcH = zeros(Nf,Nf,2*Ln-1);
 
-for i=1:Nf
-    for j=1:Nf
-        hc=H_conv{1,j};
-        HcH(i,j,:) = hc(i,:);   %h_i \ast \tilde{h}_j at filter rate
+%% Inversion
+ck_v = pinv(G)*q_v;
+
+%% Reconstruction
+
+% compute reconstruction (decoding) filters
+th = (-ty(end)-dt*(flen-1)):dt:ty(end);
+hg = zeros(Nf,length(th));
+for i=1:size(h,1)
+    hg(i,:) = fftconv(g2,fliplr(h(i,:)));
+end
+
+u_rec = zeros(size(u));
+for j = 1:Nf
+    tj = round(TK(1:LN(j),j)'/dt);
+    for sp = 1:ln(j)
+        idx = length(u)+2*flen-2-tj(sp) + (1:length(u));
+        u_rec = u_rec + ck_v(ln2(j)+sp)*hg(j,idx);
     end
 end
 
-for i=1:Nf
-    for j=1:Nf
-        G(ln2(i)+1:ln2(i+1),ln2(j)+1:ln2(j+1))=G_filterbank(TK(1:LN(i),i)',TK(1:LN(j),j),[zeros(1,Ns-1) squeeze(resample(HcH(i,j,:),Ns,1))],t_f);
-    end
-end
-
-%% inversion
-Ginv = pinv(G,1e-4); %matrix inversion
-ck_v = Ginv*q_v;
-
-%% reconstruction
-
-hb_rec=resample(h_bs',Ns,1)';  % reconstruction filter at signal rate
-
-u_temp=zeros(1,size(hb_rec,2));
-
-for i=1:Nf
-    tk=TK(1:LN(i),i)';
-    sk=(tk(1:end-1)+tk(2:end))/2;
-    for j=1:ln(i)
-        u_temp = u_temp + ck_v(ln2(i)+j)*circshift(hb_rec(i,:),[0,round(sk(j)*Fs*Ns)]);
-                % weight and shift the reconstruction filter at time sk(j)
-                % [eq. (3.17)]
-    end
-end
-
-u_rec = u_temp((Ln-1)*Ns:(Ln-1)*Ns+length(u)-1);
 
 u_rec = u_rec - mean(u_rec(tr_vc));
 
@@ -176,22 +146,22 @@ subplot(1,2,2);plot(f,2*abs(U(1:np2/2+1)),f,2*abs(U_rec(1:np2/2+1)),f,abs(2*abs(
     axis([0,Fs/2,0,1.1*max(2*abs(U_rec(1:np2/2+1)))]);
     xlabel('Frequency [Hz]'); ylabel('Spectrum'); title('Recovery in the frequency domain');    
     legend('Original','Recovered','Error')
-    
+
+
 %% sequential recovery
 
-ur_i=zeros(Nf,length(u_temp));
 ur_s=zeros(Nf,length(u));
 for i=1:Nf
     Gi=G(1:ln2(i+1),1:ln2(i+1));
-    ck_i = pinv(Gi,1e-4)*q_v(1:ln2(i+1));
+    ck_i = pinv(Gi)*q_v(1:ln2(i+1));
     for j=1:i
-        tk=TK(1:LN(j),j)';
-        sk=(tk(1:end-1)+tk(2:end))/2;
-        for k=1:ln(j)
-            ur_i(i,:)=ur_i(i,:)+ck_i(ln2(j)+k)*circshift(hb_rec(j,:),[0,round(sk(k)*Fs*Ns)]);
+        tj = round(TK(1:LN(j),j)'/dt);
+        for sp = 1:ln(j)
+            idx = length(u)+2*flen-2-tj(sp) + (1:length(u));
+            ur_s(i,:) = ur_s(i,:) + ck_i(ln2(j)+sp)*hg(j,idx);           
+            %ur_i(i,:)=ur_i(i,:)+ck_i(ln2(j)+k)*circshift(hb_rec(j,:),[0,round(sk(k)*Fs*Ns)]);
         end
     end
-    ur_s(i,:)=ur_i(i,(Ln-1)*Ns:(Ln-1)*Ns+length(u)-1);
     ur_s(i,:) = ur_s(i,:) - mean(ur_s(i,tr_vc));
 end
 
@@ -228,12 +198,10 @@ figure;
 
 %% MSE and SNR
 
-tr_vt = round(0.1*length(u)):round(0.9*length(u));
-
 for i=1:Nf
-    ms=u(tr_vt)-ur_s(i,tr_vt);
+    ms=u(tr_vc)-ur_s(i,tr_vc);
     mse(i)=10*log10(mean(ms.^2));
-    snr(i)=10*log10(sum(u(tr_vt).^2)/sum(ms.^2));
+    snr(i)=10*log10(sum(u(tr_vc).^2)/sum(ms.^2));
 end
 
 figure;plot(1:Nf,mse); grid on;
@@ -242,4 +210,4 @@ title('MSE as a Function of the Number of Neurons');
 
 figure;plot(1:Nf,snr); grid on;
 xlabel('# of Neurons'); ylabel('SNR (dB)');
-title('SNR as a Function of the Number of Neurons');
+title('SNR as a Function of the Number of Neurons');    
