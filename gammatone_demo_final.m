@@ -38,7 +38,7 @@ u = u((round(0.15*length(t))+1):end-round(0.15*length(t))-1); % truncate first a
 u = u/max(abs(u));  % normalization
 
 figure;subplot(1,2,1);plot(t,u); % plot signal and its fourier transform
-        xlabel('Time [sec]'); ylabel('Amplitude'); title('Singal in the time domain');
+        xlabel('Time [sec]'); ylabel('Amplitude'); title('Signal in the time domain');
 
         
 np2 = 2^nextpow2(length(u(tr_vc)));
