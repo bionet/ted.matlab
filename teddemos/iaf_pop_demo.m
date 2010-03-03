@@ -84,3 +84,5 @@ fprintf(1,'%s\n',fig_title);
 u_rec = func_timer(@iaf_decode_pop,{s1,s2},dur,dt,bw, ...
                    {b1,b2},{d1,d2},{R1,R2},{C1,C2});
 plot_compare(t,u,u_rec,fig_title);
+%%
+
