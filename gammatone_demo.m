@@ -1,11 +1,5 @@
-% Time encoding and decoding of a bandpass stimulus with a gammatone 
-% filterbank and an ensemble of integrate-and-fire neurons
-
-% Author: Eftychios A. Pnevmatikakis and Robert J. Turetsky
-% Bionet Group
-% Department of Electrical Engineering
-% Columbia University
-% January 2010
+%% Time Encoding and Decoding of a Bandpass Signal with a Gammatone 
+%% Filterbank and an Ensemble of Integrate-and-Fire Neurons
 
 clear all;
 close all;
@@ -211,3 +205,8 @@ title('MSE as a Function of the Number of Neurons');
 figure;plot(1:Nf,snr); grid on;
 xlabel('# of Neurons'); ylabel('SNR (dB)');
 title('SNR as a Function of the Number of Neurons');    
+
+%%
+% _Authors: Eftychios A. Pnevmatikakis and Robert J. Turetsky_
+%%
+% _Copyright 2009-2010 Trustees of Columbia University
