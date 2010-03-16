@@ -1,7 +1,8 @@
 % Bionet Matlab Utilities
-% Version 0.013
+% Version 0.014
 %
 % Utility Functions
+%   fig_resize      - Resize a figure.
 %   func_timer      - Time the execution of a function.
 %   gen_test_signal - Generate bandlimited test signals.
 %   plot_compare    - Compare two signals graphically.
