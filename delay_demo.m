@@ -68,22 +68,30 @@ end
     
 %% Time Encoding
 
+%%
+% Encode the signals:
 for i=1:N
     s = iaf_encode(u_s(i,:), dt, b(i), d(i)*kd(i));
     TK(1:length(s),i) = cumsum(s)' + t(tr_vc(1));  % spike times of neuron i
     LN(i) = length(s);                             % number of spikes of neuron i
 end
 
-% Plot spike times:
+%%
+% Plot the spike times:
 figure;
 for i=1:N
     subplot(N,1,i);
     plot(TK(1:LN(i),i)',ones(1,LN(i)),'k.','markersize',18);
-    axis([t(tr_vc(1)) t(tr_vc(end)) 0.5 1.5])
-    %set(gca,'xtick',[],'ytick',[])
-    set(gca,'ytick',[])
-    ylabel('spikes')
+    axis([t(tr_vc(1)) t(tr_vc(end)) 0.5 1.5]);
+    if i == 1,
+        title('Spike Times')
+    end
+    if i ~= N,
+        set(gca,'xtick',[]);
+    end
+    set(gca,'ytick',[]);
 end
+xlabel('t (seconds)');
 
 %% Time Decoding
 
@@ -139,16 +147,14 @@ subplot(2,3,6);plot(t(tr_vc),u(tr_vc),t(tr_vc),u_rec(16,:));
 xlim(minmax(t(tr_vc)));
 xlabel('Time [sec]'); title('# of Neurons: 16');
 
-%% 
-% Compute and plot the MSE and SNR:
+%%
+% Plot the MSE in terms of spike density:
+
 tr_vc2 = round(0.15*length(t))+1:round(0.85*length(t)); % time interval of interest
 
 for i=1:N
     mse(i)=10*log10(mean(u_rec(i,tr_vc2-tr_vc(1)+1)-u(tr_vc2)).^2);
 end
-
-%%
-% Plot the MSE in terms of spike density:
 sp_den = (ln2(2:end)/(length(tr_vc)*dt))/(bw/pi);
 
 figure; plot(sp_den,mse,'k-o'); hold on;
@@ -157,6 +163,8 @@ ylabel('MSE (dB)');
 title('MSE vs Spike Density and # of Neurons');
 
 set(gca,'XTick',sort([1-eps sp_den]));
+set(gca,'XTickLabel',arrayfun(@(x) sprintf('%.2f',x), ...
+                              sort([1-eps sp_den]),'UniformOutput', false));
 xlimits = get(gca,'XLim');
 ylimits = get(gca,'YLim');
 plot(ones(1,100),ylimits(1):(ylimits(2)-ylimits(1))/99:ylimits(2),'k--')
@@ -167,13 +175,13 @@ text(xlimits(1)-(xlimits(2)-xlimits(1))*0.09, ...
      ylimits(1)-(ylimits(2)-ylimits(1))*0.04,'Rel. Rate:')
 text(xlimits(1)-(xlimits(2)-xlimits(1))*0.12, ...
      ylimits(1)-(ylimits(2)-ylimits(1))*0.08,'# of Neurons:')       
+
+%%
+% Plot the SNR in terms of spike density:
     
 for i=1:N
     snr(i)=-10*log10(sum((u_rec(i,tr_vc2-tr_vc(1)+1)-u(tr_vc2)).^2)/sum(u(tr_vc).^2));
 end
-
-%%
-% Plot the SNR in terms of spike density:
 sp_den=(cumsum(LN-1)/(length(tr_vc)*dt))/(bw/pi);
 
 figure; plot(sp_den,snr,'k-o'); hold on;
@@ -182,6 +190,8 @@ ylabel('SNR (dB)');
 title('SNR vs Spike Density and # of Neurons');
 
 set(gca,'XTick',sort([1-eps sp_den]));
+set(gca,'XTickLabel',arrayfun(@(x) sprintf('%.2f',x), ...
+                              sort([1-eps sp_den]),'UniformOutput', false));
 xlimits = get(gca,'XLim');
 ylimits = get(gca,'YLim');
 plot(ones(1,100),ylimits(1):(ylimits(2)-ylimits(1))/99:ylimits(2),'k--')
