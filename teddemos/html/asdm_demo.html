@@ -1,0 +1,191 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML is auto-generated from an M-file.
+To make changes, update the M-file and republish this document.
+      --><title>Time Encoding and Decoding with an Asynchronous Sigma-Delta Modulator</title><meta name="generator" content="MATLAB 7.9"><meta name="date" content="2010-03-03"><meta name="m-file" content="asdm_demo"><style type="text/css">
+
+body {
+  background-color: white;
+  margin:10px;
+}
+
+h1 {
+  color: #990000; 
+  font-size: x-large;
+}
+
+h2 {
+  color: #990000;
+  font-size: medium;
+}
+
+/* Make the text shrink to fit narrow windows, but not stretch too far in 
+wide windows. */ 
+p,h1,h2,div.content div {
+  max-width: 600px;
+  /* Hack for IE6 */
+  width: auto !important; width: 600px;
+}
+
+pre.codeinput {
+  background: #EEEEEE;
+  padding: 10px;
+}
+@media print {
+  pre.codeinput {word-wrap:break-word; width:100%;}
+} 
+
+span.keyword {color: #0000FF}
+span.comment {color: #228B22}
+span.string {color: #A020F0}
+span.untermstring {color: #B20000}
+span.syscmd {color: #B28C00}
+
+pre.codeoutput {
+  color: #666666;
+  padding: 10px;
+}
+
+pre.error {
+  color: red;
+}
+
+p.footer {
+  text-align: right;
+  font-size: xx-small;
+  font-weight: lighter;
+  font-style: italic;
+  color: gray;
+}
+
+  </style></head><body><div class="content"><h1>Time Encoding and Decoding with an Asynchronous Sigma-Delta Modulator</h1><!--introduction--><p>This demo illustrates the time encoding and decoding of a bandlimited signal using an asynchronous sigma-delta modulator.</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Generating a Test Signal</a></li><li><a href="#2">Time Encoding</a></li><li><a href="#5">Time Decoding</a></li></ul></div><h2>Generating a Test Signal<a name="1"></a></h2><p>Generate a noiseless signal 0.1 s long sampled at 1 GHz containing 3 components no greater than 32 Hz:</p><pre class="codeinput">dur = 0.1;      <span class="comment">% duration</span>
+fs = 1e6;       <span class="comment">% sampling frequency</span>
+dt = 1/fs;      <span class="comment">% sampling resolution</span>
+f = 32;
+bw = 2*pi*f;    <span class="comment">% bandwidth (rad/s)</span>
+t = [0:dt:dur]; <span class="comment">% time support</span>
+np = -inf;      <span class="comment">% noise level</span>
+
+<span class="keyword">if</span> np == -inf,
+  fig_title = <span class="string">'ASDM input signal with no noise'</span>;
+<span class="keyword">else</span>
+  fig_title = sprintf(<span class="string">'ASDM input signal with %d dB of noise'</span>,np);
+<span class="keyword">end</span>
+
+rand(<span class="string">'twister'</span>,0); randn(<span class="string">'state'</span>,0);
+fprintf(1,<span class="string">'%s\n'</span>,fig_title);
+u = func_timer(@gen_test_signal,dur,dt,f,np);
+plot_signal(t,u,fig_title);
+</pre><pre class="codeoutput">ASDM input signal with no noise
+execution time = 0.024 s
+</pre><img vspace="5" hspace="5" src="asdm_demo_01.png" alt=""> <h2>Time Encoding<a name="2"></a></h2><p>Set the encoding parameters:</p><pre class="codeinput">b = 3.5;    <span class="comment">% bias</span>
+d = 0.7;    <span class="comment">% threshold</span>
+k = 0.01;   <span class="comment">% scaling factor</span>
+</pre><p>Verify that recovery can take place:</p><pre class="codeinput"><span class="keyword">if</span> ~asdm_recoverable(u,bw,b,d,k),
+  <span class="keyword">return</span>
+<span class="keyword">end</span>
+</pre><p>Encode the signal:</p><pre class="codeinput">fig_title = <span class="string">'encoding using ASDM algorithm'</span>;
+fprintf(1,<span class="string">'%s\n'</span>,fig_title);
+s = func_timer(@asdm_encode,u,dt,b,d,k);
+plot_encoded(t,u,s,fig_title);
+</pre><pre class="codeoutput">encoding using ASDM algorithm
+execution time = 0.238 s
+</pre><img vspace="5" hspace="5" src="asdm_demo_02.png" alt=""> <h2>Time Decoding<a name="5"></a></h2><p>The encoded signal can be recovered using one of several different decoding algorithms:</p><pre class="codeinput">fig_title = <span class="string">'decoding using ASDM algorithm'</span>;
+fprintf(1,<span class="string">'%s\n'</span>,fig_title);
+u_rec = func_timer(@asdm_decode,s,dur,dt,bw,b,d,k);
+plot_compare(t,u,u_rec,fig_title);
+</pre><pre class="codeoutput">decoding using ASDM algorithm
+execution time = 0.129 s
+</pre><img vspace="5" hspace="5" src="asdm_demo_03.png" alt=""> <pre class="codeinput">fig_title = <span class="string">'decoding using threshold-insensitive ASDM algorithm'</span>;
+fprintf(1,<span class="string">'%s\n'</span>,fig_title);
+u_rec = func_timer(@asdm_decode_ins,s,dur,dt,bw,b);
+plot_compare(t,u,u_rec,fig_title);
+</pre><pre class="codeoutput">decoding using threshold-insensitive ASDM algorithm
+execution time = 0.131 s
+</pre><img vspace="5" hspace="5" src="asdm_demo_04.png" alt=""> <pre class="codeinput">M = 5;    <span class="comment">% fast decoding parameter</span>
+
+fig_title = <span class="string">'decoding using fast ASDM algorithm'</span>;
+fprintf(1,<span class="string">'%s\n'</span>,fig_title);
+u_rec = func_timer(@asdm_decode_fast,s,dur,dt,bw,M,b,d,k);
+plot_compare(t,u,u_rec,fig_title);
+</pre><pre class="codeoutput">decoding using fast ASDM algorithm
+execution time = 0.127 s
+</pre><img vspace="5" hspace="5" src="asdm_demo_05.png" alt=""> <p><i>Author: Lev Givon</i></p><p><i>Copyright 2009-2010 Trustees of Columbia University</i></p><p class="footer"><br>
+      Published with MATLAB&reg; 7.9<br></p></div><!--
+##### SOURCE BEGIN #####
+%% Time Encoding and Decoding with an Asynchronous Sigma-Delta Modulator
+% This demo illustrates the time encoding and decoding of a
+% bandlimited signal using an asynchronous sigma-delta modulator.
+
+%% Generating a Test Signal
+% Generate a noiseless signal 0.1 s long sampled at 1 GHz containing 3
+% components no greater than 32 Hz:
+dur = 0.1;      % duration
+fs = 1e6;       % sampling frequency
+dt = 1/fs;      % sampling resolution
+f = 32;         
+bw = 2*pi*f;    % bandwidth (rad/s)
+t = [0:dt:dur]; % time support
+np = -inf;      % noise level
+
+if np == -inf,
+  fig_title = 'ASDM input signal with no noise';
+else
+  fig_title = sprintf('ASDM input signal with %d dB of noise',np);
+end
+
+rand('twister',0); randn('state',0);
+fprintf(1,'%s\n',fig_title);
+u = func_timer(@gen_test_signal,dur,dt,f,np);
+plot_signal(t,u,fig_title);
+
+%% Time Encoding
+% Set the encoding parameters:
+b = 3.5;    % bias
+d = 0.7;    % threshold
+k = 0.01;   % scaling factor
+
+%% 
+% Verify that recovery can take place:
+if ~asdm_recoverable(u,bw,b,d,k),
+  return
+end
+
+%%
+% Encode the signal:
+fig_title = 'encoding using ASDM algorithm';
+fprintf(1,'%s\n',fig_title);
+s = func_timer(@asdm_encode,u,dt,b,d,k);
+plot_encoded(t,u,s,fig_title);
+
+%% Time Decoding
+% The encoded signal can be recovered using one of several
+% different decoding algorithms:
+fig_title = 'decoding using ASDM algorithm';
+fprintf(1,'%s\n',fig_title);
+u_rec = func_timer(@asdm_decode,s,dur,dt,bw,b,d,k);
+plot_compare(t,u,u_rec,fig_title);
+%%
+fig_title = 'decoding using threshold-insensitive ASDM algorithm';
+fprintf(1,'%s\n',fig_title);
+u_rec = func_timer(@asdm_decode_ins,s,dur,dt,bw,b);
+plot_compare(t,u,u_rec,fig_title);
+%%
+M = 5;    % fast decoding parameter
+
+fig_title = 'decoding using fast ASDM algorithm';
+fprintf(1,'%s\n',fig_title);
+u_rec = func_timer(@asdm_decode_fast,s,dur,dt,bw,M,b,d,k);
+plot_compare(t,u,u_rec,fig_title);
+
+%%
+% _Author: Lev Givon_
+%%
+% _Copyright 2009-2010 Trustees of Columbia University_
+
+##### SOURCE END #####
+--></body></html>

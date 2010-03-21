@@ -1,0 +1,22 @@
+.. -*- rst -*-
+
+Change Log
+==========
+
+Release 0.03 - (January 07, 2010)
+---------------------------------
+* Add IAF population decoding algorithms.
+* Speed up decoding algorithms with faster sine integral approximation.
+
+Release 0.02 - (October 26, 2009)
+---------------------------------
+* Add ASDM population decoding algorithms.
+* Make time array construction consistently use a fixed time step.
+
+Release 0.011 - (May 08, 2009)
+------------------------------
+* Change package name to Time Encoding and Decoding Toolbox.
+
+Release 0.01 - (May 08, 2009)
+-----------------------------
+* First public release.
