@@ -13,27 +13,33 @@ time intervals between fixed-amplitude spikes. Sample code and
 documentation demonstrating the use of the implementations is
 included.
 
+Future releases of this package may be obtained from the Bionet
+Group's online code repository [1]_.
+
 Authors & Acknowledgments
 -------------------------
 
-The implementations in this package were written by Lev Givon [1]_,
-currently at the Bionet Group at Columbia University. Some parts of
-the code are based (in part) on previous implementations written by
-the following members of the Bionet Group:
+The implementations in this toolbox were written by the following
+members of the Bionet Group at Columbia University's Department of
+Electrical Engineering:
 
-* Eftychios Pnevmatikakis
+* Lev Givon
+* Eftychios A. Pnevmatikakis
+* Robert J. Turetsky
+
+Some portions of the code are based (in part) on previous implementations
+written by the following Bionet Group members:
+
+* Robert J. Turetsky
 * Yevgeniy Slutskiy
-* Robert Turetsky
 
 Special thanks are due to the following Bionet Group members for 
-reviewing the code and providing useful suggestions:
+reviewing parts of the code and providing useful suggestions:
 
-* Robert Turetsky
+* Robert J. Turetsky
 * Yiyin Zhou
 
-All of the time encoding and decoding algorithms currently comprised
-by the toolbox were developed by Aurel Lazar [2]_, currently at
-Columbia University's Electrical Engineering Department.
+The software in this toolbox was integrated and packaged by Lev Givon.
 
 License
 -------
@@ -44,9 +50,16 @@ See the included LICENSE file for more information.
 Contact Information
 -------------------
 
-Please direct all questions and comments pertaining to this software to
+Please direct all questions and comments pertaining to individual
+algorithm implementations to the relevant author or authors of the
+code:
 
-Lev Givon <lev@columbia.edu>
+* `Lev Givon <lev@columbia.edu>`_
+* `Eftychios A. Pnevmatikakis <eap2111@columbia.edu>`_
+* `Robert J. Turetsky <rjt72@columbia.edu>`_
+
+General questions relating to the toolbox should be directed to 
+`Lev Givon <lev@columbia.edu>`_.
 
 References
 ----------
@@ -54,8 +67,7 @@ References
 The algorithms implemented in this toolbox are described in the papers
 listed in the attached BibTeX bibliography. Further research on
 time domain coding and processing may be obtained from the Bionet Group
-publication server [3]_.
+publication server [2]_.
 
-.. [1] http://bionet.ee.columbia.edu/~lev
-.. [2] http://www.ee.columbia.edu/~aurel
-.. [3] http://bionet.ee.columbia.edu/publications.html
+.. [1] http://bionet.ee.columbia.edu/code/
+.. [2] http://bionet.ee.columbia.edu/publications/
