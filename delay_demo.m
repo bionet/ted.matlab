@@ -104,8 +104,8 @@ G = zeros(sum(ln),sum(ln));
 for i=1:N
     for j=1:N
         G(ln2(i)+1:ln2(i+1),ln2(j)+1:ln2(j+1)) = ...
-            G_block_computing(TK(1:LN(i),i)',TK(1:LN(j),j), ...
-                              delay(i),delay(j),bw,dt);
+            G_block_delay(TK(1:LN(i),i)',TK(1:LN(j),j), ...
+                          delay(i),delay(j),bw,dt);
     end
 end
 
@@ -117,8 +117,8 @@ u_rec = zeros(N,length(tr_vc));
 % figure; 
 for i=1:N
     % recover using the first i neurons:
-    u_rec(i,:) = population_decode_delay(TK,LN,t(tr_vc),bw,b,d,kd, ...
-                                         G(1:ln2(i+1),1:ln2(i+1)),i,delay,dt); 
+    u_rec(i,:) = iaf_decode_pop_delay(TK,LN,t(tr_vc),bw,b,d,kd, ...
+                                      G(1:ln2(i+1),1:ln2(i+1)),i,delay,dt); 
 %     subplot(4,N/4,i);plot(t(tr_vc),u(tr_vc),t(tr_vc),u_rec(i,:));
 %         xlabel('Time [sec]'); ylabel('Amplitude'); 
 %         title(sprintf('# of Neurons: %d',i))

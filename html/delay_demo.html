@@ -6,7 +6,7 @@
    <!--
 This HTML is auto-generated from an M-file.
 To make changes, update the M-file and republish this document.
-      --><title>Neural Population Encoding using Filters with Arbitrary Delays</title><meta name="generator" content="MATLAB 7.9"><meta name="date" content="2010-03-17"><meta name="m-file" content="delay_demo"><style type="text/css">
+      --><title>Neural Population Encoding using Filters with Arbitrary Delays</title><meta name="generator" content="MATLAB 7.9"><meta name="date" content="2010-03-22"><meta name="m-file" content="delay_demo"><style type="text/css">
 
 body {
   background-color: white;
@@ -136,8 +136,8 @@ ln2 = cumsum([0,ln]);
 <span class="keyword">for</span> i=1:N
     <span class="keyword">for</span> j=1:N
         G(ln2(i)+1:ln2(i+1),ln2(j)+1:ln2(j+1)) = <span class="keyword">...</span>
-            G_block_computing(TK(1:LN(i),i)',TK(1:LN(j),j), <span class="keyword">...</span>
-                              delay(i),delay(j),bw,dt);
+            G_block_delay(TK(1:LN(i),i)',TK(1:LN(j),j), <span class="keyword">...</span>
+                          delay(i),delay(j),bw,dt);
     <span class="keyword">end</span>
 <span class="keyword">end</span>
 </pre><p>Perform recursive recovery using 1, 2, ..., N neurons:</p><pre class="codeinput">u_rec = zeros(N,length(tr_vc));
@@ -146,8 +146,8 @@ ln2 = cumsum([0,ln]);
 <span class="comment">% figure;</span>
 <span class="keyword">for</span> i=1:N
     <span class="comment">% recover using the first i neurons:</span>
-    u_rec(i,:) = population_decode_delay(TK,LN,t(tr_vc),bw,b,d,kd, <span class="keyword">...</span>
-                                         G(1:ln2(i+1),1:ln2(i+1)),i,delay,dt);
+    u_rec(i,:) = iaf_decode_pop_delay(TK,LN,t(tr_vc),bw,b,d,kd, <span class="keyword">...</span>
+                                      G(1:ln2(i+1),1:ln2(i+1)),i,delay,dt);
 <span class="comment">%     subplot(4,N/4,i);plot(t(tr_vc),u(tr_vc),t(tr_vc),u_rec(i,:));</span>
 <span class="comment">%         xlabel('Time [sec]'); ylabel('Amplitude');</span>
 <span class="comment">%         title(sprintf('# of Neurons: %d',i))</span>
@@ -329,8 +329,8 @@ G = zeros(sum(ln),sum(ln));
 for i=1:N
     for j=1:N
         G(ln2(i)+1:ln2(i+1),ln2(j)+1:ln2(j+1)) = ...
-            G_block_computing(TK(1:LN(i),i)',TK(1:LN(j),j), ...
-                              delay(i),delay(j),bw,dt);
+            G_block_delay(TK(1:LN(i),i)',TK(1:LN(j),j), ...
+                          delay(i),delay(j),bw,dt);
     end
 end
 
@@ -342,8 +342,8 @@ u_rec = zeros(N,length(tr_vc));
 % figure; 
 for i=1:N
     % recover using the first i neurons:
-    u_rec(i,:) = population_decode_delay(TK,LN,t(tr_vc),bw,b,d,kd, ...
-                                         G(1:ln2(i+1),1:ln2(i+1)),i,delay,dt); 
+    u_rec(i,:) = iaf_decode_pop_delay(TK,LN,t(tr_vc),bw,b,d,kd, ...
+                                      G(1:ln2(i+1),1:ln2(i+1)),i,delay,dt); 
 %     subplot(4,N/4,i);plot(t(tr_vc),u(tr_vc),t(tr_vc),u_rec(i,:));
 %         xlabel('Time [sec]'); ylabel('Amplitude'); 
 %         title(sprintf('# of Neurons: %d',i))
