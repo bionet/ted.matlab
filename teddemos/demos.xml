@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<demos>
+
+<name>Bionet Time Encoding and Decoding Toolbox - Demos</name>
+<type>toolbox</type>
+<icon>$toolbox/matlab/icons/matlabicon.gif</icon>
+<description>Programs that demonstrate how to use the
+  Bionet Time Encoding and Decoding Toolbox.</description>
+
+<website></website>
+
+<demosection>
+  <label>Demos</label>
+  <demoitem>
+    <label>Time encoding and decoding with an asynchronous sigma-delta
+      modulator.</label>    
+    <type>M-file</type>
+    <file>html/asdm_demo.html</file>
+  </demoitem>
+  <demoitem>
+    <label>Time encoding and decoding with multiple ASD modulators.</label>
+    <type>M-file</type>
+    <file>html/asdm_pop_demo.html</file>
+  </demoitem>
+  <demoitem>
+    <label>Time encoding and decoding with gammatone filter banks.</label
+    <type>M-file</type>
+    <file>html/gammatone_demo.html</file>
+  </demoitem>
+  <demoitem>
+    <label>Time encoding and decoding with an integrate-and-fire
+      neuron.</label>
+    <type>M-file</type>
+    <file>html/iaf_demo.html</file>
+  </demoitem>
+  <demoitem>
+    <label>Time encoding and decoding with multiple IAF
+      neurons.</label>
+    <type>M-file</type>
+    <file>html/iaf_pop_demo.html</file>
+  </demoitem>
+</demosection>
+
+</demos>
