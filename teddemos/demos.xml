@@ -23,6 +23,11 @@
     <file>html/asdm_pop_demo.html</file>
   </demoitem>
   <demoitem>
+    <label>Time encoding and decoding with delayed IAF neurons.</label>
+    <type>M-file</type>
+    <file>html/delay_demo.html</file>
+  </demoitem>
+  <demoitem>
     <label>Time encoding and decoding with gammatone filter banks.</label
     <type>M-file</type>
     <file>html/gammatone_demo.html</file>
