@@ -21,7 +21,8 @@ Authors & Acknowledgments
 
 The implementations in this toolbox were written by the following
 members of the Bionet Group at Columbia University's Department of
-Electrical Engineering:
+Electrical Engineering under the supervision of Prof. Aurel A. Lazar
+[2]_:
 
 * Lev Givon
 * Eftychios A. Pnevmatikakis
@@ -67,7 +68,8 @@ References
 The algorithms implemented in this toolbox are described in the papers
 listed in the attached BibTeX bibliography. Further research on
 time domain coding and processing may be obtained from the Bionet Group
-publication server [2]_.
+publication server [3]_.
 
 .. [1] http://bionet.ee.columbia.edu/code/
-.. [2] http://bionet.ee.columbia.edu/publications/
+.. [2] http://www.ee.columbia.edu/~aurel/
+.. [3] http://bionet.ee.columbia.edu/publications/
