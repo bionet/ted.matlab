@@ -79,19 +79,12 @@ end
 %%
 % Plot the spike times:
 figure;
-for i=1:N
-    subplot(N,1,i);
-    plot(TK(1:LN(i),i)',ones(1,LN(i)),'k.','markersize',18);
-    axis([t(tr_vc(1)) t(tr_vc(end)) 0.5 1.5]);
-    if i == 1,
-        title('Spike Times')
-    end
-    if i ~= N,
-        set(gca,'xtick',[]);
-    end
-    set(gca,'ytick',[]);
+TK_list = {};
+for i=1:N,
+    TK_list{end+1} = TK(1:LN(i),i)';
 end
-xlabel('t (seconds)');
+plot_raster(TK_list);
+title('Spike Times');
 
 %% Time Decoding
 
