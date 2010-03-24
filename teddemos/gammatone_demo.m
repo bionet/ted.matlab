@@ -156,9 +156,10 @@ legend('Original','Recovered','Error')
 %%
 % Perform sequential recovery:
 ur_s=zeros(Nf,length(u));
+trsvd = logspace(-3,-8,Nf);  % truncate svd
 for i=1:Nf
     Gi=G(1:ln2(i+1),1:ln2(i+1));
-    ck_i = pinv(Gi)*q_v(1:ln2(i+1));
+    ck_i = pinv(Gi,trsvd(i))*q_v(1:ln2(i+1));
     for j=1:i
         tj = round(TK(1:LN(j),j)'/dt);
         for sp = 1:ln(j)
@@ -173,7 +174,7 @@ end
 % Plot all 16 recovered signals:
 figure;
 for i=1:Nf
-    subplot(4,Nf/4,i);plot(t(tr_vc),u(tr_vc),t(tr_vc),ur_s(i,tr_vc))
+    subplot(4,ceil(Nf/4),i);plot(t(tr_vc),u(tr_vc),t(tr_vc),ur_s(i,tr_vc))
     xlim(minmax(t(tr_vc)));
     xlabel('Time [sec]'); ylabel('Amplitude');
     title(sprintf('# of Neurons: %d',i));
