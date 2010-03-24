@@ -1,17 +1,52 @@
+.. -*- rst -*-
+
 Bionet Matlab Utilities
 =======================
 
-This package contains a variety of useful Matlab routines written by
-Lev Givon [1] for use in projects released by the Bionet Group [2].
+Package Description
+-------------------
+
+This toolbox contains a variety of useful Matlab routines written 
+for use in projects released by the Bionet Group.
+
+Future releases of this package may be obtained from the Bionet
+Group's online code repository [1]_.
+
+Authors & Acknowledgments
+-------------------------
+
+The implementations in this toolbox were written by the following
+members of the Bionet Group at Columbia University's Department of
+Electrical Engineering under the supervision of Prof. Aurel A. Lazar
+[2]_:
+
+* Lev Givon
+* Eftychios A. Pnevmatikakis
+* Robert J. Turetsky
+
+The software in this toolbox was integrated and packaged by Lev Givon.
+
+License
+-------
+This software is licensed under the 
+`BSD License <http://www.opensource.org/licenses/bsd-license.php>`_.
+See the included LICENSE file for more information.
 
 Contact Information
-===================
+-------------------
 
-Please direct all questions and comments pertaining to this software
-to 
+Please direct all questions and comments pertaining to individual
+algorithm implementations to the relevant author or authors of the
+code:
 
-Lev Givon <lev@columbia.edu>
+* `Lev Givon <lev@columbia.edu>`_
+* `Eftychios A. Pnevmatikakis <eap2111@columbia.edu>`_
+* `Robert J. Turetsky <rjt72@columbia.edu>`_
 
-[1] http://www.columbia.edu/~lev
-[2] http://bionet.ee.columbia.edu
+General questions relating to the toolbox should be directed to 
+`Lev Givon <lev@columbia.edu>`_.
+
+
+.. [1] http://bionet.ee.columbia.edu/code/
+.. [2] http://www.ee.columbia.edu/~aurel/
 

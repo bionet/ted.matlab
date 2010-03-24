@@ -1,17 +1,37 @@
+.. -*- rst -*-
+
 Installation Instructions
 =========================
 
-1. Unpack the archive into an installation directory. Assuming that
-   Matlab is installed in the directory $MATLAB, one may wish to
-   install the software in $MATLAB/toolbox/utils if one has
-   administrative access to the machine.
+Prerequisites
+-------------
 
-2. Add the subdirectories of the installation directory to Matlab's
-   search path. For example, if the software is installed in
-   $MATLAB/toolbox/utils, one may add the following lines to the list of
-   paths in $MATLAB/toolbox/local/pathdef.m and restart Matlab to make the 
-   toolbox contents available:
+The Bionet Matlab Utilities Toolbox should work with a relatively
+recent release of Matlab:
+
+* `Matlab R14 <http://www.mathworks/com>`_
+
+Installation
+------------
+
+Unpack the archive into an installation directory of your
+choice. Assuming that Matlab is installed in the directory whose name
+is stored in the environmental variable ``$MATLAB``, one may wish to
+install the software in ``$MATLAB/toolbox/utils`` if one has
+administrative access to the machine.
+
+Add the subdirectories of the installation directory to Matlab's
+search path so that the functions comprised by the toolbox may be
+easily accessed. For example, if the software is installed in
+``$MATLAB/toolbox/utils``, one may add the following lines to the list of
+paths in ``$MATLAB/toolbox/local/pathdef.m`` and restart Matlab to make 
+the toolbox contents available:
 
    matlabroot,'/toolbox/utils/utils:', ...
    matlabroot,'/toolbox/utils/utilsdemos:', ...
 
+Alternatively, one may also add the path to the toolbox for the
+duration of one session by running the commands
+
+   addpath(strcat(getenv('MATLAB'),'/toolbox/utils/utils'));
+   addpath(strcat(getenv('MATLAB'),'/toolbox/utils/utilsdemos'));

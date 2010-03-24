@@ -1,18 +1,28 @@
+.. -*- rst -*-
+
+Change Log
+==========
+
+Release 0.014 - (?, 2010)
+-------------------------
+* Add raster plot function.
+* Add bandpass test signal generator.
+
 Release 0.013 - (January 07, 2010)
-==================================
+----------------------------------
 * Plotting bug fix.
 
 Release 0.012 - (October 26, 2009)
-==================================
+----------------------------------
 * Make time array construction consistently use a fixed time step.
 
 Release 0.011 - (October 02, 2009)
-==================================
+----------------------------------
 * Make random phase of generated test signal uniformly distributed
   over the range [0,2*pi].
 * Improve plotting.
 * Improve organization of toolbox files.
 
 Release 0.01 - (May 08, 2009)
-=============================
+-----------------------------
 * First public release.
