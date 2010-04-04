@@ -1,26 +1,18 @@
+%Q_IF_ONOFF Compute the t-transform for ON-OFF IAF neurons.
+%   Q = Q_IF_ONOFF(TK1,TK2,B,D,C,TAUF,SCALE,DT) computes the
+%   t-transform for an ON-OFF IAF neuron pair for the interspike
+%   interval [TK1,TK2] using neurons with bias B, threshold D,
+%   capacitance C, cross-feedback time constant TAUF, and
+%   cross-feedback amplitude scaling factor SCALE.
+% 
+%   The calculation is described in further detail in Equation 31
+%   of the Consistent Recovery paper mentioned in the toolbox
+%   references.
+
+%   Author: Eftychios A. Pnevmatikakis
+%   Copyright 2009-2010 Trustees of Columbia University
+
 function q = q_IF_ONOFF(tk1,tk2, b, d, C, tauf, scale, dt)
-
-% (tk1,tk2, b, d, C, tauf, scale, dt)
-% t-transform calculation for an ON-OFF IF neuron pair
-
-% q_IF_ONOFF(tk1,tk2, b, d, C, tauf, scale, dt) computes the t-transform
-% of a symmetric ON-OFF IF neuron pair eq. (31)
-
-% Inputs:
-% tk1:    spike times from ON component
-% tk2:    spike times from OFF component
-% b:      bias
-% delta:  threshold of the LIF neuron
-% R:      resistance 
-% C:      capacitance
-% tauf:   time constant of crossfeedback term
-% scale:  amplitude of crossfeedback term
-
-% Output:
-% q:      right hand side of the t-transform
-
-% Author(s): Eftychios A. Pnevmatikakis
-% Copyright 2010 Trustees of Columbia University
 
 q1 = C*d - b*diff(tk1);
 fb1 = 0*q1;

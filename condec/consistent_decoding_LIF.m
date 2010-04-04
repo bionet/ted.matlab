@@ -1,24 +1,16 @@
-function u_rec = consistent_decoding_LIF(tk,t, b, d, R, C)
-% (tk,t,dt,b,d,R,C)
-% consistent_decoding_LIF reconstruct signals encoded with a LIF neuron
+%CONSISTENT_DECODING_LIF Decode a signal encoded with a leaky IAF neuron.
+%   U_REC = CONSISTENT_DECODING_LIF(TK,T,B,D,R,C) decodes a
+%   finite-energy signal encoded as spike times TK over the times T
+%   using a leaky IAF neuron with bias B, threshold D, resistance R,
+%   and capacitance C.
+%
+%   The calculation is described in further detail in Section 2.2 of
+%   the Consistent Recovery paper mentioned in the toolbox references.
 
-% u_rec = consistent_decoding_LIF(t, b, d, R, C, lamda) reconstructs the encoded 
-% stimulus u that has finite energy and is encoded with a 
-% LIF neuron. The process is described in detail in section 2.2
+%   Author: Eftychios A. Pnevmatikakis
+%   Copyright 2009-2010 Trustees of Columbia University
 
-% Inputs:
-% tk:     spike times
-% t:      time vector
-% b:      bias
-% delta:  threshold of the LIF neuron
-% R:      resistance 
-% C:      capacitance
-
-% Output:
-% u_rec:  reconstructed stimulus.
-
-% Author(s): Eftychios A. Pnevmatikakis
-% Copyright 2010 Trustees of Columbia University
+function u_rec = consistent_decoding_LIF(tk,t,b,d,R,C)
 
 ln = length(tk)-1;
 

@@ -1,28 +1,16 @@
+%PSI Create the signal reconstruction function psi.
+%   P = PSI(TK1,TK2,T,RC) computes the matrix reconstruction function
+%   psi for an IAF neuron for the interspike interval [TK1,TK2] over
+%   the times T. If the neuron's time constant RC is not specified, it
+%   is assumed to be infinite.
+%   
+%   The calculation is described in further detail in Equation 19 of
+%   the Consistent Recovery paper mentioned in the toolbox references.
+
+%   Author: Eftychios A. Pnevmatikakis
+%   Copyright 2009-2010 Trustees of Columbia University
+
 function psi = psi(tk1,tk2,t,varargin)
-
-% psi creates the function reconstruction function psi
-
-% psi(tk1,tk2,t) creates the matrix function reconstruction
-% function psi for an ideal IF neuron that corresponds to the to the interspike
-% interval [tik1,tk2]. The functions is given by eq. (19).
-
-
-% psi_LIF(tk1,tk2,t,RC) creates the matrix function reconstruction
-% function psi for a LIF neuron with time constant RC that corresponds to 
-% the to the interspike interval [tik1,tk2]. The functions is given by eq. (19).
-
-% Inputs
-% tk1:  first spike time
-% tk2:  second spike time
-% t:    time vector
-% RC:   time constant of the LIF neuron
-
-
-% Output
-% psi:  the reconstruction function
-
-% Author(s): Eftychios A. Pnevmatikakis
-% Copyright 2010 Trustees of Columbia University
 
 psi = zeros(1,length(t));
 

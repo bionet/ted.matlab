@@ -1,20 +1,16 @@
-function Gb = Gblock_IF(ti,tj)
+%G_BLOCK_IF Compute the reconstruction matrix for IAF neurons.
+%   G = G_BLOCK_IF(TI,TJ) computes the reconstruction matrix
+%   G[i,j] = <phi_k^i,psi_l^j> used to decode a signal in L2 space
+%   that was encoded by a population of ideal IAF neurons. TI and
+%   TJ contain the spike times from neurons i and j, respectively.
+%
+%   The calculation is described in further detail in Equation 29 of the
+%   Consistent Recovery paper mentioned in the toolbox references.
 
-% G_block_IF create the matrix G^{ij} component of G [equation (29)]
+%   Author: Eftychios A. Pnevmatikakis
+%   Copyright 2009-2010 Trustees of Columbia University
 
-% G = G_LIF(tk,RC) creates the matrix G with entries G[i,j] =
-% <phi_k^i,psi_l^j> for the reconstruction of a stimulus that belongs in the
-% L2 space and is encoded with a population of ideal IF neurons
-
-% Inputs
-% ti:  spike times from neuron i
-% ti:  spike times from neuron j
-
-% Output
-% G^{ij}: the ij-th block of matrix G
-
-% Author(s): Eftychios A. Pnevmatikakis
-% Copyright 2009 Trustees of Columbia University
+function Gb = G_block_IF(ti,tj)
 
 li=length(ti)-1;
 lj=length(tj)-1;

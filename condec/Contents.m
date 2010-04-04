@@ -6,7 +6,7 @@
 %   consistent_decoding_IF_MIMO   - Reconstruction of a vector valued signal encoded with a population of neurons [Section 4]
 %   G_IF                          - Construction of G matrix for the single neuron case (both leaky and ideal) eqs. (17) and (19)
 %   G_pop_IF                      - Construction of G matrix for population of neurons
-%   Gblock_IF                     - Calculation of G^{ij} for ideal IF neurons eq. (51)
+%   G_block_IF                    - Calculation of G^{ij} for ideal IF neurons eq. (51)
 %   p_IF                          - General calculation of p-vector
 %   r_IF                          - General calculation of r-vector
 %   psi                           - General calculation of reconstruction function psi eqs. (16) and (19) 

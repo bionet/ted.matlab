@@ -1,25 +1,18 @@
+%G_IF Create the reconstruction matrix G.
+%   G = G_IF(TK,RC) computes the reconstruction matrix G with entries
+%   G[i,j] = <phi_i,psi_j> used to decode a signal in L2 space that
+%   was encoded by a leaky IAF neuron as the spike times TK with time
+%   constant RC; if no time constant is specified, the neuron is
+%   assumed to be ideal.
+%   
+%   The calculation is described in further detail in Equations
+%   17 and 19 of the Consistent Recover paper mentioned in the
+%   toolbox references.
+
+%   Author: Eftychios A. Pnevmatikakis
+%   Copyright 2009-2010 Trustees of Columbia University
+
 function G = G_IF(tk,varargin)
-
-% G_IF create the matrix G [equation (15)]
-
-% G = G_IF(tk) creates the matrix G with entries G[i,j] =
-% <phi_i,psi_j> for the reconstruction of a stimulus that belongs in the
-% L2 space and is encoded with an ideal integrate-and-fire neuron (equation (19)).
-
-% G = G_IF(tk,RC) creates the matrix G with entries G[i,j] =
-% <phi_i,psi_j> for the reconstruction of a stimulus that belongs in the
-% L2 space and is encoded with a leaky integrate-and-fire neuron with time 
-% constant RC (equation (17)).
-
-% Inputs
-% tk:  vector of spike times
-% RC:  time constant of the LIF neuron (R*C)
-
-% Output
-% G: the matrix G
-
-% Author(s): Eftychios A. Pnevmatikakis
-% Copyright 2009 Trustees of Columbia University
 
 ln = length(tk)-1;
 G = zeros(ln,ln);

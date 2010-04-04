@@ -1,26 +1,18 @@
+%P_IF Compute the inner product <1,\phi_k>.
+%   P = P_IF(TK,RC) computes the inner product <1,\phi_k> for
+%   a leaky IAF neuron with time constant RC (an ideal neuron may
+%   be simulated by setting RC to Inf). The spike times generated
+%   by the neuron are specified in TK.
+%
+%   P = P_IF(TK,RC,LN,W) computes the inner product for a population
+%   of IAF neurons; LN contains the number of spikes from each
+%   neuron, and W contains the values by which each neuron weights
+%   the input. If W is not specified, the input is not weighted.
+
+%   Author: Eftychios A. Pnevmatikakis
+%   Copyright 2009-2010 Trustees of Columbia University
+
 function p = p_IF(TK,RC,varargin)
-
-% p_IF creates the vector of inner product measurements p_k = <1,\phi_k>
-
-% p_IF(TK,RC) creates the vector for a LIF neuron with time constant RC
-% If the neuron is an ideal integrator then choose RC = Inf
-% p_IF(TK,RC,ln) creates the vector for a population of length(ln) neurons 
-% where ln represents the number of spikes from each neuron
-% p_IF(TK,RC,ln, w) creates the vector for a population of length(ln) neurons 
-% where ln represents the number of measurements from each neuron, and each
-% neuron j weights the input by a number w(j) before encoding
-
-% Inputs
-% TK:   vector of spike trains
-% RC:   time constants of each neuron
-% ln:   # of measurements for each neuron
-% w:    weighing factor for each neuron
-
-% Output
-% p:    the p-vector
-
-% Author(s): Eftychios A. Pnevmatikakis
-% Copyright 2010 Trustees of Columbia University
 
 if nargin > 2
     ln = varargin{1};

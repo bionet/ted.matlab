@@ -1,25 +1,17 @@
+%CROSS_FB Compute cross-feedback (coupling function).
+%   H = CROSS_FB(T,N1,N2,TAUF,SCALE) computes the cross-feedback
+%   term coupling the two components of an ON-OFF IAF neuron
+%   pair over the times T. N1 and N2 denote the exponents for the
+%   positive and negative feedback terms, respectively; TAUF
+%   denotes the time constant, and SCALE the amplitude of the
+%   cross-feedback.
+%
+%   The calculation is described in further detail in Equation 33 of
+%   the Consistent Recovery paper mentioned in the toolbox references.
+
+%   Author: Eftychios A. Pnevmatikakis
+%   Copyright 2009-2010 Trustees of Columbia University
+
 function h = cross_fb(t,n1,n2,tauf,scale)
-
-% (t,n1,n2,tauf,scale)
-% calculation of the crossfeedback term (coupling function)
-
-% cross_fb(t,n1,n2,tauf,scale) calculates the crossfeedback term for coupling 
-% the two components of an ON-OFF IF neuron pair
-% The mean value of the term is zero to avoid unstable behavior
-% The general term is given by eq. (33)
-% h = scale/tauf*exp(-t/tauf)*((t/tauf)^n1/(n1!) - (t/tauf)^n2/(n2!))
-
-% Inputs:
-% t:      time vector
-% n1:     exponent for positive term
-% n2:     exponent for negative term
-% tauf:   time constant
-% scale:  amplitude of crossfeedback term
-
-% Output:
-% h:      response of the crossfeedback term
-
-% Author(s): Eftychios A. Pnevmatikakis
-% Copyright 2010 Trustees of Columbia University
 
 h = scale/tauf*exp(-t/tauf).*((t/tauf).^n1/factorial(n1)-(t/tauf).^n2/factorial(n2));

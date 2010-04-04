@@ -1,25 +1,18 @@
+%CONSISTENT_DECODING_IF_ONOFF Decode a signal encoded with ON-OFF IAF neurons.
+%   U_REC = CONSISTENT_DECODING_IF_ONOFF(TK1,TK2,T,B,D,C,TAUF,SCALE)
+%   decodes a finite energy signal encoded as spike times TK1 and
+%   TK2 by a pair of ON-OFF IAF neurons with bias B, threshold D,
+%   capacitance C, cross-feedback time constant TAUF, and
+%   cross-feedback amplitude scaling factor SCALE.
+%
+%   The calculation is described in further detail in Section 3.2
+%   of the Consistent Recovery paper mentioned in the toolbox
+%   references. 
+
+%   Author: Eftychios A. Pnevmatikakis
+%   Copyright 2009-2010 Trustees of Columbia University
+
 function u_rec = consistent_decoding_IF_ONOFF(tk1, tk2, t, b, d, C, tauf, scale)
-% (tk,t,dt,b,d,R,C)
-% consistent_decoding_IF_ONOFF reconstruct signals encoded with an ON-OFF
-% IF neuron pair
-
-% u_rec = consistent_decoding_IF_ONOFF(t, b, d, R, C, lamda) reconstructs the encoded 
-% stimulus u that has finite energy and is encoded with an ON-OFF IF neuron 
-% pair. The process is described in detail in section 3.2
-
-% Inputs:
-% tk:     spike times
-% t:      time vector
-% b:      bias
-% delta:  threshold of the LIF neuron
-% R:      resistance 
-% C:      capacitance
-
-% Output:
-% u_rec:  reconstructed stimulus.
-
-% Author(s): Eftychios A. Pnevmatikakis
-% Copyright 2010 Trustees of Columbia University
 
 dt = t(2) - t(1);
 ln = [length(tk1)-1,length(tk2)-1];

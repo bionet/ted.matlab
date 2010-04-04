@@ -1,29 +1,21 @@
-function u_rec = consistent_decoding_IF_MIMO(TK, LN, t, b, d, C, N, M, delay, scale)
+%CONSISTENT_DECODING_IF_MIMO Decode a signal encoded with an IAF neuron.
+%   U_REC = CONSISTENT_DECODING_IF_MIMO(TK,LN,T,B,D,C,N,M,DELAY,SCALE)
+%   decodes a vector-valued signal comprising M inputs encoded as
+%   spike times TK over the times T using N ideal IAF neurons with
+%   biases, thresholds, and capacitances respectively specified in the
+%   arrays B, D, and C and a filtering kernel that delays and scales
+%   the inputs using the values in the DELAY and SCALE matrices.
+%   delaying and scaling to the inputs. The number of spikes from each
+%   neuron is specified in LN. 
+%
+%   The calculation is described in further detail in Section 4.2
+%   of the Consistent Recovery paper mentioned in the toolbox
+%   references.
 
-% (tk,t,dt,b,d,R,C)
-% consistent_decoding_IF_MIMO reconstructs a vector valued signal encoded a
-% population of ideal IF neurons and a filtering kernel that performs
-% delaying and scaling to the inputs. The proces is described in detail in
-% section 4.2
+%   Author: Eftychios A. Pnevmatikakis
+%   Copyright 2009-2010 Trustees of Columbia University
 
-
-% Inputs:
-% TK:    spike times of each neuron
-% LN:    number of spikes for each neuron
-% t:     time vector
-% b:     bias vector
-% d:     thresholds vector 
-% C:     capacitance vector
-% N:     number of neurons
-% M:     number of inputs
-% delay: matrix of delays
-% scale: matrix of scalings
-
-% Output:
-% u_rec: vector valued reconstructed signal
-
-% Author(s): Eftychios A. Pnevmatikakis
-% Copyright 2010 Trustees of Columbia University
+function u_rec = consistent_decoding_IF_MIMO(TK,LN,t,b,d,C,N,M,delay,scale)
 
 dt = t(2) - t(1);
 ln = LN-1;
