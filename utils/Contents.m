@@ -7,6 +7,7 @@
 %
 % Visualization Functions
 %   fig_resize         - Resize a figure.
+%   mtit               - Create a major title for subplots.
 %   plot_compare       - Compare two signals graphically.
 %   plot_encoded       - Plot a time-encoded signal.
 %   plot_raster        - Plot raster of time sequences.
