@@ -61,7 +61,7 @@ tk1 = t(find(s1));
 tk2 = t(find(s2));
 
 figure;plot(t,u,t,y1,t,y2); hold on;
-xlabel('Time [sec]'); ylabel('Amplitude');
+xlabel('t (seconds)'); ylabel('u(t)');
 plot(tk1-dt,d*ones(1,length(tk1)),'yo');hold on;%y1(find(s1)),'yo'); hold on
 plot(tk2-dt,-d*ones(1,length(tk2)),'mo');hold on;%y2(find(s2)),'mo'); hold on
 plot(t,d*ones(size(t)),'k--',t,-d*ones(size(t)),'k--'); hold off;

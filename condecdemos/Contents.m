@@ -1,9 +1,9 @@
 % Consistent Decoding Algorithms for Finite Energy Stimuli Encoded with LIF
 % Neurons Using Interpolation Splines - Demos
 %
-%   SISO_demo      - Reconstruction of signal encoded with a single neuron [Section 2.3]
-%   IF_ONOFF_demo  - Reconstruction of temporal contrast encoded with an ON-OFF neuron pair [Section 3.3]
-%   MIMO_demo      - Reconstruction of a vector valued signal encoded with a population of neurons [Section 4.3]
+%   iaf_demo_spline        - Demo of IAF encoder/decoder [Section 2.3]
+%   iaf_demo_spline_mimo   - Demo of multiple input IAF encoder/decoder [Section 4.3]
+%   iaf_demo_spline_onoff  - Demo of ON-OFF IAF encoder/decoder [Section 3.3]
 %
 % See also condec
 %
@@ -16,4 +16,4 @@
 % Published Online September 22, 2009.
 
 % Author: Eftychios A. Pnevmatikakis
-% Copyright 2010 Trustees of Columbia University
+% Copyright 2009-2010 Trustees of Columbia University
