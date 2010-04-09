@@ -44,6 +44,24 @@
     <type>M-file</type>
     <file>html/iaf_pop_demo.html</file>
   </demoitem>
+  <demoitem>
+    <label>Time encoding and decoding with an IAF neuron and spline
+      interpolation.</label>
+    <type>M-file</type>
+    <file>html/iaf_demo_spline.html</file>
+  </demoitem>
+  <demoitem>
+    <label>Time encoding and decoding of multiple signals with multiple IAF neurons using spline
+      interpolation.</label>
+    <type>M-file</type>
+    <file>html/iaf_demo_spline_mimo.html</file>
+  </demoitem>
+  <demoitem>
+    <label>Time encoding and decoding with ON-OFF IAF neurons using spline
+      interpolation.</label>
+    <type>M-file</type>
+    <file>html/iaf_demo_spline_onoff.html</file>
+  </demoitem>
 </demosection>
 
 </demos>
