@@ -1,4 +1,4 @@
-%Q_IF_ONOFF Compute the t-transform for ON-OFF IAF neurons.
+%Q_IF_ONOFF Compute the t-transform for an ON-OFF IAF neuron pair.
 %   Q = Q_IF_ONOFF(TK1,TK2,B,D,C,TAUF,SCALE,DT) computes the
 %   t-transform for an ON-OFF IAF neuron pair for the interspike
 %   interval [TK1,TK2] using neurons with bias B, threshold D,

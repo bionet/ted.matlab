@@ -1,4 +1,4 @@
-%G_POP_IF Compute the reconstruction matrix G for consistent recovery.
+%G_POP_IF Compute the reconstruction matrix G for multiple IAF neuron decoder.
 %   G = G_POP_IF(TK,LN,W) computes the matrix G with entries 
 %   G[i,j] = <phi_k^i,psi_l^j> used to reconstruct a signal in L2
 %   space that was encoded with a population of ideal IAF

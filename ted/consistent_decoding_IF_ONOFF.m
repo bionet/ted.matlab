@@ -1,4 +1,4 @@
-%CONSISTENT_DECODING_IF_ONOFF Decode a signal encoded with ON-OFF IAF neurons.
+%CONSISTENT_DECODING_IF_ONOFF Decode a signal encoded with an ON-OFF IAF neuron pair.
 %   U_REC = CONSISTENT_DECODING_IF_ONOFF(TK1,TK2,T,B,D,C,TAUF,SCALE)
 %   decodes a finite energy signal encoded as spike times TK1 and
 %   TK2 by a pair of ON-OFF IAF neurons with bias B, threshold D,

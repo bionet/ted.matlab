@@ -1,4 +1,4 @@
-%G_BLOCK_IF Compute the reconstruction matrix for IAF neurons.
+%G_BLOCK_IF Compute the reconstruction matrix for multiple IAF time decoder.
 %   G = G_BLOCK_IF(TI,TJ) computes the reconstruction matrix
 %   G[i,j] = <phi_k^i,psi_l^j> used to decode a signal in L2 space
 %   that was encoded by a population of ideal IAF neurons. TI and

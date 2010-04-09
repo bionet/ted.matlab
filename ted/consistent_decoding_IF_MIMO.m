@@ -1,4 +1,4 @@
-%CONSISTENT_DECODING_IF_MIMO Decode a signal encoded with an IAF neuron.
+%CONSISTENT_DECODING_IF_MIMO Decode several signal encoded with an ensemble of IAF neurons.
 %   U_REC = CONSISTENT_DECODING_IF_MIMO(TK,LN,T,B,D,C,N,M,DELAY,SCALE)
 %   decodes a vector-valued signal comprising M inputs encoded as
 %   spike times TK over the times T using N ideal IAF neurons with

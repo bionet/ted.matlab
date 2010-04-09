@@ -1,4 +1,4 @@
-%G_IF Create the reconstruction matrix G.
+%G_IF Compute the reconstruction matrix G for a single IAF time decoder.
 %   G = G_IF(TK,RC) computes the reconstruction matrix G with entries
 %   G[i,j] = <phi_i,psi_j> used to decode a signal in L2 space that
 %   was encoded by a leaky IAF neuron as the spike times TK with time

@@ -1,4 +1,4 @@
-%CROSS_FB Compute cross-feedback (coupling function).
+%CROSS_FB Compute cross-feedback for ON-OFF IAF neuron pair.
 %   H = CROSS_FB(T,N1,N2,TAUF,SCALE) computes the cross-feedback
 %   term coupling the two components of an ON-OFF IAF neuron
 %   pair over the times T. N1 and N2 denote the exponents for the
