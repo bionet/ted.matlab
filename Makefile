@@ -3,7 +3,9 @@ TAG = $(VERSION)
 PREFIX = bionet.ted-$(VERSION)
 TARNAME = bionet.ted-matlab-$(VERSION).tar.gz
 
-tarball:
+.PHONY: package
+
+package:
 	hg archive -r $(TAG) -t tgz -p $(PREFIX) -X Makefile $(TARNAME)
 
 clean:
