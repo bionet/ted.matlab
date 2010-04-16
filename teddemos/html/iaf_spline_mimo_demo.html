@@ -6,7 +6,7 @@
    <!--
 This HTML is auto-generated from an M-file.
 To make changes, update the M-file and republish this document.
-      --><title>Time Encoding and Decoding of Multiple Signals with Multiple Neurons</title><meta name="generator" content="MATLAB 7.9"><meta name="date" content="2010-04-08"><meta name="m-file" content="iaf_demo_spline_mimo"><style type="text/css">
+      --><title>Time Encoding and Decoding of Multiple Signals with Multiple Integrate-and-Fire Neurons Using Spline Interpolation</title><meta name="generator" content="MATLAB 7.9"><meta name="date" content="2010-04-16"><meta name="m-file" content="iaf_spline_mimo_demo"><style type="text/css">
 
 body {
   background-color: white;
@@ -62,7 +62,7 @@ p.footer {
   color: gray;
 }
 
-  </style></head><body><div class="content"><h1>Time Encoding and Decoding of Multiple Signals with Multiple Neurons</h1><!--introduction--><p>This demo illsutrates the time encoding of several bandlimited signals with multiple neurons and their recovery using spline interpolation.</p><p>The demo corresponds to the example presented in Section 4.3 of the Consistent Recovery paper mentioned in the toolbox references.</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Generating a Test Signal</a></li><li><a href="#6">Time Encoding</a></li><li><a href="#9">Time Decoding</a></li></ul></div><h2>Generating a Test Signal<a name="1"></a></h2><p>Generate a noiseless signal 0.1 s long sampled at 10 GHz with a bandwidth of 100 Hz:</p><pre class="codeinput">dur = 0.1;       <span class="comment">% duration</span>
+  </style></head><body><div class="content"><h1>Time Encoding and Decoding of Multiple Signals with Multiple Integrate-and-Fire Neurons Using Spline Interpolation</h1><!--introduction--><p>This demo illsutrates the time encoding of several bandlimited signals with multiple integrate-and-fire neurons and their recovery using spline interpolation.</p><p>The demo corresponds to the example presented in Section 4.3 of the Consistent Recovery paper mentioned in the toolbox references.</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Generating a Test Signal</a></li><li><a href="#6">Time Encoding</a></li><li><a href="#9">Time Decoding</a></li></ul></div><h2>Generating a Test Signal<a name="1"></a></h2><p>Generate a noiseless signal 0.1 s long sampled at 10 GHz with a bandwidth of 100 Hz:</p><pre class="codeinput">dur = 0.1;       <span class="comment">% duration</span>
 dt = 1e-7;       <span class="comment">% sampling resolution</span>
 fmax = 100;      <span class="comment">% bandwidth (Hz)</span>
 t = [dt:dt:dur]; <span class="comment">% time support</span>
@@ -78,13 +78,14 @@ u = zeros(M,length(t));
     u(i,:) = ut((round(0.1*length(t))+1):end-round(0.1*length(t)));
     u(i,:) = u(i,:)/max(abs(u(i,:)));
 <span class="keyword">end</span>
-</pre><pre class="codeinput">figure;
+</pre><p>Display the generated signals:</p><pre class="codeinput">figure;
 <span class="keyword">for</span> i=1:M
     subplot(1,M,i); plot(t,u(i,:));
     ylabel(sprintf(<span class="string">'u^{%d}'</span>,i));
-    xlabel(<span class="string">'t (sec)'</span>);
+    xlabel(<span class="string">'t (seconds)'</span>);
 <span class="keyword">end</span>
-</pre><img vspace="5" hspace="5" src="iaf_demo_spline_mimo_01.png" alt=""> <h2>Time Encoding<a name="6"></a></h2><p>Set encoding parameters:</p><pre class="codeinput">N = 12;                          <span class="comment">% number of neurons</span>
+mtit(<span class="string">'Generated Signals'</span>);
+</pre><img vspace="5" hspace="5" src="iaf_spline_mimo_demo_01.png" alt=""> <h2>Time Encoding<a name="6"></a></h2><p>Set encoding parameters:</p><pre class="codeinput">N = 12;                          <span class="comment">% number of neurons</span>
 delay = exprnd(1/2/fmax/40,N,M); <span class="comment">% delays</span>
 scale = 0.5 + 0.5*rand(N,M);     <span class="comment">% rank should be M</span>
 b = 2.3 + rand(1,N);             <span class="comment">% biases</span>
@@ -97,20 +98,20 @@ C = 0.01*ones(1,N)/2;            <span class="comment">% capacitances</span>
         v(j,:) = v(j,:)+scale(j,i)*u(i,tr_vc+round(delay(j,i)/dt));
     <span class="keyword">end</span>
 <span class="keyword">end</span>
-</pre><p>Encode the signal:</p><pre class="codeinput"><span class="keyword">for</span> j=1:N
+</pre><p>Encode the signals:</p><pre class="codeinput"><span class="keyword">for</span> j=1:N
     tk = cumsum([0,iaf_encode(v(j,:),dt,b(j),d(j),Inf,C(j))]);
     TK(1:length(tk),j) = tk';
     LN(j) = length(tk);
 <span class="keyword">end</span>
-</pre><h2>Time Decoding<a name="9"></a></h2><p>Recover the signal:</p><pre class="codeinput">u_rec = consistent_decoding_IF_MIMO(TK,LN,t(tr_vc)-t(tr_vc(1)),b,d,C,N,M,delay,scale);
-
-figure;
+</pre><h2>Time Decoding<a name="9"></a></h2><p>Recover the signals:</p><pre class="codeinput">u_rec = consistent_decoding_IF_MIMO(TK,LN,t(tr_vc)-t(tr_vc(1)),b,d,C,N,M,delay,scale);
+</pre><p>Display the recovered signals:</p><pre class="codeinput">figure;
 <span class="keyword">for</span> i = 1:M
     subplot(1,M,i);plot(t(tr_vc),u(i,tr_vc),t(tr_vc),u_rec(i,:))
     ylabel(sprintf(<span class="string">'u^{%d}'</span>,i));
-    xlabel (<span class="string">'t (s)'</span>);
+    xlabel (<span class="string">'t (seconds)'</span>);
 <span class="keyword">end</span>
-</pre><img vspace="5" hspace="5" src="iaf_demo_spline_mimo_02.png" alt=""> <p>Compute the SNR of the recovered signals:</p><pre class="codeinput"><span class="keyword">for</span> i = 1:M
+mtit(<span class="string">'Recovered Signals'</span>);
+</pre><img vspace="5" hspace="5" src="iaf_spline_mimo_demo_02.png" alt=""> <p>Compute the SNR of the recovered signals:</p><pre class="codeinput"><span class="keyword">for</span> i = 1:M
     snr(i) = 10*log10(sum(u(i,tr_vc).^2)/sum((u(i,tr_vc)-u_rec(i,:)).^2));
 <span class="keyword">end</span>
 snr
@@ -122,10 +123,10 @@ snr =
 </pre><p><i>Author: Eftychios A. Pnevmatikakis</i></p><p><i>Copyright 2009-2010 Trustees of Columbia University</i></p><p class="footer"><br>
       Published with MATLAB&reg; 7.9<br></p></div><!--
 ##### SOURCE BEGIN #####
-%% Time Encoding and Decoding of Multiple Signals with Multiple Neurons
-% This demo illsutrates the time encoding of several bandlimited signals
-% with multiple neurons and their recovery using spline
-% interpolation.
+%% Time Encoding and Decoding of Multiple Signals with Multiple Integrate-and-Fire Neurons Using Spline Interpolation
+% This demo illsutrates the time encoding of several bandlimited
+% signals with multiple integrate-and-fire neurons and their recovery
+% using spline interpolation.
 %
 % The demo corresponds to the example presented in Section 4.3 of
 % the Consistent Recovery paper mentioned in the toolbox
@@ -161,12 +162,14 @@ for i=1:M
 end
 
 %%
+% Display the generated signals:
 figure;
 for i=1:M
     subplot(1,M,i); plot(t,u(i,:));
     ylabel(sprintf('u^{%d}',i));
-    xlabel('t (sec)');
+    xlabel('t (seconds)');
 end
+mtit('Generated Signals');
 
 %% Time Encoding
 % Set encoding parameters:
@@ -189,7 +192,7 @@ for j=1:N
 end    
 
 %%
-% Encode the signal:
+% Encode the signals:
 for j=1:N
     tk = cumsum([0,iaf_encode(v(j,:),dt,b(j),d(j),Inf,C(j))]);
     TK(1:length(tk),j) = tk';
@@ -197,15 +200,18 @@ for j=1:N
 end
 
 %% Time Decoding
-% Recover the signal:
+% Recover the signals:
 u_rec = consistent_decoding_IF_MIMO(TK,LN,t(tr_vc)-t(tr_vc(1)),b,d,C,N,M,delay,scale);
 
+%%
+% Display the recovered signals:
 figure;
 for i = 1:M
     subplot(1,M,i);plot(t(tr_vc),u(i,tr_vc),t(tr_vc),u_rec(i,:))
     ylabel(sprintf('u^{%d}',i));
-    xlabel ('t (s)');
+    xlabel ('t (seconds)');
 end
+mtit('Recovered Signals');
 
 %%
 % Compute the SNR of the recovered signals:

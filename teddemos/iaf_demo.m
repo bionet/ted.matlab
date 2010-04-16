@@ -14,9 +14,9 @@ t = [0:dt:dur]; % time support
 np = -inf;      % noise level
 
 if np == -inf,
-  fig_title = 'IAF input signal with no noise';
+  fig_title = 'IAF Input Signal with No Noise';
 else
-  fig_title = sprintf('IAF input signal with %d dB of noise',np);
+  fig_title = sprintf('IAF Input Signal with %d dB of Noise',np);
 end
 
 rand('twister',0); randn('state',0);
@@ -25,7 +25,7 @@ u = func_timer(@gen_test_signal,dur,dt,f,np);
 plot_signal(t,u,fig_title);
 
 %% Time Encoding
-% The IAF time encoder can make use of a leaky or non-leaky neuron
+% The IAF time encoder can make use of a leaky or ideal neuron
 % model (i.e., when the neuron's resistance is infinite). Both models
 % are demonstrated below.
 %
@@ -36,7 +36,7 @@ R = 10;   % resistance
 C = 0.01; % capacitance
 
 %%
-% Verify that recovery can take place with the leaky and non-leaky
+% Verify that recovery can take place with the leaky and ideal
 % parameters:
 if ~iaf_recoverable(u,bw,b,d,R,C),
   return
@@ -48,43 +48,44 @@ end
 
 %%
 % Encode the signal using the leaky model: 
-fig_title = 'encoding using leaky IAF algorithm';
+fig_title = 'Signal Encoded Using Leaky IAF Encoder';
 fprintf(1,'%s\n',fig_title);
 s_leaky = func_timer(@iaf_encode,u,dt,b,d,R,C);
 plot_encoded(t,u,s_leaky,fig_title);
 
 %%
-% Encode the signal using the non-leaky model:
-fig_title = 'encoding using nonleaky IAF algorithm';
+% Encode the signal using the ideal model:
+fig_title = 'Signal Encoded Using Ideal IAF Encoder';
 fprintf(1,'%s\n',fig_title);
-s_nonleaky = func_timer(@iaf_encode,u,dt,b,d,inf,C);
-plot_encoded(t,u,s_nonleaky,fig_title);
+s_ideal = func_timer(@iaf_encode,u,dt,b,d,inf,C);
+plot_encoded(t,u,s_ideal,fig_title);
 
 %% Time Decoding
-% The signal can be recovered for both the leaky and non-leaky models:
-fig_title = 'decoding using leaky IAF algorithm';
+% The signal can be recovered for both the leaky and ideal models:
+fig_title = 'Signal Decoded Using Leaky IAF Decoder';
 fprintf(1,'%s\n',fig_title);
 u_rec_leaky = func_timer(@iaf_decode,s_leaky,dur,dt,bw,b,d,R,C);
 plot_compare(t,u,u_rec_leaky,fig_title);
 %%
-fig_title = 'decoding using nonleaky IAF algorithm';
+fig_title = 'Signal Decoded Using Ideal IAF Decoder';
 fprintf(1,'%s\n',fig_title);
-u_rec_nonleaky = func_timer(@iaf_decode,s_nonleaky,dur,dt,bw,b,d,inf,C);
-plot_compare(t,u,u_rec_nonleaky,fig_title);
+u_rec_ideal = func_timer(@iaf_decode,s_ideal,dur,dt,bw,b,d,inf,C);
+plot_compare(t,u,u_rec_ideal,fig_title);
 
 %%
 % Decoding can also be performed using a faster algorithm:
 M = 5; % fast decoding parameter
 
-fig_title = 'decoding using leaky fast IAF algorithm';
+fig_title = 'Signal Decoded Using Fast Leaky IAF Decoder';
 fprintf(1,'%s\n',fig_title);
 u_rec_leaky = func_timer(@iaf_decode_fast,s_leaky,dur,dt,bw,M,b,d,inf,C);
 plot_compare(t,u,u_rec_leaky,fig_title);
+
 %%
-fig_title = 'decoding using nonleaky fast IAF algorithm';
+fig_title = 'Signal Decoded Using Fast Ideal IAF Decoder';
 fprintf(1,'%s\n',fig_title);
-u_rec_nonleaky = func_timer(@iaf_decode_fast,s_nonleaky,dur,dt,bw,M,b,d,inf,C);
-plot_compare(t,u,u_rec_nonleaky,fig_title);
+u_rec_ideal = func_timer(@iaf_decode_fast,s_ideal,dur,dt,bw,M,b,d,inf,C);
+plot_compare(t,u,u_rec_ideal,fig_title);
 
 %%
 % _Author: Lev Givon_

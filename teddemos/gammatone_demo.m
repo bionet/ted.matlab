@@ -22,6 +22,7 @@ fmax = 390;  % maximum frequency of bandpass signal
 W  = 2*pi*fmax; 
 
 mc = floor(floor(t(end)/dt)*(fmax-fmin-1)*dt); % maximum sinusoidal components
+rand('twister',0); randn('state',0);
 u = gen_test_bp_signal(t(end)+(2*round(0.15*length(t))+1)*dt, ...
                        dt,fmin,fmax,-Inf,mc);
     
@@ -34,7 +35,7 @@ u = u/max(abs(u)); % normalize signal
 % Plot the signal in the time and frequency domains:
 figure;subplot(1,2,1);plot(t,u); 
 xlim(minmax(t));
-xlabel('Time [sec]'); ylabel('Amplitude'); 
+xlabel('t (seconds)'); ylabel('u(t)'); 
 title('Signal in the Time Domain');
         
 np2 = 2^nextpow2(length(u(tr_vc)));
@@ -43,7 +44,7 @@ U = fft(u(tr_vc),np2)/length(u(tr_vc));
 f = Ft/2*linspace(0,1,np2/2+1);
 subplot(1,2,2);plot(f,2*abs(U(1:np2/2+1)));
 axis([0,Fs/2,0,1.1*max(2*abs(U(1:np2/2+1)))]);
-xlabel('Frequency [Hz]'); ylabel('Spectrum'); 
+xlabel('f (Hz)'); ylabel('U(f)'); 
 title('Signal in the Frequency Domain');
 
 %% Filterbank Construction and Filtering of Signal
@@ -138,9 +139,9 @@ u_rec = u_rec - mean(u_rec(tr_vc));
 figure;subplot(1,2,1);
 plot(t(tr_vc),u(tr_vc),t(tr_vc),u_rec(tr_vc),t(tr_vc),u(tr_vc)-u_rec(tr_vc));
 xlim(minmax(t(tr_vc)));
-xlabel('Time [sec]'); ylabel('Amplitude'); 
+xlabel('t (seconds)'); ylabel('u(t)'); 
 title('Recovery in the Time domain');
-legend('Original','Recovered','Error');
+legend('original','recovered','error');
 
 U_rec = fft(u_rec(tr_vc),np2)/length(u(tr_vc));  
 
@@ -149,9 +150,9 @@ subplot(1,2,2);
 plot(f,2*abs(U(1:np2/2+1)),f,2*abs(U_rec(1:np2/2+1)), ...
      f,abs(2*abs(U(1:np2/2+1))-2*abs(U_rec(1:np2/2+1))));
 axis([0,Fs/2,0,1.1*max(2*abs(U_rec(1:np2/2+1)))]);
-xlabel('Frequency [Hz]'); ylabel('Spectrum'); 
+xlabel('f (Hz)'); ylabel('U(f)'); 
 title('Recovery in the Frequency domain');    
-legend('Original','Recovered','Error')
+legend('original','recovered','error')
 
 %%
 % Perform sequential recovery:
@@ -171,16 +172,14 @@ for i=1:Nf
 end
 
 %%
-% Plot all 16 recovered signals:
+% Plot all 16 recovered signals; the original signal is blue, and
+% the recovered signal is green:
 figure;
 for i=1:Nf
     subplot(4,ceil(Nf/4),i);plot(t(tr_vc),u(tr_vc),t(tr_vc),ur_s(i,tr_vc))
     xlim(minmax(t(tr_vc)));
-    xlabel('Time [sec]'); ylabel('Amplitude');
+    xlabel('t (sec)'); ylabel('u(t)');
     title(sprintf('# of Neurons: %d',i));
-    if i==1,
-        legend('Original','Recovered');
-    end
 end
 
 %%
@@ -188,7 +187,7 @@ end
 figure;
 subplot(2,3,1);plot(t(tr_vc),u(tr_vc),t(tr_vc),ur_s(1,tr_vc));
 xlim(minmax(t(tr_vc)));
-title('# of Neurons: 1'); ylabel('Amplitude');
+title('# of Neurons: 1'); ylabel('u(t)');
 subplot(2,3,2);plot(t(tr_vc),u(tr_vc),t(tr_vc),ur_s(2,tr_vc));
 xlim(minmax(t(tr_vc)));
 title('# of Neurons: 2');
@@ -197,13 +196,13 @@ xlim(minmax(t(tr_vc)));
 title('# of Neurons: 3');
 subplot(2,3,4);plot(t(tr_vc),u(tr_vc),t(tr_vc),ur_s(4,tr_vc));
 xlim(minmax(t(tr_vc)));
-xlabel('Time [sec]'); title('# of Neurons: 4'); ylabel('Amplitude');
+xlabel('t (seconds)'); title('# of Neurons: 4'); ylabel('u(t)');
 subplot(2,3,5);plot(t(tr_vc),u(tr_vc),t(tr_vc),ur_s(8,tr_vc));
 xlim(minmax(t(tr_vc)));
-xlabel('Time [sec]'); title('# of Neurons: 8');
+xlabel('t (seconds)'); title('# of Neurons: 8');
 subplot(2,3,6);plot(t(tr_vc),u(tr_vc),t(tr_vc),ur_s(16,tr_vc));
 xlim(minmax(t(tr_vc)));
-xlabel('Time [sec]'); title('# of Neurons: 16');
+xlabel('t (seconds)'); title('# of Neurons: 16');
 
 %%
 % Compute and plot the MSE and SNR:

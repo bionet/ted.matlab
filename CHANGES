@@ -3,9 +3,10 @@
 Change Log
 ==========
 
-Release 0.04 - (?, 2010)
+Release 0.04 - (April 16, 2010)
 * Add gammatone filter algorithms.
 * Add delayed IAF algorithms.
+* Add spline interpolation algorithms.
 
 Release 0.03 - (January 07, 2010)
 ---------------------------------

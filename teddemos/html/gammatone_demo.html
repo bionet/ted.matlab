@@ -6,7 +6,7 @@
    <!--
 This HTML is auto-generated from an M-file.
 To make changes, update the M-file and republish this document.
-      --><title>Time Encoding and Decoding of a Bandpass Signal with a Gammatone Filterbank and an Ensemble of Integrate-and-Fire Neurons</title><meta name="generator" content="MATLAB 7.9"><meta name="date" content="2010-04-10"><meta name="m-file" content="gammatone_demo"><style type="text/css">
+      --><title>Time Encoding and Decoding of a Bandpass Signal with a Gammatone Filterbank and an Ensemble of Integrate-and-Fire Neurons</title><meta name="generator" content="MATLAB 7.9"><meta name="date" content="2010-04-16"><meta name="m-file" content="gammatone_demo"><style type="text/css">
 
 body {
   background-color: white;
@@ -79,6 +79,7 @@ fmax = 390;  <span class="comment">% maximum frequency of bandpass signal</span>
 W  = 2*pi*fmax;
 
 mc = floor(floor(t(end)/dt)*(fmax-fmin-1)*dt); <span class="comment">% maximum sinusoidal components</span>
+rand(<span class="string">'twister'</span>,0); randn(<span class="string">'state'</span>,0);
 u = gen_test_bp_signal(t(end)+(2*round(0.15*length(t))+1)*dt, <span class="keyword">...</span>
                        dt,fmin,fmax,-Inf,mc);
 
@@ -88,7 +89,7 @@ u = u((round(0.15*length(t))+1):end-round(0.15*length(t))-1);
 u = u/max(abs(u)); <span class="comment">% normalize signal</span>
 </pre><p>Plot the signal in the time and frequency domains:</p><pre class="codeinput">figure;subplot(1,2,1);plot(t,u);
 xlim(minmax(t));
-xlabel(<span class="string">'Time [sec]'</span>); ylabel(<span class="string">'Amplitude'</span>);
+xlabel(<span class="string">'t (seconds)'</span>); ylabel(<span class="string">'u(t)'</span>);
 title(<span class="string">'Signal in the Time Domain'</span>);
 
 np2 = 2^nextpow2(length(u(tr_vc)));
@@ -97,7 +98,7 @@ U = fft(u(tr_vc),np2)/length(u(tr_vc));
 f = Ft/2*linspace(0,1,np2/2+1);
 subplot(1,2,2);plot(f,2*abs(U(1:np2/2+1)));
 axis([0,Fs/2,0,1.1*max(2*abs(U(1:np2/2+1)))]);
-xlabel(<span class="string">'Frequency [Hz]'</span>); ylabel(<span class="string">'Spectrum'</span>);
+xlabel(<span class="string">'f (Hz)'</span>); ylabel(<span class="string">'U(f)'</span>);
 title(<span class="string">'Signal in the Frequency Domain'</span>);
 </pre><img vspace="5" hspace="5" src="gammatone_demo_01.png" alt=""> <h2>Filterbank Construction and Filtering of Signal<a name="3"></a></h2><pre class="codeinput">Nf = 16;              <span class="comment">% # of filters / neurons</span>
 flen = ceil(.03/dt);  <span class="comment">% length of filters</span>
@@ -164,9 +165,9 @@ u_rec = u_rec - mean(u_rec(tr_vc));
 </pre><p>Plot recovered signal in the time and frequency domains:</p><pre class="codeinput">figure;subplot(1,2,1);
 plot(t(tr_vc),u(tr_vc),t(tr_vc),u_rec(tr_vc),t(tr_vc),u(tr_vc)-u_rec(tr_vc));
 xlim(minmax(t(tr_vc)));
-xlabel(<span class="string">'Time [sec]'</span>); ylabel(<span class="string">'Amplitude'</span>);
+xlabel(<span class="string">'t (seconds)'</span>); ylabel(<span class="string">'u(t)'</span>);
 title(<span class="string">'Recovery in the Time domain'</span>);
-legend(<span class="string">'Original'</span>,<span class="string">'Recovered'</span>,<span class="string">'Error'</span>);
+legend(<span class="string">'original'</span>,<span class="string">'recovered'</span>,<span class="string">'error'</span>);
 
 U_rec = fft(u_rec(tr_vc),np2)/length(u(tr_vc));
 
@@ -175,9 +176,9 @@ subplot(1,2,2);
 plot(f,2*abs(U(1:np2/2+1)),f,2*abs(U_rec(1:np2/2+1)), <span class="keyword">...</span>
      f,abs(2*abs(U(1:np2/2+1))-2*abs(U_rec(1:np2/2+1))));
 axis([0,Fs/2,0,1.1*max(2*abs(U_rec(1:np2/2+1)))]);
-xlabel(<span class="string">'Frequency [Hz]'</span>); ylabel(<span class="string">'Spectrum'</span>);
+xlabel(<span class="string">'f (Hz)'</span>); ylabel(<span class="string">'U(f)'</span>);
 title(<span class="string">'Recovery in the Frequency domain'</span>);
-legend(<span class="string">'Original'</span>,<span class="string">'Recovered'</span>,<span class="string">'Error'</span>)
+legend(<span class="string">'original'</span>,<span class="string">'recovered'</span>,<span class="string">'error'</span>)
 </pre><img vspace="5" hspace="5" src="gammatone_demo_02.png" alt=""> <p>Perform sequential recovery:</p><pre class="codeinput">ur_s=zeros(Nf,length(u));
 trsvd = logspace(-3,-8,Nf);  <span class="comment">% truncate svd</span>
 <span class="keyword">for</span> i=1:Nf
@@ -192,20 +193,17 @@ trsvd = logspace(-3,-8,Nf);  <span class="comment">% truncate svd</span>
     <span class="keyword">end</span>
     ur_s(i,:) = ur_s(i,:) - mean(ur_s(i,tr_vc));
 <span class="keyword">end</span>
-</pre><p>Plot all 16 recovered signals:</p><pre class="codeinput">figure;
+</pre><p>Plot all 16 recovered signals; the original signal is blue, and the recovered signal is green:</p><pre class="codeinput">figure;
 <span class="keyword">for</span> i=1:Nf
     subplot(4,ceil(Nf/4),i);plot(t(tr_vc),u(tr_vc),t(tr_vc),ur_s(i,tr_vc))
     xlim(minmax(t(tr_vc)));
-    xlabel(<span class="string">'Time [sec]'</span>); ylabel(<span class="string">'Amplitude'</span>);
+    xlabel(<span class="string">'t (sec)'</span>); ylabel(<span class="string">'u(t)'</span>);
     title(sprintf(<span class="string">'# of Neurons: %d'</span>,i));
-    <span class="keyword">if</span> i==1,
-        legend(<span class="string">'Original'</span>,<span class="string">'Recovered'</span>);
-    <span class="keyword">end</span>
 <span class="keyword">end</span>
 </pre><img vspace="5" hspace="5" src="gammatone_demo_03.png" alt=""> <p>Plot signals recovered using 1, 2, 3, 4, 8 and 16 neurons:</p><pre class="codeinput">figure;
 subplot(2,3,1);plot(t(tr_vc),u(tr_vc),t(tr_vc),ur_s(1,tr_vc));
 xlim(minmax(t(tr_vc)));
-title(<span class="string">'# of Neurons: 1'</span>); ylabel(<span class="string">'Amplitude'</span>);
+title(<span class="string">'# of Neurons: 1'</span>); ylabel(<span class="string">'u(t)'</span>);
 subplot(2,3,2);plot(t(tr_vc),u(tr_vc),t(tr_vc),ur_s(2,tr_vc));
 xlim(minmax(t(tr_vc)));
 title(<span class="string">'# of Neurons: 2'</span>);
@@ -214,13 +212,13 @@ xlim(minmax(t(tr_vc)));
 title(<span class="string">'# of Neurons: 3'</span>);
 subplot(2,3,4);plot(t(tr_vc),u(tr_vc),t(tr_vc),ur_s(4,tr_vc));
 xlim(minmax(t(tr_vc)));
-xlabel(<span class="string">'Time [sec]'</span>); title(<span class="string">'# of Neurons: 4'</span>); ylabel(<span class="string">'Amplitude'</span>);
+xlabel(<span class="string">'t (seconds)'</span>); title(<span class="string">'# of Neurons: 4'</span>); ylabel(<span class="string">'u(t)'</span>);
 subplot(2,3,5);plot(t(tr_vc),u(tr_vc),t(tr_vc),ur_s(8,tr_vc));
 xlim(minmax(t(tr_vc)));
-xlabel(<span class="string">'Time [sec]'</span>); title(<span class="string">'# of Neurons: 8'</span>);
+xlabel(<span class="string">'t (seconds)'</span>); title(<span class="string">'# of Neurons: 8'</span>);
 subplot(2,3,6);plot(t(tr_vc),u(tr_vc),t(tr_vc),ur_s(16,tr_vc));
 xlim(minmax(t(tr_vc)));
-xlabel(<span class="string">'Time [sec]'</span>); title(<span class="string">'# of Neurons: 16'</span>);
+xlabel(<span class="string">'t (seconds)'</span>); title(<span class="string">'# of Neurons: 16'</span>);
 </pre><img vspace="5" hspace="5" src="gammatone_demo_04.png" alt=""> <p>Compute and plot the MSE and SNR:</p><pre class="codeinput"><span class="keyword">for</span> i=1:Nf
     ms=u(tr_vc)-ur_s(i,tr_vc);
     mse(i)=10*log10(mean(ms.^2));
@@ -265,6 +263,7 @@ fmax = 390;  % maximum frequency of bandpass signal
 W  = 2*pi*fmax; 
 
 mc = floor(floor(t(end)/dt)*(fmax-fmin-1)*dt); % maximum sinusoidal components
+rand('twister',0); randn('state',0);
 u = gen_test_bp_signal(t(end)+(2*round(0.15*length(t))+1)*dt, ...
                        dt,fmin,fmax,-Inf,mc);
     
@@ -277,7 +276,7 @@ u = u/max(abs(u)); % normalize signal
 % Plot the signal in the time and frequency domains:
 figure;subplot(1,2,1);plot(t,u); 
 xlim(minmax(t));
-xlabel('Time [sec]'); ylabel('Amplitude'); 
+xlabel('t (seconds)'); ylabel('u(t)'); 
 title('Signal in the Time Domain');
         
 np2 = 2^nextpow2(length(u(tr_vc)));
@@ -286,7 +285,7 @@ U = fft(u(tr_vc),np2)/length(u(tr_vc));
 f = Ft/2*linspace(0,1,np2/2+1);
 subplot(1,2,2);plot(f,2*abs(U(1:np2/2+1)));
 axis([0,Fs/2,0,1.1*max(2*abs(U(1:np2/2+1)))]);
-xlabel('Frequency [Hz]'); ylabel('Spectrum'); 
+xlabel('f (Hz)'); ylabel('U(f)'); 
 title('Signal in the Frequency Domain');
 
 %% Filterbank Construction and Filtering of Signal
@@ -381,9 +380,9 @@ u_rec = u_rec - mean(u_rec(tr_vc));
 figure;subplot(1,2,1);
 plot(t(tr_vc),u(tr_vc),t(tr_vc),u_rec(tr_vc),t(tr_vc),u(tr_vc)-u_rec(tr_vc));
 xlim(minmax(t(tr_vc)));
-xlabel('Time [sec]'); ylabel('Amplitude'); 
+xlabel('t (seconds)'); ylabel('u(t)'); 
 title('Recovery in the Time domain');
-legend('Original','Recovered','Error');
+legend('original','recovered','error');
 
 U_rec = fft(u_rec(tr_vc),np2)/length(u(tr_vc));  
 
@@ -392,9 +391,9 @@ subplot(1,2,2);
 plot(f,2*abs(U(1:np2/2+1)),f,2*abs(U_rec(1:np2/2+1)), ...
      f,abs(2*abs(U(1:np2/2+1))-2*abs(U_rec(1:np2/2+1))));
 axis([0,Fs/2,0,1.1*max(2*abs(U_rec(1:np2/2+1)))]);
-xlabel('Frequency [Hz]'); ylabel('Spectrum'); 
+xlabel('f (Hz)'); ylabel('U(f)'); 
 title('Recovery in the Frequency domain');    
-legend('Original','Recovered','Error')
+legend('original','recovered','error')
 
 %%
 % Perform sequential recovery:
@@ -414,16 +413,14 @@ for i=1:Nf
 end
 
 %%
-% Plot all 16 recovered signals:
+% Plot all 16 recovered signals; the original signal is blue, and
+% the recovered signal is green:
 figure;
 for i=1:Nf
     subplot(4,ceil(Nf/4),i);plot(t(tr_vc),u(tr_vc),t(tr_vc),ur_s(i,tr_vc))
     xlim(minmax(t(tr_vc)));
-    xlabel('Time [sec]'); ylabel('Amplitude');
+    xlabel('t (sec)'); ylabel('u(t)');
     title(sprintf('# of Neurons: %d',i));
-    if i==1,
-        legend('Original','Recovered');
-    end
 end
 
 %%
@@ -431,7 +428,7 @@ end
 figure;
 subplot(2,3,1);plot(t(tr_vc),u(tr_vc),t(tr_vc),ur_s(1,tr_vc));
 xlim(minmax(t(tr_vc)));
-title('# of Neurons: 1'); ylabel('Amplitude');
+title('# of Neurons: 1'); ylabel('u(t)');
 subplot(2,3,2);plot(t(tr_vc),u(tr_vc),t(tr_vc),ur_s(2,tr_vc));
 xlim(minmax(t(tr_vc)));
 title('# of Neurons: 2');
@@ -440,13 +437,13 @@ xlim(minmax(t(tr_vc)));
 title('# of Neurons: 3');
 subplot(2,3,4);plot(t(tr_vc),u(tr_vc),t(tr_vc),ur_s(4,tr_vc));
 xlim(minmax(t(tr_vc)));
-xlabel('Time [sec]'); title('# of Neurons: 4'); ylabel('Amplitude');
+xlabel('t (seconds)'); title('# of Neurons: 4'); ylabel('u(t)');
 subplot(2,3,5);plot(t(tr_vc),u(tr_vc),t(tr_vc),ur_s(8,tr_vc));
 xlim(minmax(t(tr_vc)));
-xlabel('Time [sec]'); title('# of Neurons: 8');
+xlabel('t (seconds)'); title('# of Neurons: 8');
 subplot(2,3,6);plot(t(tr_vc),u(tr_vc),t(tr_vc),ur_s(16,tr_vc));
 xlim(minmax(t(tr_vc)));
-xlabel('Time [sec]'); title('# of Neurons: 16');
+xlabel('t (seconds)'); title('# of Neurons: 16');
 
 %%
 % Compute and plot the MSE and SNR:

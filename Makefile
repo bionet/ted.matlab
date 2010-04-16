@@ -1,7 +1,10 @@
-VERSION = 0.03
+NAME = bionet.ted
+VERSION = 0.04
+LANG = matlab
+
 TAG = $(VERSION)
-PREFIX = bionet.ted-$(VERSION)
-TARNAME = bionet.ted-matlab-$(VERSION).tar.gz
+PREFIX = $(NAME)-$(VERSION)
+TARNAME = $(NAME)-$(LANG)-$(VERSION).tar.gz
 
 .PHONY: package
 

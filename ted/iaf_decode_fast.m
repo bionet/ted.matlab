@@ -7,8 +7,8 @@
 %   1/DT Hz. This function uses a fast decoding algorithm; M
 %   specifies the number of bins used by this algorithm.
 %
-%   The parameters R and C are optional. If R = inf (the default), a
-%   non-leaky neuron model is used. C is assumed to be 1 if not
+%   The parameters R and C are optional. If R = inf (the default), an
+%   ideal neuron model is used. C is assumed to be 1 if not
 %   specified.
 
 %   Author: Lev Givon

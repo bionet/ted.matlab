@@ -1,8 +1,8 @@
-%% Time Encoding and Decoding Using ON/OFF IAF Neurons
+%% Time Encoding and Decoding Using ON/OFF Integrate-and-Fire Neurons
 % This demo illustrates the time encoding of a bandlimited signal
-% using interconnected ON/OFF IAF neurons and recovery of the signal
-% using spline interpolation. The input signal in this case can be
-% thought of as the temporal contrast of a positive input
+% using interconnected ON/OFF integrate-and-fire neurons and recovery
+% of the signal using spline interpolation. The input signal in this
+% case can be thought of as the temporal contrast of a positive input
 % photocurrent.
 %
 % The demo corresponds to the example presented in Section 3.3 of

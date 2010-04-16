@@ -6,7 +6,7 @@
    <!--
 This HTML is auto-generated from an M-file.
 To make changes, update the M-file and republish this document.
-      --><title>Time Encoding and Decoding Using Spline Interpolation</title><meta name="generator" content="MATLAB 7.9"><meta name="date" content="2010-04-08"><meta name="m-file" content="iaf_demo_spline"><style type="text/css">
+      --><title>Time Encoding and Decoding Using Spline Interpolation</title><meta name="generator" content="MATLAB 7.9"><meta name="date" content="2010-04-16"><meta name="m-file" content="iaf_spline_demo"><style type="text/css">
 
 body {
   background-color: white;
@@ -62,7 +62,7 @@ p.footer {
   color: gray;
 }
 
-  </style></head><body><div class="content"><h1>Time Encoding and Decoding Using Spline Interpolation</h1><!--introduction--><p>This demo illustrates the time encoding of a bandlimited signal with a leaky IAF neuron and recovery of the signal using spline interpolation.</p><p>The demo corresponds to the example presented in Section 2.3 of the Consistent Recovery paper mentioned in the toolbox references.</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Generating a Test Signal</a></li><li><a href="#7">Time Encoding</a></li><li><a href="#9">Time Decoding</a></li></ul></div><h2>Generating a Test Signal<a name="1"></a></h2><p>Generate a noiseless signal 0.2 s long sampled at 1 GHz with a bandwidth of 100 Hz:</p><pre class="codeinput">dur = 0.2;       <span class="comment">% duration</span>
+  </style></head><body><div class="content"><h1>Time Encoding and Decoding Using Spline Interpolation</h1><!--introduction--><p>This demo illustrates the time encoding of a bandlimited signal with a leaky integrate-and-fire neuron and recovery of the signal using spline interpolation.</p><p>The demo corresponds to the example presented in Section 2.3 of the Consistent Recovery paper mentioned in the toolbox references.</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Generating a Test Signal</a></li><li><a href="#7">Time Encoding</a></li><li><a href="#9">Time Decoding</a></li></ul></div><h2>Generating a Test Signal<a name="1"></a></h2><p>Generate a noiseless signal 0.2 s long sampled at 1 GHz with a bandwidth of 100 Hz:</p><pre class="codeinput">dur = 0.2;       <span class="comment">% duration</span>
 dt = 1e-6;       <span class="comment">% sampling resolution</span>
 fmax = 100;      <span class="comment">% bandwidth (Hz)</span>
 t = [dt:dt:dur]; <span class="comment">% time support</span>
@@ -75,7 +75,7 @@ u = gen_test_signal(t(end)+(2*round(0.1*length(t))-1)*dt,dt,fmax,-Inf,mc);
 </pre><pre class="codeinput">plot(t,u);
 xlabel(<span class="string">'t (seconds)'</span>); ylabel(<span class="string">'u(t)'</span>);
 title(<span class="string">'Input signal'</span>)
-</pre><img vspace="5" hspace="5" src="iaf_demo_spline_01.png" alt=""> <h2>Time Encoding<a name="7"></a></h2><p>Set the encoding parameters:</p><pre class="codeinput">b = 3;    <span class="comment">% bias</span>
+</pre><img vspace="5" hspace="5" src="iaf_spline_demo_01.png" alt=""> <h2>Time Encoding<a name="7"></a></h2><p>Set the encoding parameters:</p><pre class="codeinput">b = 3;    <span class="comment">% bias</span>
 d = 0.8;  <span class="comment">% threshold</span>
 R = 50;   <span class="comment">% resistance</span>
 C = 0.01; <span class="comment">% capacitance</span>
@@ -86,7 +86,7 @@ figure;plot(t(tr_vc),u(tr_vc),t(tr_vc),u_rec(tr_vc));
 xlabel(<span class="string">'t (seconds)'</span>); ylabel(<span class="string">'u(t)'</span>);
 title(<span class="string">'Reconstructed Signal'</span>);
 legend(<span class="string">'original'</span>,<span class="string">'reconstructed'</span>);
-</pre><img vspace="5" hspace="5" src="iaf_demo_spline_02.png" alt=""> <p>Compute the SNR of the recovered signal:</p><pre class="codeinput">snr = 10*log10(sum(u(tr_vc).^2)/sum((u(tr_vc)-u_rec(tr_vc)).^2))
+</pre><img vspace="5" hspace="5" src="iaf_spline_demo_02.png" alt=""> <p>Compute the SNR of the recovered signal:</p><pre class="codeinput">snr = 10*log10(sum(u(tr_vc).^2)/sum((u(tr_vc)-u_rec(tr_vc)).^2))
 </pre><pre class="codeoutput">
 snr =
 
@@ -97,7 +97,7 @@ snr =
 ##### SOURCE BEGIN #####
 %% Time Encoding and Decoding Using Spline Interpolation
 % This demo illustrates the time encoding of a bandlimited signal
-% with a leaky IAF neuron and recovery of the signal
+% with a leaky integrate-and-fire neuron and recovery of the signal
 % using spline interpolation.
 % 
 % The demo corresponds to the example presented in Section 2.3 of the

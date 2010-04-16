@@ -1,4 +1,4 @@
-%% Neural Population Encoding using Filters with Arbitrary Delays
+%% Time Encoding and Decoding Using Filters with Arbitrary Delays
 % This demo illustrates the time encoding and decoding of a
 % bandlimited signal using a population of ideal integrate-and-fire
 % neurons with receptive fields that delay the signal by arbitrary
@@ -60,11 +60,12 @@ for i=1:N
     u_s(i,:)=u(tr_vc-round(delay(i)/dt));
 end
 
-% Plot signal and three delayed versions:
-% figure; plot(t(tr_vc),u(tr_vc),t(tr_vc),u_s(1,:), ...
-%              t(tr_vc),u_s(2,:),t(tr_vc),u_s(3,:));
-% xlabel('Time [sec]'); ylabel('Amplitude'); 
-% title('Signal and Delayed Versions')
+%%
+% Plot the original and delayed signals:
+figure; plot(t(tr_vc),u(tr_vc),t(tr_vc),u_s(1,:), ...
+             t(tr_vc),u_s(2,:),t(tr_vc),u_s(3,:));
+xlabel('t (seconds)'); ylabel('u(t)'); 
+title('Original and Delayed Signal');
     
 %% Time Encoding
 
@@ -85,6 +86,7 @@ for i=1:N,
 end
 plot_raster(TK_list);
 title('Spike Times');
+ylabel('neuron #');
 
 %% Time Decoding
 
@@ -123,22 +125,22 @@ end
 figure;
 subplot(2,3,1);plot(t(tr_vc),u(tr_vc),t(tr_vc),u_rec(1,:));
 xlim(minmax(t(tr_vc)));
-xlabel('Time [sec]'); title('# of Neurons: 1'); ylabel('Amplitude');
+xlabel('t (sec)'); title('# of Neurons: 1'); ylabel('u(t)');
 subplot(2,3,2);plot(t(tr_vc),u(tr_vc),t(tr_vc),u_rec(2,:));
 xlim(minmax(t(tr_vc)));
-xlabel('Time [sec]'); title('# of Neurons: 2');
+xlabel('t (sec)'); title('# of Neurons: 2');
 subplot(2,3,3);plot(t(tr_vc),u(tr_vc),t(tr_vc),u_rec(3,:));
 xlim(minmax(t(tr_vc)));
-xlabel('Time [sec]'); title('# of Neurons: 3');
+xlabel('t (sec)'); title('# of Neurons: 3');
 subplot(2,3,4);plot(t(tr_vc),u(tr_vc),t(tr_vc),u_rec(4,:));
 xlim(minmax(t(tr_vc)));
-xlabel('Time [sec]'); title('# of Neurons: 4'); ylabel('Amplitude');
+xlabel('t (sec)'); title('# of Neurons: 4'); ylabel('u(t)');
 subplot(2,3,5);plot(t(tr_vc),u(tr_vc),t(tr_vc),u_rec(8,:));
 xlim(minmax(t(tr_vc)));
-xlabel('Time [sec]'); title('# of Neurons: 8');
+xlabel('t (sec)'); title('# of Neurons: 8');
 subplot(2,3,6);plot(t(tr_vc),u(tr_vc),t(tr_vc),u_rec(16,:));
 xlim(minmax(t(tr_vc)));
-xlabel('Time [sec]'); title('# of Neurons: 16');
+xlabel('t (sec)'); title('# of Neurons: 16');
 
 %%
 % Plot the MSE in terms of spike density:
@@ -164,10 +166,10 @@ plot(ones(1,100),ylimits(1):(ylimits(2)-ylimits(1))/99:ylimits(2),'k--')
 for i=1:N
     text(sp_den(i),ylimits(1)-(ylimits(2)-ylimits(1))*0.08,sprintf('%d',i));
 end
-text(xlimits(1)-(xlimits(2)-xlimits(1))*0.09, ...
+text(xlimits(1)-(xlimits(2)-xlimits(1))*0.16, ...
      ylimits(1)-(ylimits(2)-ylimits(1))*0.04,'Rel. Rate:')
-text(xlimits(1)-(xlimits(2)-xlimits(1))*0.12, ...
-     ylimits(1)-(ylimits(2)-ylimits(1))*0.08,'# of Neurons:')       
+text(xlimits(1)-(xlimits(2)-xlimits(1))*0.16, ...
+     ylimits(1)-(ylimits(2)-ylimits(1))*0.08,'# of Nrns:')       
 
 %%
 % Plot the SNR in terms of spike density:
@@ -191,10 +193,10 @@ plot(ones(1,100),ylimits(1):(ylimits(2)-ylimits(1))/99:ylimits(2),'k--')
 for i=1:N
     text(sp_den(i),ylimits(1)-(ylimits(2)-ylimits(1))*0.08,sprintf('%d',i));
 end
-text(xlimits(1)-(xlimits(2)-xlimits(1))*0.09, ...
+text(xlimits(1)-(xlimits(2)-xlimits(1))*0.16, ...
      ylimits(1)-(ylimits(2)-ylimits(1))*0.04,'Rel. Rate:')
-text(xlimits(1)-(xlimits(2)-xlimits(1))*0.12, ...
-     ylimits(1)-(ylimits(2)-ylimits(1))*0.08,'# of Neurons:')
+text(xlimits(1)-(xlimits(2)-xlimits(1))*0.16, ...
+     ylimits(1)-(ylimits(2)-ylimits(1))*0.08,'# of Nrns:')
 
 %%
 % _Author: Eftychios A. Pnevmatikakis_

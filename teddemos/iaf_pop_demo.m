@@ -15,9 +15,9 @@ t = [0:dt:dur]; % time support
 np = -inf;      % noise level
 
 if np == -inf,
-  fig_title = 'IAF input signal with no noise';
+  fig_title = 'IAF Input Signal with No Noise';
 else
-  fig_title = sprintf('IAF input signal with %d dB of noise',np);
+  fig_title = sprintf('IAF Input Signal with %d dB of Noise',np);
 end
 
 rand('twister',0); randn('state',0);
@@ -39,7 +39,7 @@ R2 = 9.0;    % resistance
 C2 = 0.01;   % capacitance
 
 %%
-% Verify that recovery can take place with the leaky and non-leaky
+% Verify that recovery can take place with the leaky and ideal
 % parameters:
 if ~iaf_recoverable(u,bw,b1,d1,R1,C1),
   return
@@ -59,40 +59,40 @@ end
 
 %%
 % Encode the signal using the leaky model:
-fig_title = 'encoding using leaky IAF algorithm (encoder #1)';
+fig_title = 'Signal Encoded Using Leaky IAF Encoder #1';
 fprintf(1,'%s\n',fig_title);
 s1_leaky = func_timer(@iaf_encode,u,dt,b1,d1,R1,C1);
 plot_encoded(t,u,s1_leaky,fig_title);
 %%
-fig_title = 'encoding using leaky IAF algorithm (encoder #2)';
+fig_title = 'Signal Encoded Using Leaky IAF Encoder #2';
 fprintf(1,'%s\n',fig_title);
 s2_leaky = func_timer(@iaf_encode,u,dt,b2,d2,R2,C2);
 plot_encoded(t,u,s2_leaky,fig_title);
 %%
-% Encode the signal using the non-leaky model:
-fig_title = 'encoding using non-leaky IAF algorithm (encoder #1)';
+% Encode the signal using the ideal model:
+fig_title = 'Signal Encoded Using Ideal IAF Encoder #1';
 fprintf(1,'%s\n',fig_title);
-s1_nonleaky = func_timer(@iaf_encode,u,dt,b1,d1,inf,C1);
-plot_encoded(t,u,s1_nonleaky,fig_title);
+s1_ideal = func_timer(@iaf_encode,u,dt,b1,d1,inf,C1);
+plot_encoded(t,u,s1_ideal,fig_title);
 %%
-fig_title = 'encoding using non-leaky IAF algorithm (encoder #2)';
+fig_title = 'Signal Encoded Using Ideal IAF Encoder #2';
 fprintf(1,'%s\n',fig_title);
-s2_nonleaky = func_timer(@iaf_encode,u,dt,b2,d2,inf,C2);
-plot_encoded(t,u,s2_nonleaky,fig_title);
+s2_ideal = func_timer(@iaf_encode,u,dt,b2,d2,inf,C2);
+plot_encoded(t,u,s2_ideal,fig_title);
 
 %% Time Decoding
-% The signal can be recovered for both the leaky and non-leaky models:
-fig_title = 'decoding using leaky IAF algorithm';
+% The signal can be recovered for both the leaky and ideal models:
+fig_title = 'Signal Decoded Using Leaky IAF Decoder';
 fprintf(1,'%s\n',fig_title);
 u_rec_leaky = func_timer(@iaf_decode_pop,{s1_leaky,s2_leaky}, ...
                          dur,dt,bw,{b1,b2},{d1,d2},{R1,R2},{C1,C2});
 plot_compare(t,u,u_rec_leaky,fig_title);
 %%
-fig_title = 'decoding using non-leaky IAF algorithm';
+fig_title = 'Signal Decoded Using Ideal IAF Decoder';
 fprintf(1,'%s\n',fig_title);
-u_rec_nonleaky = func_timer(@iaf_decode_pop,{s1_nonleaky,s2_nonleaky}, ...
+u_rec_ideal = func_timer(@iaf_decode_pop,{s1_ideal,s2_ideal}, ...
                    dur,dt,bw,{b1,b2},{d1,d2},{inf,inf},{C1,C2});
-plot_compare(t,u,u_rec_nonleaky,fig_title);
+plot_compare(t,u,u_rec_ideal,fig_title);
 
 %%
 % _Author: Lev Givon_

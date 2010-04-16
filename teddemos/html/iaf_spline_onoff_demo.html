@@ -6,7 +6,7 @@
    <!--
 This HTML is auto-generated from an M-file.
 To make changes, update the M-file and republish this document.
-      --><title>Time Encoding and Decoding Using ON/OFF IAF Neurons</title><meta name="generator" content="MATLAB 7.9"><meta name="date" content="2010-04-08"><meta name="m-file" content="iaf_demo_spline_onoff"><style type="text/css">
+      --><title>Time Encoding and Decoding Using ON/OFF Integrate-and-Fire Neurons Using Spline Interpolation</title><meta name="generator" content="MATLAB 7.9"><meta name="date" content="2010-04-16"><meta name="m-file" content="iaf_spline_onoff_demo"><style type="text/css">
 
 body {
   background-color: white;
@@ -62,7 +62,7 @@ p.footer {
   color: gray;
 }
 
-  </style></head><body><div class="content"><h1>Time Encoding and Decoding Using ON/OFF IAF Neurons</h1><!--introduction--><p>This demo illustrates the time encoding of a bandlimited signal using interconnected ON/OFF IAF neurons and recovery of the signal using spline interpolation. The input signal in this case can be thought of as the temporal contrast of a positive input photocurrent.</p><p>The demo corresponds to the example presented in Section 3.3 of the Consistent Recovery paper mentioned in the toolbox references.</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Generating a Test Signal</a></li><li><a href="#8">Time Encoding</a></li><li><a href="#10">Time Decoding</a></li></ul></div><h2>Generating a Test Signal<a name="1"></a></h2><p>Generate a noiseless signal 0.2 s long sampled at 1 GHz with a bandwidth of 100 Hz:</p><pre class="codeinput">dur = 0.2;       <span class="comment">% duration</span>
+  </style></head><body><div class="content"><h1>Time Encoding and Decoding Using ON/OFF Integrate-and-Fire Neurons</h1><!--introduction--><p>This demo illustrates the time encoding of a bandlimited signal using interconnected ON/OFF integrate-and-fire neurons and recovery of the signal using spline interpolation. The input signal in this case can be thought of as the temporal contrast of a positive input photocurrent.</p><p>The demo corresponds to the example presented in Section 3.3 of the Consistent Recovery paper mentioned in the toolbox references.</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Generating a Test Signal</a></li><li><a href="#8">Time Encoding</a></li><li><a href="#10">Time Decoding</a></li></ul></div><h2>Generating a Test Signal<a name="1"></a></h2><p>Generate a noiseless signal 0.2 s long sampled at 1 GHz with a bandwidth of 100 Hz:</p><pre class="codeinput">dur = 0.2;       <span class="comment">% duration</span>
 dt = 1e-6;       <span class="comment">% sampling resolution</span>
 fmax = 100;      <span class="comment">% bandwidth (Hz)</span>
 t = [dt:dt:dur]; <span class="comment">% time support</span>
@@ -82,19 +82,19 @@ subplot(1,2,2); plot(t,u)
 xlabel(<span class="string">'t (seconds)'</span>);
 ylabel(<span class="string">'v(t)'</span>);
 title(<span class="string">'Temporal Contrast'</span>)
-</pre><img vspace="5" hspace="5" src="iaf_demo_spline_onoff_01.png" alt=""> <h2>Time Encoding<a name="8"></a></h2><p>Set the encoding parameters:</p><pre class="codeinput">b = 4;          <span class="comment">% bias</span>
+</pre><img vspace="5" hspace="5" src="iaf_spline_onoff_demo_01.png" alt=""> <h2>Time Encoding<a name="8"></a></h2><p>Set the encoding parameters:</p><pre class="codeinput">b = 4;          <span class="comment">% bias</span>
 d = 0.75;       <span class="comment">% threshold</span>
 C = 0.01;       <span class="comment">% capacitance</span>
 tauf = 0.015;   <span class="comment">% cross-feedback time constant</span>
 scale = 0.005;  <span class="comment">% amplitude scaling factor</span>
 </pre><p>Encode the signal:</p><pre class="codeinput">[tk1 tk2]  = iaf_encode_ideal_on_off(u,t,b,d,C,tauf,scale);
-</pre><img vspace="5" hspace="5" src="iaf_demo_spline_onoff_02.png" alt=""> <h2>Time Decoding<a name="10"></a></h2><p>Recover the signal:</p><pre class="codeinput">u_rec = consistent_decoding_IF_ONOFF(tk1,tk2,t,b,d,C,tauf,scale);
+</pre><img vspace="5" hspace="5" src="iaf_spline_onoff_demo_02.png" alt=""> <h2>Time Decoding<a name="10"></a></h2><p>Recover the signal:</p><pre class="codeinput">u_rec = consistent_decoding_IF_ONOFF(tk1,tk2,t,b,d,C,tauf,scale);
 
 figure;plot(t(tr_vc),u(tr_vc),t(tr_vc),u_rec(tr_vc));
 xlabel(<span class="string">'t (seconds)'</span>); ylabel(<span class="string">'u(t)'</span>);
 title(<span class="string">'Reconstructed Signal'</span>);
 legend(<span class="string">'original'</span>,<span class="string">'reconstructed'</span>);
-</pre><img vspace="5" hspace="5" src="iaf_demo_spline_onoff_03.png" alt=""> <p>Compute the SNR of the recovered signal:</p><pre class="codeinput">snr = 10*log10(sum(u(tr_vc).^2)/sum((u(tr_vc)-u_rec(tr_vc)).^2))
+</pre><img vspace="5" hspace="5" src="iaf_spline_onoff_demo_03.png" alt=""> <p>Compute the SNR of the recovered signal:</p><pre class="codeinput">snr = 10*log10(sum(u(tr_vc).^2)/sum((u(tr_vc)-u_rec(tr_vc)).^2))
 </pre><pre class="codeoutput">
 snr =
 
@@ -103,11 +103,11 @@ snr =
 </pre><p><i>Author: Eftychios A. Pnevmatikakis</i></p><p><i>Copyright 2009-2010 Trustees of Columbia University</i></p><p class="footer"><br>
       Published with MATLAB&reg; 7.9<br></p></div><!--
 ##### SOURCE BEGIN #####
-%% Time Encoding and Decoding Using ON/OFF IAF Neurons
+%% Time Encoding and Decoding Using ON/OFF Integrate-and-Fire Neurons
 % This demo illustrates the time encoding of a bandlimited signal
-% using interconnected ON/OFF IAF neurons and recovery of the signal
-% using spline interpolation. The input signal in this case can be
-% thought of as the temporal contrast of a positive input
+% using interconnected ON/OFF integrate-and-fire neurons and recovery
+% of the signal using spline interpolation. The input signal in this
+% case can be thought of as the temporal contrast of a positive input
 % photocurrent.
 %
 % The demo corresponds to the example presented in Section 3.3 of

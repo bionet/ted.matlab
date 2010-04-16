@@ -1,6 +1,6 @@
 %% Time Encoding and Decoding Using Spline Interpolation
 % This demo illustrates the time encoding of a bandlimited signal
-% with a leaky IAF neuron and recovery of the signal
+% with a leaky integrate-and-fire neuron and recovery of the signal
 % using spline interpolation.
 % 
 % The demo corresponds to the example presented in Section 2.3 of the

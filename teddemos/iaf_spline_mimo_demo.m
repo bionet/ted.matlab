@@ -1,7 +1,7 @@
-%% Time Encoding and Decoding of Multiple Signals with Multiple Neurons
-% This demo illsutrates the time encoding of several bandlimited signals
-% with multiple neurons and their recovery using spline
-% interpolation.
+%% Time Encoding and Decoding of Multiple Signals with Multiple Integrate-and-Fire Neurons Using Spline Interpolation
+% This demo illsutrates the time encoding of several bandlimited
+% signals with multiple integrate-and-fire neurons and their recovery
+% using spline interpolation.
 %
 % The demo corresponds to the example presented in Section 4.3 of
 % the Consistent Recovery paper mentioned in the toolbox
@@ -37,12 +37,14 @@ for i=1:M
 end
 
 %%
+% Display the generated signals:
 figure;
 for i=1:M
     subplot(1,M,i); plot(t,u(i,:));
     ylabel(sprintf('u^{%d}',i));
-    xlabel('t (sec)');
+    xlabel('t (seconds)');
 end
+mtit('Generated Signals');
 
 %% Time Encoding
 % Set encoding parameters:
@@ -65,7 +67,7 @@ for j=1:N
 end    
 
 %%
-% Encode the signal:
+% Encode the signals:
 for j=1:N
     tk = cumsum([0,iaf_encode(v(j,:),dt,b(j),d(j),Inf,C(j))]);
     TK(1:length(tk),j) = tk';
@@ -73,15 +75,18 @@ for j=1:N
 end
 
 %% Time Decoding
-% Recover the signal:
+% Recover the signals:
 u_rec = consistent_decoding_IF_MIMO(TK,LN,t(tr_vc)-t(tr_vc(1)),b,d,C,N,M,delay,scale);
 
+%%
+% Display the recovered signals:
 figure;
 for i = 1:M
     subplot(1,M,i);plot(t(tr_vc),u(i,tr_vc),t(tr_vc),u_rec(i,:))
     ylabel(sprintf('u^{%d}',i));
-    xlabel ('t (s)');
+    xlabel ('t (seconds)');
 end
+mtit('Recovered Signals');
 
 %%
 % Compute the SNR of the recovered signals:

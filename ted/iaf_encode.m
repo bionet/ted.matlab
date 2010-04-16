@@ -12,7 +12,7 @@
 %   intervals S. 
 %
 %   The parameters K, DTE, Y, INT, QM, and FOUT are optional. If R =
-%   inf (the default), a non-leaky neuron model is used. C is assumed
+%   inf (the default), an ideal neuron model is used. C is assumed
 %   to be 1 if not specified.
 %
 %   [S,Y,INT] = IAF_ENCODE(U,T,B,D,R,C,DTE,Y,INT,QM,FOUT) returns

@@ -14,9 +14,9 @@ t = [0:dt:dur]; % time support
 np = -inf;      % noise level
 
 if np == -inf,
-  fig_title = 'ASDM input signal with no noise';
+  fig_title = 'ASDM Input Signal with No Noise';
 else
-  fig_title = sprintf('ASDM input signal with %d dB of noise',np);
+  fig_title = sprintf('ASDM Input Signal with %d dB of Noise',np);
 end
 
 rand('twister',0); randn('state',0);
@@ -38,7 +38,7 @@ end
 
 %%
 % Encode the signal:
-fig_title = 'encoding using ASDM algorithm';
+fig_title = 'Signal Encoded Using ASDM Encoder';
 fprintf(1,'%s\n',fig_title);
 s = func_timer(@asdm_encode,u,dt,b,d,k);
 plot_encoded(t,u,s,fig_title);
@@ -46,19 +46,19 @@ plot_encoded(t,u,s,fig_title);
 %% Time Decoding
 % The encoded signal can be recovered using one of several
 % different decoding algorithms:
-fig_title = 'decoding using ASDM algorithm';
+fig_title = 'Signal Decoded Using ASDM Decoder';
 fprintf(1,'%s\n',fig_title);
 u_rec = func_timer(@asdm_decode,s,dur,dt,bw,b,d,k);
 plot_compare(t,u,u_rec,fig_title);
 %%
-fig_title = 'decoding using threshold-insensitive ASDM algorithm';
+fig_title = 'Signal Decoded Using Threshold-Insensitive ASDM Decoder';
 fprintf(1,'%s\n',fig_title);
 u_rec = func_timer(@asdm_decode_ins,s,dur,dt,bw,b);
 plot_compare(t,u,u_rec,fig_title);
 %%
 M = 5;    % fast decoding parameter
 
-fig_title = 'decoding using fast ASDM algorithm';
+fig_title = 'Signal Decoded Using Fast ASDM Decoder';
 fprintf(1,'%s\n',fig_title);
 u_rec = func_timer(@asdm_decode_fast,s,dur,dt,bw,M,b,d,k);
 plot_compare(t,u,u_rec,fig_title);

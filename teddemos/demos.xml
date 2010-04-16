@@ -12,55 +12,56 @@
 <demosection>
   <label>Demos</label>
   <demoitem>
-    <label>Time encoding and decoding with an asynchronous sigma-delta
-      modulator.</label>    
+    <label>Time Encoding and Decoding with an Asynchronous Sigma-Delta
+      Modulator</label>    
     <type>M-file</type>
     <file>html/asdm_demo.html</file>
   </demoitem>
   <demoitem>
-    <label>Time encoding and decoding with multiple ASD modulators.</label>
+    <label>Time Encoding and Decoding with Multiple Asynchronous Sigma-Delta Modulators</label>
     <type>M-file</type>
     <file>html/asdm_pop_demo.html</file>
   </demoitem>
   <demoitem>
-    <label>Time encoding and decoding with delayed IAF neurons.</label>
+    <label>Time Encoding and Decoding Using Filters with Arbitrary Delays</label>
     <type>M-file</type>
     <file>html/delay_demo.html</file>
   </demoitem>
   <demoitem>
-    <label>Time encoding and decoding with gammatone filter banks.</label
+    <label>Time Encoding and Decoding of a Bandpass Signal with a
+    Gammatone Filterbank and an Ensemble of Integrate-and-Fire Neurons</label>
     <type>M-file</type>
     <file>html/gammatone_demo.html</file>
   </demoitem>
   <demoitem>
-    <label>Time encoding and decoding with an integrate-and-fire
+    <label>Time Encoding and Decoding with an Integrate-and-Fire
       neuron.</label>
     <type>M-file</type>
     <file>html/iaf_demo.html</file>
   </demoitem>
   <demoitem>
-    <label>Time encoding and decoding with multiple IAF
-      neurons.</label>
+    <label>Time Encoding and Decoding with Multiple Integrate-and-Fire
+      Neurons</label>
     <type>M-file</type>
     <file>html/iaf_pop_demo.html</file>
   </demoitem>
   <demoitem>
-    <label>Time encoding and decoding with an IAF neuron and spline
-      interpolation.</label>
+    <label>Time Encoding and Decoding Using Spline 
+      Interpolation.</label>
     <type>M-file</type>
-    <file>html/iaf_demo_spline.html</file>
+    <file>html/iaf_spline_demo.html</file>
   </demoitem>
   <demoitem>
-    <label>Time encoding and decoding of multiple signals with multiple IAF neurons using spline
-      interpolation.</label>
+    <label>Time Encoding and Decoding of Multiple Signals with Multiple Integrate-and-Fire Neurons Using Spline
+      Interpolation</label>
     <type>M-file</type>
-    <file>html/iaf_demo_spline_mimo.html</file>
+    <file>html/iaf_spline_mimo_demo.html</file>
   </demoitem>
   <demoitem>
-    <label>Time encoding and decoding with ON-OFF IAF neurons using spline
-      interpolation.</label>
+    <label>Time Encoding and Decoding with ON-OFF Integrate-and-Fire Neurons Using Spline
+      Interpolation.</label>
     <type>M-file</type>
-    <file>html/iaf_demo_spline_onoff.html</file>
+    <file>html/iaf_spline_onoff_demo.html</file>
   </demoitem>
 </demosection>
 

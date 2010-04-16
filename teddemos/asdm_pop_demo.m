@@ -14,9 +14,9 @@ t = [0:dt:dur]; % time support
 np = -inf;      % noise level
 
 if np == -inf,
-  fig_title = 'ASDM input signal with no noise';
+  fig_title = 'ASDM Input Signal with No Noise';
 else
-  fig_title = sprintf('ASDM input signal with %d dB of noise',np);
+  fig_title = sprintf('ASDM Input Signal with %d dB of Noise',np);
 end
 
 rand('twister',0); randn('state',0);
@@ -47,25 +47,25 @@ end
 
 %%
 % Encode the signal:
-fig_title = 'encoding using ASDM algorithm (encoder #1)';
+fig_title = 'Signal Encoded Using ASDM Encoder #1';
 fprintf(1,'%s\n',fig_title);
 s1 = func_timer(@asdm_encode,u,dt,b1,d1,k1);
 plot_encoded(t,u,s1,fig_title);
 %%
-fig_title = 'encoding using ASDM algorithm (encoder #2)';
+fig_title = 'Signal Encoded Using ASDM Encoder #2';
 fprintf(1,'%s\n',fig_title);
 s2 = func_timer(@asdm_encode,u,dt,b2,d2,k2);
 plot_encoded(t,u,s2,fig_title);
 
 %% Time Decoding
 % Decode the encoded signal using several different algorithms:
-fig_title = 'decoding using ASDM population algorithm';
+fig_title = 'Signal Decoded Using ASDM Population Decoder';
 fprintf(1,'%s\n',fig_title);
 u_rec = func_timer(@asdm_decode_pop,{s1,s2},dur,dt,bw, ...
                    {b1,b2},{d1,d2},{k1,k2});
 plot_compare(t,u,u_rec,fig_title);
 %%
-fig_title = 'decoding using threshold-insensitive ASDM population algorithm';
+fig_title = 'Signal Decoded Using Threshold-Insensitive ASDM Population Decoder';
 fprintf(1,'%s\n',fig_title);
 u_rec = func_timer(@asdm_decode_pop_ins,{s1,s2},dur,dt,bw,{b1,b2});
 plot_compare(t,u,u_rec,fig_title);
