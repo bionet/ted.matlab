@@ -1,9 +1,15 @@
-VERSION = 0.013
+NAME = bionet.utils
+VERSION = 0.014
+LANG = matlab
 
-.PHONY: package 
+TAG = $(VERSION)
+PREFIX = $(NAME)-$(VERSION)
+TARNAME = $(NAME)-$(LANG)-$(VERSION).tar.gz
+
+.PHONY: package
 
 package:
-	TEMPDIR=`mktemp -d`; \
-	hg archive -t tgz -p bionet.utils-matlab-$(VERSION) $$TEMPDIR/bionet.utils-matlab-$(VERSION).tar.gz; \
-	mv -f $$TEMPDIR/*.gz . ; \
-	rmdir $$TEMPDIR
+	hg archive -r $(TAG) -t tgz -p $(PREFIX) -X Makefile $(TARNAME)
+
+clean:
+	rm -f $(TARNAME)

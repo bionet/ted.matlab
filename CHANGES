@@ -3,9 +3,12 @@
 Change Log
 ==========
 
-Release 0.014 - (?, 2010)
--------------------------
-* Add raster plot function.
+Release 0.014 - (April 16, 2010)
+--------------------------------
+* Add raster plot, figure resizing functions.
+* Add bandpass test signal generator.
+* Include mtit function from Matlab Central.
+* Add fft-based convolution.
 * Add bandpass test signal generator.
 
 Release 0.013 - (January 07, 2010)
