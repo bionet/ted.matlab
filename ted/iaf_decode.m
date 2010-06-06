@@ -47,9 +47,7 @@ G = zeros(nsh,nsh);
 if isinf(R),
   for j=1:nsh,
     temp = si(bw*(ts-tsh(j)))/pi;
-    for i=1:nsh,
-      G(i,j) = temp(i+1)-temp(i);
-    end
+    G(:,j) = temp(2:end)-temp(1:end-1);
   end
   q = (C*d-b*s(2:end))';
 else

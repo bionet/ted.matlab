@@ -35,7 +35,8 @@ Nsh_list = cellfun(@length,tsh_list);
 
 % Compute the values of the matrix that must be inverted to obtain
 % the reconstruction coefficients:
-Nsh_sum = sum(Nsh_list);
+Nsh_cumsum = cumsum([1,Nsh_list]);
+Nsh_sum = Nsh_cumsum(end)-1;
 G = zeros(Nsh_sum,Nsh_sum);
 q = zeros(Nsh_sum,1);
 for l=1:M,
@@ -47,19 +48,16 @@ for l=1:M,
         % integrals between spike times:
         for k=1:Nsh_list(m),
             temp = si(bw*(ts_list{l}-tsh_list{m}(k)))/pi;
-            for n=1:Nsh_list(l),
-                G_block(n,k) = temp(n+1)-temp(n);
-            end
+            G_block(:,k) = temp(2:end)-temp(1:end-1);
         end
-        G(sum(Nsh_list(1:l-1))+1:sum(Nsh_list(1:l)), ...
-          sum(Nsh_list(1:m-1))+1:sum(Nsh_list(1:m))) = G_block;
+        G(Nsh_cumsum(l):Nsh_cumsum(l+1)-1, ...
+          Nsh_cumsum(m):Nsh_cumsum(m+1)-1) = G_block;
     end
     
     % Compute the quanta:
-    q(sum(Nsh_list(1:l-1))+1:sum(Nsh_list(1:l)),1) = ...
-        (-1).^[1:Nsh_list(l)].*(2*k_list{l}*d_list{l}-b_list{l}* ...
-                               s_list{l}(2:end));
-
+    q(Nsh_cumsum(l):Nsh_cumsum(l+1)-1,1) = ...
+       (-1).^[1:Nsh_list(l)].*(2*k_list{l}*d_list{l}-b_list{l}* ...
+                              s_list{l}(2:end));
 end
 
 % Compute the reconstruction coefficients:
@@ -71,6 +69,6 @@ u_rec = zeros(1,length(t));
 for m=1:M,
     for k=1:Nsh_list(m),
         u_rec = u_rec + sinc(bwpi*(t-tsh_list{m}(k)))*bwpi* ...
-                c(sum(Nsh_list(1:m-1))+k,1);
+               c(Nsh_cumsum(m)+k-1,1);
     end
 end    
