@@ -4,7 +4,7 @@
 %   with bias B, firing threshold D, resistance R, and capacitance
 %   C. If DTE is specified and is smaller than DT, U is resampled with
 %   at the sampling frequency 1/DTE Hz prior to being integrated. The
-%   state of the ASDM integrator is initially set to Y and the initial
+%   state of the IAF integrator is initially set to Y and the initial
 %   interval since the last spike is set to INT. One may specify the
 %   quadrature method used to integrate U; currently 'rect'
 %   (rectangular integration) and 'trapz' (trapezoidal integration)
