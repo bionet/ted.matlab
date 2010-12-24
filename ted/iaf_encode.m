@@ -115,7 +115,7 @@ for i=1:last,
     s(j) = interval;
     j = j + 1;
     interval = 0;
-    y = 0;
+    y = y - d;
   end
 end
 

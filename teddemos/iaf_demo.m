@@ -78,14 +78,14 @@ M = 5; % fast decoding parameter
 
 fig_title = 'Signal Decoded Using Fast Leaky IAF Decoder';
 fprintf(1,'%s\n',fig_title);
-u_rec_leaky = func_timer(@iaf_decode_fast,s_leaky,dur,dt,bw,M,b,d,inf,C);
-plot_compare(t,u,u_rec_leaky,fig_title);
+u_rec_leaky_fast = func_timer(@iaf_decode_fast,s_leaky,dur,dt,bw,M,b,d,inf,C);
+plot_compare(t,u,u_rec_leaky_fast,fig_title);
 
 %%
 fig_title = 'Signal Decoded Using Fast Ideal IAF Decoder';
 fprintf(1,'%s\n',fig_title);
-u_rec_ideal = func_timer(@iaf_decode_fast,s_ideal,dur,dt,bw,M,b,d,inf,C);
-plot_compare(t,u,u_rec_ideal,fig_title);
+u_rec_ideal_fast = func_timer(@iaf_decode_fast,s_ideal,dur,dt,bw,M,b,d,inf,C);
+plot_compare(t,u,u_rec_ideal_fast,fig_title);
 
 %%
 % _Author: Lev Givon_
