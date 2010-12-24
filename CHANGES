@@ -3,7 +3,12 @@
 Change Log
 ==========
 
+Release 0.05 - ()
+-------------------------------
+* Improve performance of IAF encoder.
+
 Release 0.04 - (April 16, 2010)
+-------------------------------
 * Add gammatone filter algorithms.
 * Add delayed IAF algorithms.
 * Add spline interpolation algorithms.
