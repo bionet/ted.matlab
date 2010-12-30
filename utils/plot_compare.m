@@ -28,7 +28,7 @@ if nargin >= 4,
   title(varargin{1});
 end
 
-if nargin > 5,
+if nargin >= 5,
   filename = varargin{2};
   tok = regexp(filename,'\.(?<first>.*)$','tokens');
   if isempty(tok),
