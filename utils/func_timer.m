@@ -3,7 +3,7 @@
 %   with handle F called with arguments ARG1, ARG2, etc.
 
 %   Author: Lev Givon
-%   Copyright 2009-2010 Trustees of Columbia University
+%   Copyright 2009-2011 Lev Givon
 
 function [varargout] = func_timer(f,varargin)
 

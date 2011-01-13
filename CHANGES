@@ -3,6 +3,10 @@
 Change Log
 ==========
 
+Release 
+--------------------------------
+* Fix copyright information.
+
 Release 0.014 - (April 16, 2010)
 --------------------------------
 * Add raster plot, figure resizing functions.

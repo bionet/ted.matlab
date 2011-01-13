@@ -5,4 +5,4 @@
 % See also UTILS
 
 % Author: Lev Givon
-% Copyright 2009 Trustees of Columbia University
+% Copyright 2009-2011 Lev Givon

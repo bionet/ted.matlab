@@ -60,7 +60,7 @@
 %	us	24-Feb-2003		/ CSSM
 %	us	06-Apr-2003		/ TMW
 %	us	13-Nov-2009 17:38:17
-%      lev      08-Apr-2010             / Added author and license info
+%      lev      08-Apr-2011             / Added author and license info
 
 %   Author: Urs (us) Schwarz
 %   Copyright 2009 Urs Schwarz

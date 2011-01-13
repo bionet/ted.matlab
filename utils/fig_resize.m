@@ -6,7 +6,7 @@
 %   by RL.
 
 %   Author: Lev Givon
-%   Copyright 2009-2010 Trustees of Columbia University
+%   Copyright 2009-2011 Lev Givon
 
 function fig_resize(h,varargin)
 
