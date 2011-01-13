@@ -3,7 +3,7 @@
 %   accelerate the computation.
 
 %   Authors: Eftychios A. Pnevmatikakis and Robert J. Turetsky
-%   Copyright 2009-2011 Lev Givon
+%   Copyright 2009-2011 Eftychios A. Pnevmatikakis and Robert J. Turetsky
 
 function y = fftconv(a,b)
 
