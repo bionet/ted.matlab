@@ -19,7 +19,7 @@
 %   integrator at the conclusion of processing U.
 
 %   Author: Lev Givon
-%   Copyright 2009-2010 Trustees of Columbia University
+%   Copyright 2009-2011 Lev Givon
 
 function [varargout] = asdm_encode(u,dt,b,d,varargin)
 

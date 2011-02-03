@@ -4,9 +4,9 @@
 <html><head>
       <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
    <!--
-This HTML is auto-generated from an M-file.
-To make changes, update the M-file and republish this document.
-      --><title>Time Encoding and Decoding of a Bandpass Signal with a Gammatone Filterbank and an Ensemble of Integrate-and-Fire Neurons</title><meta name="generator" content="MATLAB 7.9"><meta name="date" content="2010-04-16"><meta name="m-file" content="gammatone_demo"><style type="text/css">
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Time Encoding and Decoding of a Bandpass Signal with a Gammatone Filterbank and an Ensemble of Integrate-and-Fire Neurons</title><meta name="generator" content="MATLAB 7.11"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2011-02-03"><meta name="DC.source" content="gammatone_demo.m"><style type="text/css">
 
 body {
   background-color: white;
@@ -88,7 +88,7 @@ u = u((round(0.15*length(t))+1):end-round(0.15*length(t))-1);
 
 u = u/max(abs(u)); <span class="comment">% normalize signal</span>
 </pre><p>Plot the signal in the time and frequency domains:</p><pre class="codeinput">figure;subplot(1,2,1);plot(t,u);
-xlim(minmax(t));
+xlim([min(t) max(t)]);
 xlabel(<span class="string">'t (seconds)'</span>); ylabel(<span class="string">'u(t)'</span>);
 title(<span class="string">'Signal in the Time Domain'</span>);
 
@@ -164,7 +164,7 @@ hg = zeros(Nf,length(th));
 u_rec = u_rec - mean(u_rec(tr_vc));
 </pre><p>Plot recovered signal in the time and frequency domains:</p><pre class="codeinput">figure;subplot(1,2,1);
 plot(t(tr_vc),u(tr_vc),t(tr_vc),u_rec(tr_vc),t(tr_vc),u(tr_vc)-u_rec(tr_vc));
-xlim(minmax(t(tr_vc)));
+xlim([min(t(tr_vc)) max(t(tr_vc))]);
 xlabel(<span class="string">'t (seconds)'</span>); ylabel(<span class="string">'u(t)'</span>);
 title(<span class="string">'Recovery in the Time domain'</span>);
 legend(<span class="string">'original'</span>,<span class="string">'recovered'</span>,<span class="string">'error'</span>);
@@ -196,28 +196,28 @@ trsvd = logspace(-3,-8,Nf);  <span class="comment">% truncate svd</span>
 </pre><p>Plot all 16 recovered signals; the original signal is blue, and the recovered signal is green:</p><pre class="codeinput">figure;
 <span class="keyword">for</span> i=1:Nf
     subplot(4,ceil(Nf/4),i);plot(t(tr_vc),u(tr_vc),t(tr_vc),ur_s(i,tr_vc))
-    xlim(minmax(t(tr_vc)));
+    xlim([min(t(tr_vc)) max(t(tr_vc))]);
     xlabel(<span class="string">'t (sec)'</span>); ylabel(<span class="string">'u(t)'</span>);
     title(sprintf(<span class="string">'# of Neurons: %d'</span>,i));
 <span class="keyword">end</span>
 </pre><img vspace="5" hspace="5" src="gammatone_demo_03.png" alt=""> <p>Plot signals recovered using 1, 2, 3, 4, 8 and 16 neurons:</p><pre class="codeinput">figure;
 subplot(2,3,1);plot(t(tr_vc),u(tr_vc),t(tr_vc),ur_s(1,tr_vc));
-xlim(minmax(t(tr_vc)));
+xlim([min(t(tr_vc)) max(t(tr_vc))]);
 title(<span class="string">'# of Neurons: 1'</span>); ylabel(<span class="string">'u(t)'</span>);
 subplot(2,3,2);plot(t(tr_vc),u(tr_vc),t(tr_vc),ur_s(2,tr_vc));
-xlim(minmax(t(tr_vc)));
+xlim([min(t(tr_vc)) max(t(tr_vc))]);
 title(<span class="string">'# of Neurons: 2'</span>);
 subplot(2,3,3);plot(t(tr_vc),u(tr_vc),t(tr_vc),ur_s(3,tr_vc));
-xlim(minmax(t(tr_vc)));
+xlim([min(t(tr_vc)) max(t(tr_vc))]);
 title(<span class="string">'# of Neurons: 3'</span>);
 subplot(2,3,4);plot(t(tr_vc),u(tr_vc),t(tr_vc),ur_s(4,tr_vc));
-xlim(minmax(t(tr_vc)));
+xlim([min(t(tr_vc)) max(t(tr_vc))]);
 xlabel(<span class="string">'t (seconds)'</span>); title(<span class="string">'# of Neurons: 4'</span>); ylabel(<span class="string">'u(t)'</span>);
 subplot(2,3,5);plot(t(tr_vc),u(tr_vc),t(tr_vc),ur_s(8,tr_vc));
-xlim(minmax(t(tr_vc)));
+xlim([min(t(tr_vc)) max(t(tr_vc))]);
 xlabel(<span class="string">'t (seconds)'</span>); title(<span class="string">'# of Neurons: 8'</span>);
 subplot(2,3,6);plot(t(tr_vc),u(tr_vc),t(tr_vc),ur_s(16,tr_vc));
-xlim(minmax(t(tr_vc)));
+xlim([min(t(tr_vc)) max(t(tr_vc))]);
 xlabel(<span class="string">'t (seconds)'</span>); title(<span class="string">'# of Neurons: 16'</span>);
 </pre><img vspace="5" hspace="5" src="gammatone_demo_04.png" alt=""> <p>Compute and plot the MSE and SNR:</p><pre class="codeinput"><span class="keyword">for</span> i=1:Nf
     ms=u(tr_vc)-ur_s(i,tr_vc);
@@ -236,8 +236,8 @@ plot(1:Nf,snr);
 grid <span class="string">on</span>;
 xlabel(<span class="string">'# of Neurons'</span>); ylabel(<span class="string">'SNR (dB)'</span>);
 title(<span class="string">'SNR as a Function of the Number of Neurons'</span>);
-</pre><img vspace="5" hspace="5" src="gammatone_demo_05.png" alt=""> <img vspace="5" hspace="5" src="gammatone_demo_06.png" alt=""> <p><i>Authors: Eftychios A. Pnevmatikakis and Robert J. Turetsky</i></p><p><i>Copyright 2009-2010 Trustees of Columbia University</i></p><p class="footer"><br>
-      Published with MATLAB&reg; 7.9<br></p></div><!--
+</pre><img vspace="5" hspace="5" src="gammatone_demo_05.png" alt=""> <img vspace="5" hspace="5" src="gammatone_demo_06.png" alt=""> <p><i>Authors: Eftychios A. Pnevmatikakis and Robert J. Turetsky</i></p><p><i>Copyright 2009-2010 Eftychios A. Pnevmatikakis and Robert J. Turetsky</i></p><p class="footer"><br>
+      Published with MATLAB&reg; 7.11<br></p></div><!--
 ##### SOURCE BEGIN #####
 %% Time Encoding and Decoding of a Bandpass Signal with a Gammatone Filterbank and an Ensemble of Integrate-and-Fire Neurons
 % This demo illustrates the time encoding and decoding of a
@@ -275,7 +275,7 @@ u = u/max(abs(u)); % normalize signal
 %%
 % Plot the signal in the time and frequency domains:
 figure;subplot(1,2,1);plot(t,u); 
-xlim(minmax(t));
+xlim([min(t) max(t)]);
 xlabel('t (seconds)'); ylabel('u(t)'); 
 title('Signal in the Time Domain');
         
@@ -379,7 +379,7 @@ u_rec = u_rec - mean(u_rec(tr_vc));
 % Plot recovered signal in the time and frequency domains:
 figure;subplot(1,2,1);
 plot(t(tr_vc),u(tr_vc),t(tr_vc),u_rec(tr_vc),t(tr_vc),u(tr_vc)-u_rec(tr_vc));
-xlim(minmax(t(tr_vc)));
+xlim([min(t(tr_vc)) max(t(tr_vc))]);
 xlabel('t (seconds)'); ylabel('u(t)'); 
 title('Recovery in the Time domain');
 legend('original','recovered','error');
@@ -418,7 +418,7 @@ end
 figure;
 for i=1:Nf
     subplot(4,ceil(Nf/4),i);plot(t(tr_vc),u(tr_vc),t(tr_vc),ur_s(i,tr_vc))
-    xlim(minmax(t(tr_vc)));
+    xlim([min(t(tr_vc)) max(t(tr_vc))]);
     xlabel('t (sec)'); ylabel('u(t)');
     title(sprintf('# of Neurons: %d',i));
 end
@@ -427,22 +427,22 @@ end
 % Plot signals recovered using 1, 2, 3, 4, 8 and 16 neurons:
 figure;
 subplot(2,3,1);plot(t(tr_vc),u(tr_vc),t(tr_vc),ur_s(1,tr_vc));
-xlim(minmax(t(tr_vc)));
+xlim([min(t(tr_vc)) max(t(tr_vc))]);
 title('# of Neurons: 1'); ylabel('u(t)');
 subplot(2,3,2);plot(t(tr_vc),u(tr_vc),t(tr_vc),ur_s(2,tr_vc));
-xlim(minmax(t(tr_vc)));
+xlim([min(t(tr_vc)) max(t(tr_vc))]);
 title('# of Neurons: 2');
 subplot(2,3,3);plot(t(tr_vc),u(tr_vc),t(tr_vc),ur_s(3,tr_vc));
-xlim(minmax(t(tr_vc)));
+xlim([min(t(tr_vc)) max(t(tr_vc))]);
 title('# of Neurons: 3');
 subplot(2,3,4);plot(t(tr_vc),u(tr_vc),t(tr_vc),ur_s(4,tr_vc));
-xlim(minmax(t(tr_vc)));
+xlim([min(t(tr_vc)) max(t(tr_vc))]);
 xlabel('t (seconds)'); title('# of Neurons: 4'); ylabel('u(t)');
 subplot(2,3,5);plot(t(tr_vc),u(tr_vc),t(tr_vc),ur_s(8,tr_vc));
-xlim(minmax(t(tr_vc)));
+xlim([min(t(tr_vc)) max(t(tr_vc))]);
 xlabel('t (seconds)'); title('# of Neurons: 8');
 subplot(2,3,6);plot(t(tr_vc),u(tr_vc),t(tr_vc),ur_s(16,tr_vc));
-xlim(minmax(t(tr_vc)));
+xlim([min(t(tr_vc)) max(t(tr_vc))]);
 xlabel('t (seconds)'); title('# of Neurons: 16');
 
 %%
@@ -468,7 +468,7 @@ title('SNR as a Function of the Number of Neurons');
 %%
 % _Authors: Eftychios A. Pnevmatikakis and Robert J. Turetsky_
 %%
-% _Copyright 2009-2010 Trustees of Columbia University_
+% _Copyright 2009-2010 Eftychios A. Pnevmatikakis and Robert J. Turetsky_
 
 ##### SOURCE END #####
 --></body></html>

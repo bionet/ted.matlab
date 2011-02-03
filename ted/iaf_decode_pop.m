@@ -11,7 +11,7 @@
 %   differ from the number contributed by other neurons.
 
 %   Author: Lev Givon
-%   Copyright 2009-2010 Trustees of Columbia University
+%   Copyright 2009-2011 Lev Givon
 
 function u_rec = iaf_decode_pop(s_list,dur,dt,bw,b_list,d_list, ...
                                 R_list,C_list)

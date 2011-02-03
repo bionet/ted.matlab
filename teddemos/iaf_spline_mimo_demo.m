@@ -98,4 +98,4 @@ snr
 %%
 % _Author: Eftychios A. Pnevmatikakis_
 %%
-% _Copyright 2009-2010 Trustees of Columbia University_
+% _Copyright 2009-2010 Eftychios A. Pnevmatikakis_

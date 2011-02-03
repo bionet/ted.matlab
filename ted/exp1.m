@@ -4,7 +4,7 @@
 
 %   Adapted from specfun (http://www.netlib.org/specfun/ 
 %   by Lev Givon
-%   Copyright 2009 Trustees of Columbia University
+%   Copyright 2009-2011 Lev Givon
 
 function y = exp1(z)
 

@@ -8,7 +8,7 @@
 %   the Consistent Recovery paper mentioned in the toolbox references.
 
 %   Author: Eftychios A. Pnevmatikakis
-%   Copyright 2009-2010 Trustees of Columbia University
+%   Copyright 2009-2011 Eftychios A. Pnevmatikakis
 
 function u_rec = consistent_decoding_LIF(tk,t,b,d,R,C)
 

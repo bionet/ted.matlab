@@ -10,7 +10,7 @@
 %   the input. If W is not specified, the input is not weighted.
 
 %   Author: Eftychios A. Pnevmatikakis
-%   Copyright 2009-2010 Trustees of Columbia University
+%   Copyright 2009-2011 Eftychios A. Pnevmatikakis
 
 function p = p_IF(TK,RC,varargin)
 

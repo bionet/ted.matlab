@@ -6,7 +6,7 @@
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Time Encoding and Decoding with an Integrate-and-Fire Neuron</title><meta name="generator" content="MATLAB 7.11"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2010-12-24"><meta name="DC.source" content="iaf_demo.m"><style type="text/css">
+      --><title>Time Encoding and Decoding with an Integrate-and-Fire Neuron</title><meta name="generator" content="MATLAB 7.11"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2011-02-03"><meta name="DC.source" content="iaf_demo.m"><style type="text/css">
 
 body {
   background-color: white;
@@ -81,7 +81,7 @@ fprintf(1,<span class="string">'%s\n'</span>,fig_title);
 u = func_timer(@gen_test_signal,dur,dt,f,np);
 plot_signal(t,u,fig_title);
 </pre><pre class="codeoutput">IAF Input Signal with No Noise
-execution time = 0.281 s
+execution time = 0.052 s
 </pre><img vspace="5" hspace="5" src="iaf_demo_01.png" alt=""> <h2>Time Encoding<a name="2"></a></h2><p>The IAF time encoder can make use of a leaky or ideal neuron model (i.e., when the neuron's resistance is infinite). Both models are demonstrated below.</p><p>Set the encoding parameters:</p><pre class="codeinput">b = 3.5;  <span class="comment">% bias</span>
 d = 0.7;  <span class="comment">% threshold</span>
 R = 10;   <span class="comment">% resistance</span>
@@ -98,25 +98,25 @@ fprintf(1,<span class="string">'%s\n'</span>,fig_title);
 s_leaky = func_timer(@iaf_encode,u,dt,b,d,R,C);
 plot_encoded(t,u,s_leaky,fig_title);
 </pre><pre class="codeoutput">Signal Encoded Using Leaky IAF Encoder
-execution time = 0.328 s
+execution time = 0.322 s
 </pre><img vspace="5" hspace="5" src="iaf_demo_02.png" alt=""> <p>Encode the signal using the ideal model:</p><pre class="codeinput">fig_title = <span class="string">'Signal Encoded Using Ideal IAF Encoder'</span>;
 fprintf(1,<span class="string">'%s\n'</span>,fig_title);
 s_ideal = func_timer(@iaf_encode,u,dt,b,d,inf,C);
 plot_encoded(t,u,s_ideal,fig_title);
 </pre><pre class="codeoutput">Signal Encoded Using Ideal IAF Encoder
-execution time = 0.289 s
+execution time = 0.284 s
 </pre><img vspace="5" hspace="5" src="iaf_demo_03.png" alt=""> <h2>Time Decoding<a name="6"></a></h2><p>The signal can be recovered for both the leaky and ideal models:</p><pre class="codeinput">fig_title = <span class="string">'Signal Decoded Using Leaky IAF Decoder'</span>;
 fprintf(1,<span class="string">'%s\n'</span>,fig_title);
 u_rec_leaky = func_timer(@iaf_decode,s_leaky,dur,dt,bw,b,d,R,C);
 plot_compare(t,u,u_rec_leaky,fig_title);
 </pre><pre class="codeoutput">Signal Decoded Using Leaky IAF Decoder
-execution time = 0.983 s
+execution time = 0.975 s
 </pre><img vspace="5" hspace="5" src="iaf_demo_04.png" alt=""> <pre class="codeinput">fig_title = <span class="string">'Signal Decoded Using Ideal IAF Decoder'</span>;
 fprintf(1,<span class="string">'%s\n'</span>,fig_title);
 u_rec_ideal = func_timer(@iaf_decode,s_ideal,dur,dt,bw,b,d,inf,C);
 plot_compare(t,u,u_rec_ideal,fig_title);
 </pre><pre class="codeoutput">Signal Decoded Using Ideal IAF Decoder
-execution time = 0.267 s
+execution time = 0.309 s
 </pre><img vspace="5" hspace="5" src="iaf_demo_05.png" alt=""> <p>Decoding can also be performed using a faster algorithm:</p><pre class="codeinput">M = 5; <span class="comment">% fast decoding parameter</span>
 
 fig_title = <span class="string">'Signal Decoded Using Fast Leaky IAF Decoder'</span>;
@@ -124,14 +124,14 @@ fprintf(1,<span class="string">'%s\n'</span>,fig_title);
 u_rec_leaky_fast = func_timer(@iaf_decode_fast,s_leaky,dur,dt,bw,M,b,d,inf,C);
 plot_compare(t,u,u_rec_leaky_fast,fig_title);
 </pre><pre class="codeoutput">Signal Decoded Using Fast Leaky IAF Decoder
-execution time = 0.065 s
+execution time = 0.092 s
 </pre><img vspace="5" hspace="5" src="iaf_demo_06.png" alt=""> <pre class="codeinput">fig_title = <span class="string">'Signal Decoded Using Fast Ideal IAF Decoder'</span>;
 fprintf(1,<span class="string">'%s\n'</span>,fig_title);
 u_rec_ideal_fast = func_timer(@iaf_decode_fast,s_ideal,dur,dt,bw,M,b,d,inf,C);
 plot_compare(t,u,u_rec_ideal_fast,fig_title);
 </pre><pre class="codeoutput">Signal Decoded Using Fast Ideal IAF Decoder
-execution time = 0.080 s
-</pre><img vspace="5" hspace="5" src="iaf_demo_07.png" alt=""> <p><i>Author: Lev Givon</i></p><p><i>Copyright 2009-2010 Trustees of Columbia University</i></p><p class="footer"><br>
+execution time = 0.057 s
+</pre><img vspace="5" hspace="5" src="iaf_demo_07.png" alt=""> <p><i>Author: Lev Givon</i></p><p><i>Copyright 2009-2010 Lev Givon</i></p><p class="footer"><br>
       Published with MATLAB&reg; 7.11<br></p></div><!--
 ##### SOURCE BEGIN #####
 %% Time Encoding and Decoding with an Integrate-and-Fire Neuron
@@ -226,7 +226,7 @@ plot_compare(t,u,u_rec_ideal_fast,fig_title);
 %%
 % _Author: Lev Givon_
 %%
-% _Copyright 2009-2010 Trustees of Columbia University_
+% _Copyright 2009-2010 Lev Givon_
 
 ##### SOURCE END #####
 --></body></html>

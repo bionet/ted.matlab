@@ -4,9 +4,9 @@
 <html><head>
       <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
    <!--
-This HTML is auto-generated from an M-file.
-To make changes, update the M-file and republish this document.
-      --><title>Time Encoding and Decoding with an Asynchronous Sigma-Delta Modulator</title><meta name="generator" content="MATLAB 7.9"><meta name="date" content="2010-04-16"><meta name="m-file" content="asdm_demo"><style type="text/css">
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Time Encoding and Decoding with an Asynchronous Sigma-Delta Modulator</title><meta name="generator" content="MATLAB 7.11"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2011-02-03"><meta name="DC.source" content="asdm_demo.m"><style type="text/css">
 
 body {
   background-color: white;
@@ -81,7 +81,7 @@ fprintf(1,<span class="string">'%s\n'</span>,fig_title);
 u = func_timer(@gen_test_signal,dur,dt,f,np);
 plot_signal(t,u,fig_title);
 </pre><pre class="codeoutput">ASDM Input Signal with No Noise
-execution time = 0.622 s
+execution time = 0.845 s
 </pre><img vspace="5" hspace="5" src="asdm_demo_01.png" alt=""> <h2>Time Encoding<a name="2"></a></h2><p>Set the encoding parameters:</p><pre class="codeinput">b = 3.5;    <span class="comment">% bias</span>
 d = 0.7;    <span class="comment">% threshold</span>
 k = 0.01;   <span class="comment">% scaling factor</span>
@@ -93,19 +93,19 @@ fprintf(1,<span class="string">'%s\n'</span>,fig_title);
 s = func_timer(@asdm_encode,u,dt,b,d,k);
 plot_encoded(t,u,s,fig_title);
 </pre><pre class="codeoutput">Signal Encoded Using ASDM Encoder
-execution time = 0.266 s
+execution time = 0.300 s
 </pre><img vspace="5" hspace="5" src="asdm_demo_02.png" alt=""> <h2>Time Decoding<a name="5"></a></h2><p>The encoded signal can be recovered using one of several different decoding algorithms:</p><pre class="codeinput">fig_title = <span class="string">'Signal Decoded Using ASDM Decoder'</span>;
 fprintf(1,<span class="string">'%s\n'</span>,fig_title);
 u_rec = func_timer(@asdm_decode,s,dur,dt,bw,b,d,k);
 plot_compare(t,u,u_rec,fig_title);
 </pre><pre class="codeoutput">Signal Decoded Using ASDM Decoder
-execution time = 0.262 s
+execution time = 0.309 s
 </pre><img vspace="5" hspace="5" src="asdm_demo_03.png" alt=""> <pre class="codeinput">fig_title = <span class="string">'Signal Decoded Using Threshold-Insensitive ASDM Decoder'</span>;
 fprintf(1,<span class="string">'%s\n'</span>,fig_title);
 u_rec = func_timer(@asdm_decode_ins,s,dur,dt,bw,b);
 plot_compare(t,u,u_rec,fig_title);
 </pre><pre class="codeoutput">Signal Decoded Using Threshold-Insensitive ASDM Decoder
-execution time = 0.141 s
+execution time = 0.105 s
 </pre><img vspace="5" hspace="5" src="asdm_demo_04.png" alt=""> <pre class="codeinput">M = 5;    <span class="comment">% fast decoding parameter</span>
 
 fig_title = <span class="string">'Signal Decoded Using Fast ASDM Decoder'</span>;
@@ -113,9 +113,9 @@ fprintf(1,<span class="string">'%s\n'</span>,fig_title);
 u_rec = func_timer(@asdm_decode_fast,s,dur,dt,bw,M,b,d,k);
 plot_compare(t,u,u_rec,fig_title);
 </pre><pre class="codeoutput">Signal Decoded Using Fast ASDM Decoder
-execution time = 0.302 s
-</pre><img vspace="5" hspace="5" src="asdm_demo_05.png" alt=""> <p><i>Author: Lev Givon</i></p><p><i>Copyright 2009-2010 Trustees of Columbia University</i></p><p class="footer"><br>
-      Published with MATLAB&reg; 7.9<br></p></div><!--
+execution time = 0.134 s
+</pre><img vspace="5" hspace="5" src="asdm_demo_05.png" alt=""> <p><i>Author: Lev Givon</i></p><p><i>Copyright 2009-2011 Lev Givon</i></p><p class="footer"><br>
+      Published with MATLAB&reg; 7.11<br></p></div><!--
 ##### SOURCE BEGIN #####
 %% Time Encoding and Decoding with an Asynchronous Sigma-Delta Modulator
 % This demo illustrates the time encoding and decoding of a
@@ -185,7 +185,7 @@ plot_compare(t,u,u_rec,fig_title);
 %%
 % _Author: Lev Givon_
 %%
-% _Copyright 2009-2010 Trustees of Columbia University_
+% _Copyright 2009-2011 Lev Givon_
 
 ##### SOURCE END #####
 --></body></html>

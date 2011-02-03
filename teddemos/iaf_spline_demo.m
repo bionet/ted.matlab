@@ -64,4 +64,4 @@ snr = 10*log10(sum(u(tr_vc).^2)/sum((u(tr_vc)-u_rec(tr_vc)).^2))
 %%
 % _Author: Eftychios A. Pnevmatikakis_
 %%
-% _Copyright 2009-2010 Trustees of Columbia University_
+% _Copyright 2009-2010 Eftychios A. Pnevmatikakis_

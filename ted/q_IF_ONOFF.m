@@ -10,7 +10,7 @@
 %   references.
 
 %   Author: Eftychios A. Pnevmatikakis
-%   Copyright 2009-2010 Trustees of Columbia University
+%   Copyright 2009-2011 Eftychios A. Pnevmatikakis
 
 function q = q_IF_ONOFF(tk1,tk2, b, d, C, tauf, scale, dt)
 

@@ -10,7 +10,7 @@
 %   the Consistent Recovery paper mentioned in the toolbox references.
 
 %   Author: Eftychios A. Pnevmatikakis
-%   Copyright 2009-2010 Trustees of Columbia University
+%   Copyright 2009-2011 Eftychios A. Pnevmatikakis
 
 function h = cross_fb(t,n1,n2,tauf,scale)
 
