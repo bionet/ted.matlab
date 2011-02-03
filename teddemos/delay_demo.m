@@ -124,22 +124,22 @@ end
 % Plot recovery using 1, 2, 3, 4, 8, and 16 neurons:
 figure;
 subplot(2,3,1);plot(t(tr_vc),u(tr_vc),t(tr_vc),u_rec(1,:));
-xlim(minmax(t(tr_vc)));
+xlim([min(t(tr_vc)) max(t(tr_vc))]);
 xlabel('t (sec)'); title('# of Neurons: 1'); ylabel('u(t)');
 subplot(2,3,2);plot(t(tr_vc),u(tr_vc),t(tr_vc),u_rec(2,:));
-xlim(minmax(t(tr_vc)));
+xlim([min(t(tr_vc)) max(t(tr_vc))]);
 xlabel('t (sec)'); title('# of Neurons: 2');
 subplot(2,3,3);plot(t(tr_vc),u(tr_vc),t(tr_vc),u_rec(3,:));
-xlim(minmax(t(tr_vc)));
+xlim([min(t(tr_vc)) max(t(tr_vc))]);
 xlabel('t (sec)'); title('# of Neurons: 3');
 subplot(2,3,4);plot(t(tr_vc),u(tr_vc),t(tr_vc),u_rec(4,:));
-xlim(minmax(t(tr_vc)));
+xlim([min(t(tr_vc)) max(t(tr_vc))]);
 xlabel('t (sec)'); title('# of Neurons: 4'); ylabel('u(t)');
 subplot(2,3,5);plot(t(tr_vc),u(tr_vc),t(tr_vc),u_rec(8,:));
-xlim(minmax(t(tr_vc)));
+xlim([min(t(tr_vc)) max(t(tr_vc))]);
 xlabel('t (sec)'); title('# of Neurons: 8');
 subplot(2,3,6);plot(t(tr_vc),u(tr_vc),t(tr_vc),u_rec(16,:));
-xlim(minmax(t(tr_vc)));
+xlim([min(t(tr_vc)) max(t(tr_vc))]);
 xlabel('t (sec)'); title('# of Neurons: 16');
 
 %%
@@ -153,7 +153,7 @@ end
 sp_den = (ln2(2:end)/(length(tr_vc)*dt))/(bw/pi);
 
 figure; plot(sp_den,mse,'k-o'); hold on;
-xlim(minmax(sp_den));
+xlim([min(sp_den) max(sp_den)]);
 ylabel('MSE (dB)');
 title('MSE vs Spike Density and # of Neurons');
 
@@ -180,7 +180,7 @@ end
 sp_den=(cumsum(LN-1)/(length(tr_vc)*dt))/(bw/pi);
 
 figure; plot(sp_den,snr,'k-o'); hold on;
-xlim(minmax(sp_den));
+xlim([min(sp_den) max(sp_den)]);
 ylabel('SNR (dB)');
 title('SNR vs Spike Density and # of Neurons');
 
@@ -201,4 +201,4 @@ text(xlimits(1)-(xlimits(2)-xlimits(1))*0.16, ...
 %%
 % _Author: Eftychios A. Pnevmatikakis_
 %%
-% _Copyright 2009-2010 Trustees of Columbia University_
+% _Copyright 2009-2011 Lev Givon_
