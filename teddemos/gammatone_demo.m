@@ -34,7 +34,7 @@ u = u/max(abs(u)); % normalize signal
 %%
 % Plot the signal in the time and frequency domains:
 figure;subplot(1,2,1);plot(t,u); 
-xlim(minmax(t));
+xlim([min(t) max(t)]);
 xlabel('t (seconds)'); ylabel('u(t)'); 
 title('Signal in the Time Domain');
         
@@ -138,7 +138,7 @@ u_rec = u_rec - mean(u_rec(tr_vc));
 % Plot recovered signal in the time and frequency domains:
 figure;subplot(1,2,1);
 plot(t(tr_vc),u(tr_vc),t(tr_vc),u_rec(tr_vc),t(tr_vc),u(tr_vc)-u_rec(tr_vc));
-xlim(minmax(t(tr_vc)));
+xlim([min(t(tr_vc)) max(t(tr_vc))]);
 xlabel('t (seconds)'); ylabel('u(t)'); 
 title('Recovery in the Time domain');
 legend('original','recovered','error');
@@ -177,7 +177,7 @@ end
 figure;
 for i=1:Nf
     subplot(4,ceil(Nf/4),i);plot(t(tr_vc),u(tr_vc),t(tr_vc),ur_s(i,tr_vc))
-    xlim(minmax(t(tr_vc)));
+    xlim([min(t(tr_vc)) max(t(tr_vc))]);
     xlabel('t (sec)'); ylabel('u(t)');
     title(sprintf('# of Neurons: %d',i));
 end
@@ -186,22 +186,22 @@ end
 % Plot signals recovered using 1, 2, 3, 4, 8 and 16 neurons:
 figure;
 subplot(2,3,1);plot(t(tr_vc),u(tr_vc),t(tr_vc),ur_s(1,tr_vc));
-xlim(minmax(t(tr_vc)));
+xlim([min(t(tr_vc)) max(t(tr_vc))]);
 title('# of Neurons: 1'); ylabel('u(t)');
 subplot(2,3,2);plot(t(tr_vc),u(tr_vc),t(tr_vc),ur_s(2,tr_vc));
-xlim(minmax(t(tr_vc)));
+xlim([min(t(tr_vc)) max(t(tr_vc))]);
 title('# of Neurons: 2');
 subplot(2,3,3);plot(t(tr_vc),u(tr_vc),t(tr_vc),ur_s(3,tr_vc));
-xlim(minmax(t(tr_vc)));
+xlim([min(t(tr_vc)) max(t(tr_vc))]);
 title('# of Neurons: 3');
 subplot(2,3,4);plot(t(tr_vc),u(tr_vc),t(tr_vc),ur_s(4,tr_vc));
-xlim(minmax(t(tr_vc)));
+xlim([min(t(tr_vc)) max(t(tr_vc))]);
 xlabel('t (seconds)'); title('# of Neurons: 4'); ylabel('u(t)');
 subplot(2,3,5);plot(t(tr_vc),u(tr_vc),t(tr_vc),ur_s(8,tr_vc));
-xlim(minmax(t(tr_vc)));
+xlim([min(t(tr_vc)) max(t(tr_vc))]);
 xlabel('t (seconds)'); title('# of Neurons: 8');
 subplot(2,3,6);plot(t(tr_vc),u(tr_vc),t(tr_vc),ur_s(16,tr_vc));
-xlim(minmax(t(tr_vc)));
+xlim([min(t(tr_vc)) max(t(tr_vc))]);
 xlabel('t (seconds)'); title('# of Neurons: 16');
 
 %%
@@ -227,4 +227,4 @@ title('SNR as a Function of the Number of Neurons');
 %%
 % _Authors: Eftychios A. Pnevmatikakis and Robert J. Turetsky_
 %%
-% _Copyright 2009-2010 Trustees of Columbia University_
+% _Copyright 2009-2010 Eftychios A. Pnevmatikakis and Robert J. Turetsky_
