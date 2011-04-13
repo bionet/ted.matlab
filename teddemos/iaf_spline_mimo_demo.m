@@ -62,7 +62,7 @@ v = zeros(N,length(tr_vc));
 
 for j=1:N
     for i=1:M
-        v(j,:) = v(j,:)+scale(j,i)*u(i,tr_vc+round(delay(j,i)/dt));
+        v(j,:) = v(j,:)+scale(j,i)*u(i,tr_vc-round(delay(j,i)/dt));
     end
 end    
 
@@ -98,4 +98,4 @@ snr
 %%
 % _Author: Eftychios A. Pnevmatikakis_
 %%
-% _Copyright 2009-2010 Eftychios A. Pnevmatikakis_
+% _Copyright 2009-2011 Eftychios A. Pnevmatikakis_

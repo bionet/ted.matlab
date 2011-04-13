@@ -33,11 +33,11 @@ r = zeros(ln2(end),M);
 
 for inp = 1:M
     %G = G + G_pop_IF_scale(TK+repmat(delay(:,inp)',max(LN),1),ln,scale(:,inp),N);
-    G = G + G_pop_IF(TK+repmat(delay(:,inp)',max(LN),1),ln,scale(:,inp));
+    G = G + G_pop_IF(TK-repmat(delay(:,inp)',max(LN),1),ln,scale(:,inp));
     %p(:,inp) = p_IF_scale(TK+repmat(delay(:,inp)',max(LN),1),ln,scale(:,inp),N);
-    p(:,inp) = p_IF(TK+repmat(delay(:,inp)',max(LN),1),Inf,ln,scale(:,inp))'; 
+    p(:,inp) = p_IF(TK-repmat(delay(:,inp)',max(LN),1),Inf,ln,scale(:,inp))'; 
     %r(:,inp) = r_IF_scale(TK+repmat(delay(:,inp)',max(LN),1),ln,scale(:,inp),N);
-    r(:,inp) = r_IF(TK+repmat(delay(:,inp)',max(LN),1),Inf,ln,scale(:,inp))';
+    r(:,inp) = r_IF(TK-repmat(delay(:,inp)',max(LN),1),Inf,ln,scale(:,inp))';
 end
 
 V = [G p r; p' zeros(M,2*M); r' zeros(M,2*M)];
@@ -53,7 +53,7 @@ u_rec = repmat(d0,1,length(t)) + d1*t;
 for j = 1:N
     for spk = 1:ln(j)
         for inp = 1:M
-            u_rec(inp,:) = u_rec(inp,:) + scale(j,inp)*c(ln2(j)+spk)*psi(TK(spk,j)+delay(j,inp),TK(spk+1,j)+delay(j,inp),t);
+            u_rec(inp,:) = u_rec(inp,:) + scale(j,inp)*c(ln2(j)+spk)*psi(TK(spk,j)-delay(j,inp),TK(spk+1,j)-delay(j,inp),t);
         end
     end
 end

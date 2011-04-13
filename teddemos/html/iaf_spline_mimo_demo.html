@@ -6,7 +6,7 @@
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Time Encoding and Decoding of Multiple Signals with Multiple Integrate-and-Fire Neurons Using Spline Interpolation</title><meta name="generator" content="MATLAB 7.11"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2011-02-03"><meta name="DC.source" content="iaf_spline_mimo_demo.m"><style type="text/css">
+      --><title>Time Encoding and Decoding of Multiple Signals with Multiple Integrate-and-Fire Neurons Using Spline Interpolation</title><meta name="generator" content="MATLAB 7.11"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2011-04-12"><meta name="DC.source" content="iaf_spline_mimo_demo.m"><style type="text/css">
 
 body {
   background-color: white;
@@ -95,7 +95,7 @@ C = 0.01*ones(1,N)/2;            <span class="comment">% capacitances</span>
 
 <span class="keyword">for</span> j=1:N
     <span class="keyword">for</span> i=1:M
-        v(j,:) = v(j,:)+scale(j,i)*u(i,tr_vc+round(delay(j,i)/dt));
+        v(j,:) = v(j,:)+scale(j,i)*u(i,tr_vc-round(delay(j,i)/dt));
     <span class="keyword">end</span>
 <span class="keyword">end</span>
 </pre><p>Encode the signals:</p><pre class="codeinput"><span class="keyword">for</span> j=1:N
@@ -118,9 +118,9 @@ snr
 </pre><pre class="codeoutput">
 snr =
 
-   21.2519   26.0216   31.3615
+   17.9749   21.9524   32.6320
 
-</pre><p><i>Author: Eftychios A. Pnevmatikakis</i></p><p><i>Copyright 2009-2010 Eftychios A. Pnevmatikakis</i></p><p class="footer"><br>
+</pre><p><i>Author: Eftychios A. Pnevmatikakis</i></p><p><i>Copyright 2009-2011 Eftychios A. Pnevmatikakis</i></p><p class="footer"><br>
       Published with MATLAB&reg; 7.11<br></p></div><!--
 ##### SOURCE BEGIN #####
 %% Time Encoding and Decoding of Multiple Signals with Multiple Integrate-and-Fire Neurons Using Spline Interpolation
@@ -187,7 +187,7 @@ v = zeros(N,length(tr_vc));
 
 for j=1:N
     for i=1:M
-        v(j,:) = v(j,:)+scale(j,i)*u(i,tr_vc+round(delay(j,i)/dt));
+        v(j,:) = v(j,:)+scale(j,i)*u(i,tr_vc-round(delay(j,i)/dt));
     end
 end    
 
@@ -223,7 +223,7 @@ snr
 %%
 % _Author: Eftychios A. Pnevmatikakis_
 %%
-% _Copyright 2009-2010 Eftychios A. Pnevmatikakis_
+% _Copyright 2009-2011 Eftychios A. Pnevmatikakis_
 
 ##### SOURCE END #####
 --></body></html>
