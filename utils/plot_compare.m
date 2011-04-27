@@ -1,6 +1,11 @@
 %PLOT_COMPARE Compare two signals and plot their differences.
 %   PLOT_COMPARE(T,U,V) plots the signal U and V on the same
-%   axis. It also plots the difference between them.
+%   axis. It also plots the difference between them in dB.
+%
+%   PLOT_COMPARE(T,U,V,TITLE) sets the title of the generated plot.
+%
+%   PLOT_COMPARE(T,U,V,TITLE,FILENAME) saves the plot in the
+%   specified file.
 
 %   Author: Lev Givon
 %   Copyright 2009-2011 Lev Givon
@@ -8,7 +13,7 @@
 function plot_compare(t,u,v,varargin)
 
 if nargin > 5,
-  error('Too many arguments.');
+    error('Too many arguments.');
 end
 
 clf;
@@ -23,17 +28,17 @@ xlabel('t (seconds)'); ylabel('error (dB)');
 set(gca,'XLim',[min(t),max(t)]);
 
 if nargin >= 4,
-  subplot(211);
-  set(gcf,'Name',varargin{1});
-  title(varargin{1});
+    subplot(211);
+    set(gcf,'Name',varargin{1});
+    title(varargin{1});
 end
 
 if nargin >= 5,
-  filename = varargin{2};
-  tok = regexp(filename,'\.(?<first>.*)$','tokens');
-  if isempty(tok),
-    error('Unrecognized output file format.');
-  end
-  filetype = tok{1}{1};
-  print(gcf,strcat('-d',filetype),filename);
+    filename = varargin{2};
+    tok = regexp(filename,'\.(?<first>.*)$','tokens');
+    if isempty(tok),
+        error('Unrecognized output file format.');
+    end
+    filetype = tok{1}{1};
+    print(gcf,strcat('-d',filetype),filename);
 end
