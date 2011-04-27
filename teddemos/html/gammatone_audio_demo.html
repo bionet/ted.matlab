@@ -1,0 +1,188 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Time Encoding and Decoding of an Audio Sinal Using Gammatone Flters and the Trigonometric Polynomial Approximation:</title><meta name="generator" content="MATLAB 7.11"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2011-04-27"><meta name="DC.source" content="gammatone_audio_demo.m"><style type="text/css">
+
+body {
+  background-color: white;
+  margin:10px;
+}
+
+h1 {
+  color: #990000; 
+  font-size: x-large;
+}
+
+h2 {
+  color: #990000;
+  font-size: medium;
+}
+
+/* Make the text shrink to fit narrow windows, but not stretch too far in 
+wide windows. */ 
+p,h1,h2,div.content div {
+  max-width: 600px;
+  /* Hack for IE6 */
+  width: auto !important; width: 600px;
+}
+
+pre.codeinput {
+  background: #EEEEEE;
+  padding: 10px;
+}
+@media print {
+  pre.codeinput {word-wrap:break-word; width:100%;}
+} 
+
+span.keyword {color: #0000FF}
+span.comment {color: #228B22}
+span.string {color: #A020F0}
+span.untermstring {color: #B20000}
+span.syscmd {color: #B28C00}
+
+pre.codeoutput {
+  color: #666666;
+  padding: 10px;
+}
+
+pre.error {
+  color: red;
+}
+
+p.footer {
+  text-align: right;
+  font-size: xx-small;
+  font-weight: lighter;
+  font-style: italic;
+  color: gray;
+}
+
+  </style></head><body><div class="content"><h1>Time Encoding and Decoding of an Audio Sinal Using Gammatone Flters and the Trigonometric Polynomial Approximation:</h1><!--introduction--><!--/introduction--><p>Load and display about 0.5 s of the input audio signal:</p><pre class="codeinput">Omega = 2*pi*1500;
+[u,fs] = wavread(<span class="string">'sound.wav'</span>);
+u = u(1:4000)';
+dt = 1/fs;
+dur = length(u)*dt;
+M = ceil(dur*Omega/(2*pi));
+t = [0:dt:dur-dt];
+figure();
+plot(t,u);
+xlim([min(t), max(t)]);
+title(<span class="string">'Input Audio Signal'</span>);
+xlabel(<span class="string">'t (s)'</span>);
+ylabel(<span class="string">'u(t)'</span>);
+</pre><img vspace="5" hspace="5" src="gammatone_audio_demo_01.png" alt=""> <p>Upsample the audio signal:</p><pre class="codeinput">ratio = 500;
+dt_interp = dt/ratio;
+fs_interp = fs*ratio;
+t_interp = [0:dt_interp:dur-dt_interp];
+u_interp = interp1(t,u,t_interp,<span class="string">'spline'</span>);
+</pre><p>Generate the filter bank:</p><pre class="codeinput">N = 16;
+h = make_gammatone_fb(t_interp,N); <span class="comment">% size(h) == [N, length(t)]</span>
+</pre><p>Filter the input signal with the filter bank:</p><pre class="codeinput">v = zeros(size(h));
+<span class="keyword">for</span> n=1:N,
+    v(n,:) = filter_trig_poly(u_interp,h(n,:));
+<span class="keyword">end</span>
+</pre><p>Encode the filtered signal:</p><pre class="codeinput">b = 3+0.1*rand(1,N);
+d = 0.001*ones(1,N);
+s = {};
+<span class="keyword">for</span> n=1:N,
+    s{end+1} = iaf_encode(v(n,:),dt_interp,b(n),d(n));
+<span class="keyword">end</span>
+</pre><p>Decode the filtered signal with different numbers of neurons. To save time decoding, the encoded signal is recovered at a coarse time resolution and then upsampled to 48 kHz:</p><pre class="codeinput">fs_out = 48000;
+dt_out = 1/fs_out;
+t_out = [0:dt_out:dur-dt_out];
+n_neurons = [2, 6, 10, 16];
+<span class="keyword">for</span> n=n_neurons,
+    u_rec = iaf_decode_filt_trig_pop(s(1:n),dur,dt,Omega,M,b(1:n),d(1:n),h);
+
+    <span class="comment">% Plot the recovered signal:</span>
+    figure();
+    plot_compare(t,u,u_rec,sprintf(<span class="string">'Recovery with %i Neurons'</span>,n));
+
+    <span class="comment">% Resample the normalized recovered signal to 48 kHz and save it as an audio file:</span>
+    u_out = interp1(t,u_rec,t_out,<span class="string">'spline'</span>);
+    wavwrite(u_out/max(abs(u_out)),fs_out,sprintf(<span class="string">'sound_%i.wav'</span>,n));
+<span class="keyword">end</span>
+</pre><pre class="codeoutput">Warning: Data clipped during write to file:sound_2.wav 
+Warning: Data clipped during write to file:sound_10.wav 
+</pre><img vspace="5" hspace="5" src="gammatone_audio_demo_02.png" alt=""> <img vspace="5" hspace="5" src="gammatone_audio_demo_03.png" alt=""> <img vspace="5" hspace="5" src="gammatone_audio_demo_04.png" alt=""> <img vspace="5" hspace="5" src="gammatone_audio_demo_05.png" alt=""> <p><i>Author: Lev Givon</i></p><p><i>Copyright 2009-2011 Lev Givon</i></p><p class="footer"><br>
+      Published with MATLAB&reg; 7.11<br></p></div><!--
+##### SOURCE BEGIN #####
+%% Time Encoding and Decoding of an Audio Sinal Using Gammatone Flters and the Trigonometric Polynomial Approximation:
+
+%% 
+% Load and display about 0.5 s of the input audio signal:
+Omega = 2*pi*1500;
+[u,fs] = wavread('sound.wav');
+u = u(1:4000)';
+dt = 1/fs;
+dur = length(u)*dt;
+M = ceil(dur*Omega/(2*pi));
+t = [0:dt:dur-dt];
+figure();
+plot(t,u);
+xlim([min(t), max(t)]);
+title('Input Audio Signal');
+xlabel('t (s)');
+ylabel('u(t)');
+
+%% 
+% Upsample the audio signal:
+ratio = 500;
+dt_interp = dt/ratio;
+fs_interp = fs*ratio;
+t_interp = [0:dt_interp:dur-dt_interp];
+u_interp = interp1(t,u,t_interp,'spline');
+
+%% 
+% Generate the filter bank:
+N = 16;
+h = make_gammatone_fb(t_interp,N); % size(h) == [N, length(t)]
+
+%% 
+% Filter the input signal with the filter bank:
+v = zeros(size(h));
+for n=1:N,
+    v(n,:) = filter_trig_poly(u_interp,h(n,:));    
+end
+
+%% 
+% Encode the filtered signal:
+b = 3+0.1*rand(1,N);
+d = 0.001*ones(1,N);
+s = {};
+for n=1:N,
+    s{end+1} = iaf_encode(v(n,:),dt_interp,b(n),d(n));
+end
+
+%% 
+% Decode the filtered signal with different numbers of neurons.
+% To save time decoding, the encoded signal is recovered at a
+% coarse time resolution and then upsampled to 48 kHz:
+fs_out = 48000;
+dt_out = 1/fs_out;
+t_out = [0:dt_out:dur-dt_out];
+n_neurons = [2, 6, 10, 16];
+for n=n_neurons,
+    u_rec = iaf_decode_filt_trig_pop(s(1:n),dur,dt,Omega,M,b(1:n),d(1:n),h);
+
+    % Plot the recovered signal:
+    figure();
+    plot_compare(t,u,u_rec,sprintf('Recovery with %i Neurons',n));
+
+    % Resample the normalized recovered signal to 48 kHz and save it as an audio file:
+    u_out = interp1(t,u_rec,t_out,'spline');
+    wavwrite(u_out/max(abs(u_out)),fs_out,sprintf('sound_%i.wav',n));
+end
+
+%%
+% _Author: Lev Givon_
+%%
+% _Copyright 2009-2011 Lev Givon_
+
+##### SOURCE END #####
+--></body></html>
