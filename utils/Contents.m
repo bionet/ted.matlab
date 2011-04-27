@@ -1,5 +1,5 @@
 % Bionet Matlab Utilities
-% Version 0.014
+% Version 0.015
 %
 % Signal Generation Functions
 %   gen_test_bp_signal   - Generate bandpass test signals.
