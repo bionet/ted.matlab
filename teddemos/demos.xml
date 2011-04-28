@@ -63,6 +63,40 @@
     <type>M-file</type>
     <file>html/iaf_spline_onoff_demo.html</file>
   </demoitem>
+  <demoitem>
+    <label>Time Encoding and Decoding Using Gammatone Filters and
+    Sinc Kernels</label>
+    <type>M-file</type>
+    <file>html/gammatone_demo.html</file>
+  </demoitem>
+  <demoitem>
+    <label>Time Encoding and Decoding of an Audio Signal Using Gammatone Filters and
+    the Trigonometric Polynomial Approximation</label>
+    <type>M-file</type>
+    <file>html/gammatone_audio_demo.html</file>
+  </demoitem>
+  <demoitem>
+    <label>Time Encoding and Decoding of an Audio Signal Using Gammatone Filters,
+    the Trigonometric Polynomial Approximation, and Stitching</label>
+    <type>M-file</type>
+    <file>html/gammatone_audio_stitch_demo.html</file>
+  </demoitem>
+  <demoitem>
+    <label>Generate and Display a Gammatone Filter Bank</label>
+    <type>M-file</type>
+    <file>html/gammatone_fb_demo.html</file>
+  </demoitem>
+  <demoitem>
+    <label>Effects of Noise on Recovery of a Gammatone-Filtered Signal</label>
+    <type>M-file</type>
+    <file>html/gammatone_noise_error_demo.html</file>
+  </demoitem>
+  <demoitem>
+    <label>Time Encoding and Decoding Using Gammatone Filters and the
+    Trigonometric Polynomial Approximation</label>
+    <type>M-file</type>
+    <file>html/gammatone_trig_demo.html</file>
+  </demoitem>
 </demosection>
 
 </demos>

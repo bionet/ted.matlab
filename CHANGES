@@ -7,6 +7,7 @@ Release 0.05 - ()
 -------------------------------
 * Improve performance of IAF encoder.
 * Fix incorrect signs in delayed IAF algorithms.
+* Add gammatone trigonometric polynomail demos.
 * Update license.
 
 Release 0.04 - (April 16, 2010)

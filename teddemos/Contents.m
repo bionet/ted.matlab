@@ -10,14 +10,14 @@
 %   delay_demo                  - Delayed IAF encoder/decoder. 
 %
 % Gammatone Filter Demos
-%   gammatone_demo              - Encoding/decoding using gammatone banks and sinc kernels.
+%   gammatone_demo              - Encoding/decoding using gammatone filters and sinc kernels.
 %   gammatone_audio_demo        - Encoding/decoding of an audio signal using gammatone filters 
 %                                 and the trigonometric polynomial approximation.
 %   gammatone_audio_stitch_demo - Encoding/decoding of an audio signal using gammatone filters, 
 %                                 the trigonometric polynomial approximation, and stitching.
 %   gammatone_fb_demo           - Generate and display a gammatone filter bank.
 %   gammatone_noise_error_demo  - Effects of noise on recovery of a gammatone-filtered signal.
-%   gammatone_trig_demo         - Encoding/decoding with gammatone filter banks and the 
+%   gammatone_trig_demo         - Encoding/decoding using gammatone filters and the 
 %                                 trigonometric polynomial approximation.
 %
 % Spline Interpolation Demos
