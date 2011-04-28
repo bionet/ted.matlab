@@ -227,4 +227,4 @@ title('SNR as a Function of the Number of Neurons');
 %%
 % _Authors: Eftychios A. Pnevmatikakis and Robert J. Turetsky_
 %%
-% _Copyright 2009-2010 Eftychios A. Pnevmatikakis and Robert J. Turetsky_
+% _Copyright 2009-2011 Eftychios A. Pnevmatikakis and Robert J. Turetsky_
