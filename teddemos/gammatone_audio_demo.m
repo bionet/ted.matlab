@@ -62,7 +62,12 @@ for n=n_neurons,
 
     % Resample the normalized recovered signal to 48 kHz and save it as an audio file:
     u_out = interp1(t,u_rec,t_out,'spline');
-    wavwrite(u_out/max(abs(u_out)),fs_out,sprintf('sound_%i.wav',n));
+    u_out = u_out/max(abs(u_out));
+
+    % Hack to prevent warning about clipping values too close to
+    % +1.0:
+    u_out(u_out > 0.999984) = 0.999984;
+    wavwrite(u_out,fs_out,sprintf('sound_%i.wav',n));
 end
 
 %%
