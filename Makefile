@@ -1,5 +1,5 @@
 NAME = bionet.ted
-VERSION = 0.04
+VERSION = 0.05
 LANG = matlab
 
 TAG = $(VERSION)
