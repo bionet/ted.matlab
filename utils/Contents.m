@@ -1,5 +1,11 @@
 % Bionet Matlab Utilities
-% Version 0.015
+% Version 0.016
+%
+% Gammatone Filter Functions
+%   gammatone            - Create a gammatone filter bank (for the sinc 
+%                          kernel TED demo).
+%   make_gammatone_fb    - Create a gammatone filter bank (for the trigonometric 
+%                          polynomial TED demo).
 %
 % Signal Generation Functions
 %   gen_test_bp_signal   - Generate bandpass test signals.

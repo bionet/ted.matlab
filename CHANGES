@@ -3,6 +3,10 @@
 Change Log
 ==========
 
+Release 0.016 - ()
+------------------
+* Move some auxiliary routines from TED into utils toolbox.
+
 Release 0.015 - (April 28, 2011)
 --------------------------------
 * Fix copyright information.
