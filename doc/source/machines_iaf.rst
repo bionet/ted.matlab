@@ -1,7 +1,7 @@
 .. -*- rst -*- 
 
-Integrate-and-Fire Neuron Machines
-==================================
+Integrate-and-Fire Neurons
+==========================
 
 Encoding with Integrate-and-Fire (IAF) Neurons
 ----------------------------------------------

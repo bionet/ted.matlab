@@ -1,7 +1,7 @@
 .. -*- rst -*-
 
-Asynchronous Sigma-Delta Modulator Machines
-===========================================
+Asynchronous Sigma-Delta Modulators
+===================================
 
 Encoding with Asynchronous Sigma-Delta Modulator (ASDM)
 -------------------------------------------------------
