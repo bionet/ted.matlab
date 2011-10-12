@@ -7,20 +7,20 @@ Prerequisites
 -------------
 
 The Bionet Matlab Utilities Toolbox should work with a relatively
-recent release of Matlab:
+recent release of MATLAB:
 
-* `Matlab R14 <http://www.mathworks/com>`_
+* `MATLAB R14 <http://www.mathworks.com/>`_
 
 Installation
 ------------
 
 Unpack the archive into an installation directory of your
-choice. Assuming that Matlab is installed in the directory whose name
+choice. Assuming that MATLAB is installed in the directory whose name
 is stored in the environmental variable ``$MATLAB``, one may wish to
 install the software in ``$MATLAB/toolbox/utils`` if one has
 administrative access to the machine.
 
-Add the subdirectories of the installation directory to Matlab's
+Add the subdirectories of the installation directory to MATLAB's
 search path so that the functions comprised by the toolbox may be
 easily accessed. For example, if the software is installed in
 ``$MATLAB/toolbox/utils``, one may add the following lines to the list of
