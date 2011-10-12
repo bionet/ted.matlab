@@ -69,7 +69,7 @@ d = 1 + rand(1,Nf);
 kd=0.01*ones(1,Nf);
 
 for i = 1:Nf
-    tk = [dt,cumsum(iaf_encode(y(i,:), dt, b(i), d(i), Inf, kd(i)))];
+    tk = [dt,cumsum(iaf_encode(y(i,:), dt, b(i), d(i), 0, Inf, kd(i)))];
     TK(1:length(tk),i) = tk';
     LN(i)=length(tk);
 end

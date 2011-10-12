@@ -8,7 +8,7 @@
 % references.
 
 %% Generating a Test Signal
-% Generate a noiseless signal 0.1 s long sampled at 10 GHz with a
+% Generate a noiseless signal 0.1 s long sampled at 10 MHz with a
 % bandwidth of 100 Hz:
 dur = 0.1;       % duration
 dt = 1e-7;       % sampling resolution
@@ -69,7 +69,7 @@ end
 %%
 % Encode the signals:
 for j=1:N
-    tk = cumsum([0,iaf_encode(v(j,:),dt,b(j),d(j),Inf,C(j))]);
+    tk = cumsum([0,iaf_encode(v(j,:),dt,b(j),d(j),0,Inf,C(j))]);
     TK(1:length(tk),j) = tk';
     LN(j) = length(tk);
 end

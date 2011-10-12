@@ -1,0 +1,231 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML is auto-generated from an M-file.
+To make changes, update the M-file and republish this document.
+      --><title>Time Encoding of Stimulus Velocity with a Pair of LIF Neurons</title><meta name="generator" content="MATLAB 7.9"><meta name="date" content="2011-10-11"><meta name="m-file" content="velocity_single_demo"><style type="text/css">
+
+body {
+  background-color: white;
+  margin:10px;
+}
+
+h1 {
+  color: #990000; 
+  font-size: x-large;
+}
+
+h2 {
+  color: #990000;
+  font-size: medium;
+}
+
+/* Make the text shrink to fit narrow windows, but not stretch too far in 
+wide windows. */ 
+p,h1,h2,div.content div {
+  max-width: 600px;
+  /* Hack for IE6 */
+  width: auto !important; width: 600px;
+}
+
+pre.codeinput {
+  background: #EEEEEE;
+  padding: 10px;
+}
+@media print {
+  pre.codeinput {word-wrap:break-word; width:100%;}
+} 
+
+span.keyword {color: #0000FF}
+span.comment {color: #228B22}
+span.string {color: #A020F0}
+span.untermstring {color: #B20000}
+span.syscmd {color: #B28C00}
+
+pre.codeoutput {
+  color: #666666;
+  padding: 10px;
+}
+
+pre.error {
+  color: red;
+}
+
+p.footer {
+  text-align: right;
+  font-size: xx-small;
+  font-weight: lighter;
+  font-style: italic;
+  color: gray;
+}
+
+  </style></head><body><div class="content"><h1>Time Encoding of Stimulus Velocity with a Pair of LIF Neurons</h1><!--introduction--><p>Performs the example presented in section 3.3.2 in [1]. The velocity signal is represented by a bandlimited function. The signal is decomposed into its positive and negative parts u_+, u_- Each of the two parts is encoded by a LIF with random theshold and then recovered in the Sobolev space S1.</p><p>[1] Aurel A. Lazar and Eftychios A. Pnevmatikakis, Reconstruction of     Sensory Stimuli Encoded with Integrate-and-Fire Neurons with Random     Thresholds, EURASIP Journal on Advances in Signal Processing,     Volume 2009, 2009, Special Issue on Statistical Signal Processing in     Neuroscience, doi:10.1155/2009/682930</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Generate a Test Signal</a></li><li><a href="#3">Time Encoding</a></li><li><a href="#6">Recover with bandlimited assumptions</a></li><li><a href="#8">Decode in S1 using smoothing splines</a></li></ul></div><h2>Generate a Test Signal<a name="1"></a></h2><p>Generate a signal 1 second long sampled at 0.25 MHz with a bandwidth of 30 Hz, and decompose into positive and negtive components</p><pre class="codeinput">dt = 4e-6;
+fmax = 30;
+t = dt:dt:1;
+tr_vc = round(0.05*length(t))+1:round(0.95*length(t)); <span class="comment">% truncated vector</span>
+
+mc = floor(floor(1/dt)*fmax*dt); <span class="comment">% maximum sinusoidal components</span>
+u = gen_test_signal(t(end)+(2*round(0.1*length(t))+1)*dt,dt,fmax,-Inf,mc);
+
+u = u((round(0.1*length(t))+1):end-round(0.1*length(t))); <span class="comment">% truncate first 100 values to eliminate discontinuities</span>
+
+u_pos = max(u,0);
+u_neg = max(-u,0);
+</pre><h2>Time Encoding<a name="3"></a></h2><p>Set parameters for neurons</p><pre class="codeinput">b = 2.5;
+delta = 2.5;
+C = 0.01;
+R = 40;
+tnr = inf; <span class="comment">% threshold to noise ratio</span>
+n = delta/tnr;
+
+snr_in = 10*log10(tnr);
+</pre><p>Encode both positive and negtive components by LIF</p><pre class="codeinput">tk_p  = iaf_encode(u_pos, dt, b, delta, n, R, C);
+tk_n  = iaf_encode(u_neg, dt, b, delta, n, R, C);
+</pre><h2>Recover with bandlimited assumptions<a name="6"></a></h2><p>Decode positive and negtive components, and combine</p><pre class="codeinput">u_rp_bl = iaf_decode(diff([0,tk_p]),1,dt,2*pi*fmax,b,delta,R,C);
+u_rn_bl = iaf_decode(diff([0,tk_n]),1,dt,2*pi*fmax,b,delta,R,C);
+u_r_bl = u_rp_bl - u_rn_bl;
+
+snr_bl_p = 10*log10(sum(u_pos(tr_vc).^2)/sum((u_pos(tr_vc)-u_rp_bl(tr_vc)).^2));
+snr_bl_n = 10*log10(sum(u_neg(tr_vc).^2)/sum((u_neg(tr_vc)-u_rn_bl(tr_vc)).^2));
+snr_bl = 10*log10(sum(u(tr_vc).^2)/sum((u(tr_vc)-u_r_bl(tr_vc)).^2));
+
+fprintf(<span class="string">'SNR of positive component: %.2f dB\n'</span>, snr_bl_p)
+fprintf(<span class="string">'SNR of negtive component: %.2f dB\n'</span>, snr_bl_n)
+fprintf(<span class="string">'SNR of the recovery: %.2f dB\n'</span>, snr_bl)
+</pre><pre class="codeoutput">SNR of positive component: -91.02 dB
+SNR of negtive component: -87.60 dB
+SNR of the recovery: -72.40 dB
+</pre><h2>Decode in S1 using smoothing splines<a name="8"></a></h2><p>Decode positive and negtive components, and combine</p><pre class="codeinput">lamda = 0;
+
+u_rp_s1 =  LIF_decode_S1(tk_p, t(end), dt, b, delta, R, C, lamda);
+u_rn_s1 =  LIF_decode_S1(tk_n, t(end), dt, b, delta, R, C, lamda);
+u_r_s1 = u_rp_s1 - u_rn_s1;
+
+snr_s1_p = 10*log10(sum(u_pos(tr_vc).^2)/sum((u_pos(tr_vc)-u_rp_s1(tr_vc)).^2));
+snr_s1_n = 10*log10(sum(u_neg(tr_vc).^2)/sum((u_neg(tr_vc)-u_rn_s1(tr_vc)).^2));
+snr_s1 = 10*log10(sum(u(tr_vc).^2)/sum((u(tr_vc)-u_r_s1(tr_vc)).^2));
+
+fprintf(<span class="string">'SNR of positive component: %.2f dB\n'</span>, snr_s1_p)
+fprintf(<span class="string">'SNR of negtive component: %.2f dB\n'</span>, snr_s1_n)
+fprintf(<span class="string">'SNR of the recovery: %.2f dB\n'</span>, snr_s1)
+</pre><pre class="codeoutput">SNR of positive component: 21.87 dB
+SNR of negtive component: 23.26 dB
+SNR of the recovery: 27.32 dB
+</pre><p>Plot the recovery in S1</p><pre class="codeinput">figure;
+    subplot(1,3,1); plot(t(tr_vc),u_pos(tr_vc),t(tr_vc),u_rp_s1(tr_vc));
+        xlabel(<span class="string">'Time [sec]'</span>); ylabel(<span class="string">'Amplitude'</span>); title(<span class="string">'Positive Component'</span>);
+    subplot(1,3,2); plot(t(tr_vc),u_neg(tr_vc),t(tr_vc),u_rn_s1(tr_vc));
+        xlabel(<span class="string">'Time [sec]'</span>); title(<span class="string">'Negative Component'</span>);
+    subplot(1,3,3); plot(t(tr_vc),u(tr_vc),t(tr_vc),u_r_s1(tr_vc));
+        xlabel(<span class="string">'Time [sec]'</span>); title(<span class="string">'Total'</span>);
+</pre><img vspace="5" hspace="5" src="velocity_single_demo_01.png" alt=""> <p><i>Author: Eftychios A. Pnevmatikakis</i></p><p><i>Copyright 2009-2011 Eftychios A. Pnevmatikakis</i></p><p class="footer"><br>
+      Published with MATLAB&reg; 7.9<br></p></div><!--
+##### SOURCE BEGIN #####
+%% Time Encoding of Stimulus Velocity with a Pair of LIF Neurons
+% Performs the example presented in section 3.3.2 in [1]. 
+% The velocity signal is represented by a bandlimited function. The 
+% signal is decomposed into its positive and negative parts u_+, u_-
+% Each of the two parts is encoded by a LIF with random theshold and
+% then recovered in the Sobolev space S1.
+%
+% [1] Aurel A. Lazar and Eftychios A. Pnevmatikakis, Reconstruction of
+%     Sensory Stimuli Encoded with Integrate-and-Fire Neurons with Random 
+%     Thresholds, EURASIP Journal on Advances in Signal Processing,
+%     Volume 2009, 2009, Special Issue on Statistical Signal Processing in
+%     Neuroscience, doi:10.1155/2009/682930
+
+%% Generate a Test Signal
+
+%%
+% Generate a signal 1 second long sampled at 0.25 MHz with a
+% bandwidth of 30 Hz, and decompose into positive and negtive components
+
+dt = 4e-6;
+fmax = 30;
+t = dt:dt:1;
+tr_vc = round(0.05*length(t))+1:round(0.95*length(t)); % truncated vector
+
+mc = floor(floor(1/dt)*fmax*dt); % maximum sinusoidal components
+u = gen_test_signal(t(end)+(2*round(0.1*length(t))+1)*dt,dt,fmax,-Inf,mc);
+    
+u = u((round(0.1*length(t))+1):end-round(0.1*length(t))); % truncate first 100 values to eliminate discontinuities   
+
+u_pos = max(u,0);
+u_neg = max(-u,0);
+
+%% Time Encoding
+
+%%
+% Set parameters for neurons
+
+b = 2.5;
+delta = 2.5;
+C = 0.01;
+R = 40;
+tnr = inf; % threshold to noise ratio
+n = delta/tnr;
+
+snr_in = 10*log10(tnr);
+
+%%
+% Encode both positive and negtive components by LIF
+
+tk_p  = iaf_encode(u_pos, dt, b, delta, n, R, C);
+tk_n  = iaf_encode(u_neg, dt, b, delta, n, R, C);
+
+%% Recover with bandlimited assumptions
+
+%%
+% Decode positive and negtive components, and combine
+
+u_rp_bl = iaf_decode(diff([0,tk_p]),1,dt,2*pi*fmax,b,delta,R,C);
+u_rn_bl = iaf_decode(diff([0,tk_n]),1,dt,2*pi*fmax,b,delta,R,C);
+u_r_bl = u_rp_bl - u_rn_bl;
+
+snr_bl_p = 10*log10(sum(u_pos(tr_vc).^2)/sum((u_pos(tr_vc)-u_rp_bl(tr_vc)).^2));
+snr_bl_n = 10*log10(sum(u_neg(tr_vc).^2)/sum((u_neg(tr_vc)-u_rn_bl(tr_vc)).^2));
+snr_bl = 10*log10(sum(u(tr_vc).^2)/sum((u(tr_vc)-u_r_bl(tr_vc)).^2));
+
+fprintf('SNR of positive component: %.2f dB\n', snr_bl_p)
+fprintf('SNR of negtive component: %.2f dB\n', snr_bl_n)
+fprintf('SNR of the recovery: %.2f dB\n', snr_bl)
+
+%% Decode in S1 using smoothing splines
+
+%%
+% Decode positive and negtive components, and combine
+
+lamda = 0;
+
+u_rp_s1 =  LIF_decode_S1(tk_p, t(end), dt, b, delta, R, C, lamda);
+u_rn_s1 =  LIF_decode_S1(tk_n, t(end), dt, b, delta, R, C, lamda);
+u_r_s1 = u_rp_s1 - u_rn_s1;
+
+snr_s1_p = 10*log10(sum(u_pos(tr_vc).^2)/sum((u_pos(tr_vc)-u_rp_s1(tr_vc)).^2));
+snr_s1_n = 10*log10(sum(u_neg(tr_vc).^2)/sum((u_neg(tr_vc)-u_rn_s1(tr_vc)).^2));
+snr_s1 = 10*log10(sum(u(tr_vc).^2)/sum((u(tr_vc)-u_r_s1(tr_vc)).^2));
+
+fprintf('SNR of positive component: %.2f dB\n', snr_s1_p)
+fprintf('SNR of negtive component: %.2f dB\n', snr_s1_n)
+fprintf('SNR of the recovery: %.2f dB\n', snr_s1)
+
+%%
+% Plot the recovery in S1
+
+figure;
+    subplot(1,3,1); plot(t(tr_vc),u_pos(tr_vc),t(tr_vc),u_rp_s1(tr_vc));
+        xlabel('Time [sec]'); ylabel('Amplitude'); title('Positive Component');
+    subplot(1,3,2); plot(t(tr_vc),u_neg(tr_vc),t(tr_vc),u_rn_s1(tr_vc));
+        xlabel('Time [sec]'); title('Negative Component');
+    subplot(1,3,3); plot(t(tr_vc),u(tr_vc),t(tr_vc),u_r_s1(tr_vc));
+        xlabel('Time [sec]'); title('Total');
+        
+%%
+% _Author: Eftychios A. Pnevmatikakis_
+%%
+% _Copyright 2009-2011 Eftychios A. Pnevmatikakis_
+##### SOURCE END #####
+--></body></html>

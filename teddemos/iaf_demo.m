@@ -3,7 +3,7 @@
 % bandlimited signal using an integrate-and-fire neuron.
 
 %% Generating a Test Signal
-% Generate a noiseless signal 0.1 s long sampled at 1 GHz containing 3
+% Generate a noiseless signal 0.1 s long sampled at 1 MHz containing 3
 % components no greater than 32 Hz:
 dur = 0.1;      % duration
 fs = 1e6;       % sampling frequency
@@ -50,14 +50,16 @@ end
 % Encode the signal using the leaky model: 
 fig_title = 'Signal Encoded Using Leaky IAF Encoder';
 fprintf(1,'%s\n',fig_title);
-s_leaky = func_timer(@iaf_encode,u,dt,b,d,R,C);
+s_leaky = func_timer(@iaf_encode,u,dt,b,d,0,R,C);
+figure
 plot_encoded(t,u,s_leaky,fig_title);
 
 %%
 % Encode the signal using the ideal model:
 fig_title = 'Signal Encoded Using Ideal IAF Encoder';
 fprintf(1,'%s\n',fig_title);
-s_ideal = func_timer(@iaf_encode,u,dt,b,d,inf,C);
+s_ideal = func_timer(@iaf_encode,u,dt,b,d,0,inf,C);
+figure
 plot_encoded(t,u,s_ideal,fig_title);
 
 %% Time Decoding
@@ -65,11 +67,13 @@ plot_encoded(t,u,s_ideal,fig_title);
 fig_title = 'Signal Decoded Using Leaky IAF Decoder';
 fprintf(1,'%s\n',fig_title);
 u_rec_leaky = func_timer(@iaf_decode,s_leaky,dur,dt,bw,b,d,R,C);
+figure
 plot_compare(t,u,u_rec_leaky,fig_title);
 %%
 fig_title = 'Signal Decoded Using Ideal IAF Decoder';
 fprintf(1,'%s\n',fig_title);
 u_rec_ideal = func_timer(@iaf_decode,s_ideal,dur,dt,bw,b,d,inf,C);
+figure
 plot_compare(t,u,u_rec_ideal,fig_title);
 
 %%
@@ -79,12 +83,14 @@ M = 5; % fast decoding parameter
 fig_title = 'Signal Decoded Using Fast Leaky IAF Decoder';
 fprintf(1,'%s\n',fig_title);
 u_rec_leaky_fast = func_timer(@iaf_decode_fast,s_leaky,dur,dt,bw,M,b,d,inf,C);
+figure
 plot_compare(t,u,u_rec_leaky_fast,fig_title);
 
 %%
 fig_title = 'Signal Decoded Using Fast Ideal IAF Decoder';
 fprintf(1,'%s\n',fig_title);
 u_rec_ideal_fast = func_timer(@iaf_decode_fast,s_ideal,dur,dt,bw,M,b,d,inf,C);
+figure
 plot_compare(t,u,u_rec_ideal_fast,fig_title);
 
 %%

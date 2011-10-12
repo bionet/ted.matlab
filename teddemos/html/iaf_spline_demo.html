@@ -4,9 +4,9 @@
 <html><head>
       <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
    <!--
-This HTML was auto-generated from MATLAB code.
-To make changes, update the MATLAB code and republish this document.
-      --><title>Time Encoding and Decoding Using Spline Interpolation</title><meta name="generator" content="MATLAB 7.11"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2011-02-03"><meta name="DC.source" content="iaf_spline_demo.m"><style type="text/css">
+This HTML is auto-generated from an M-file.
+To make changes, update the M-file and republish this document.
+      --><title>Time Encoding and Decoding Using Spline Interpolation</title><meta name="generator" content="MATLAB 7.9"><meta name="date" content="2011-10-11"><meta name="m-file" content="iaf_spline_demo"><style type="text/css">
 
 body {
   background-color: white;
@@ -62,7 +62,7 @@ p.footer {
   color: gray;
 }
 
-  </style></head><body><div class="content"><h1>Time Encoding and Decoding Using Spline Interpolation</h1><!--introduction--><p>This demo illustrates the time encoding of a bandlimited signal with a leaky integrate-and-fire neuron and recovery of the signal using spline interpolation.</p><p>The demo corresponds to the example presented in Section 2.3 of the Consistent Recovery paper mentioned in the toolbox references.</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Generating a Test Signal</a></li><li><a href="#7">Time Encoding</a></li><li><a href="#9">Time Decoding</a></li></ul></div><h2>Generating a Test Signal<a name="1"></a></h2><p>Generate a noiseless signal 0.2 s long sampled at 1 GHz with a bandwidth of 100 Hz:</p><pre class="codeinput">dur = 0.2;       <span class="comment">% duration</span>
+  </style></head><body><div class="content"><h1>Time Encoding and Decoding Using Spline Interpolation</h1><!--introduction--><p>This demo illustrates the time encoding of a bandlimited signal with a leaky integrate-and-fire neuron and recovery of the signal using spline interpolation.</p><p>The demo corresponds to the example presented in Section 2.3 of the Consistent Recovery paper mentioned in the toolbox references.</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Generating a Test Signal</a></li><li><a href="#7">Time Encoding</a></li><li><a href="#9">Time Decoding</a></li></ul></div><h2>Generating a Test Signal<a name="1"></a></h2><p>Generate a noiseless signal 0.2 s long sampled at 1 MHz with a bandwidth of 100 Hz:</p><pre class="codeinput">dur = 0.2;       <span class="comment">% duration</span>
 dt = 1e-6;       <span class="comment">% sampling resolution</span>
 fmax = 100;      <span class="comment">% bandwidth (Hz)</span>
 t = [dt:dt:dur]; <span class="comment">% time support</span>
@@ -79,7 +79,7 @@ title(<span class="string">'Input signal'</span>)
 d = 0.8;  <span class="comment">% threshold</span>
 R = 50;   <span class="comment">% resistance</span>
 C = 0.01; <span class="comment">% capacitance</span>
-</pre><p>Encode the signal:</p><pre class="codeinput">tk = iaf_encode(u,dt,b,d,R,C);
+</pre><p>Encode the signal:</p><pre class="codeinput">tk = iaf_encode(u,dt,b,d,0,R,C);
 </pre><h2>Time Decoding<a name="9"></a></h2><p>Recover the signal:</p><pre class="codeinput">u_rec = consistent_decoding_LIF(cumsum([0,tk]),t,b,d,R,C);
 
 figure;plot(t(tr_vc),u(tr_vc),t(tr_vc),u_rec(tr_vc));
@@ -93,7 +93,7 @@ snr =
    41.2044
 
 </pre><p><i>Author: Eftychios A. Pnevmatikakis</i></p><p><i>Copyright 2009-2011 Eftychios A. Pnevmatikakis</i></p><p class="footer"><br>
-      Published with MATLAB&reg; 7.11<br></p></div><!--
+      Published with MATLAB&reg; 7.9<br></p></div><!--
 ##### SOURCE BEGIN #####
 %% Time Encoding and Decoding Using Spline Interpolation
 % This demo illustrates the time encoding of a bandlimited signal
@@ -104,7 +104,7 @@ snr =
 % Consistent Recovery paper mentioned in the toolbox references.
 
 %% Generating a Test Signal
-% Generate a noiseless signal 0.2 s long sampled at 1 GHz with a
+% Generate a noiseless signal 0.2 s long sampled at 1 MHz with a
 % bandwidth of 100 Hz:
 dur = 0.2;       % duration
 dt = 1e-6;       % sampling resolution
@@ -143,7 +143,7 @@ C = 0.01; % capacitance
 
 %%
 % Encode the signal:
-tk = iaf_encode(u,dt,b,d,R,C);
+tk = iaf_encode(u,dt,b,d,0,R,C);
 
 %% Time Decoding
 % Recover the signal:

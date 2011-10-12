@@ -3,7 +3,7 @@
 % bandlimited signal using an asynchronous sigma-delta modulator.
 
 %% Generating a Test Signal
-% Generate a noiseless signal 0.1 s long sampled at 1 GHz containing 3
+% Generate a noiseless signal 0.1 s long sampled at 1 MHz containing 3
 % components no greater than 32 Hz:
 dur = 0.1;      % duration
 fs = 1e6;       % sampling frequency
@@ -22,6 +22,7 @@ end
 rand('twister',0); randn('state',0);
 fprintf(1,'%s\n',fig_title);
 u = func_timer(@gen_test_signal,dur,dt,f,np);
+figure
 plot_signal(t,u,fig_title);
 
 %% Time Encoding
@@ -41,6 +42,7 @@ end
 fig_title = 'Signal Encoded Using ASDM Encoder';
 fprintf(1,'%s\n',fig_title);
 s = func_timer(@asdm_encode,u,dt,b,d,k);
+figure
 plot_encoded(t,u,s,fig_title);
 
 %% Time Decoding
@@ -49,11 +51,13 @@ plot_encoded(t,u,s,fig_title);
 fig_title = 'Signal Decoded Using ASDM Decoder';
 fprintf(1,'%s\n',fig_title);
 u_rec = func_timer(@asdm_decode,s,dur,dt,bw,b,d,k);
+figure
 plot_compare(t,u,u_rec,fig_title);
 %%
 fig_title = 'Signal Decoded Using Threshold-Insensitive ASDM Decoder';
 fprintf(1,'%s\n',fig_title);
 u_rec = func_timer(@asdm_decode_ins,s,dur,dt,bw,b);
+figure
 plot_compare(t,u,u_rec,fig_title);
 %%
 M = 5;    % fast decoding parameter
@@ -61,6 +65,7 @@ M = 5;    % fast decoding parameter
 fig_title = 'Signal Decoded Using Fast ASDM Decoder';
 fprintf(1,'%s\n',fig_title);
 u_rec = func_timer(@asdm_decode_fast,s,dur,dt,bw,M,b,d,k);
+figure
 plot_compare(t,u,u_rec,fig_title);
 
 %%

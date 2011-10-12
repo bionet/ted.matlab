@@ -20,6 +20,16 @@
 %   gammatone_trig_demo         - Encoding/decoding using gammatone filters and the 
 %                                 trigonometric polynomial approximation.
 %
+% Smoothing Spline Demos
+%   tcon_population_demo        - Encoding/decoding of temporal contrast with a
+%
+%   tcon_single_demo            - Encoding/decoding of temporal contrast with an
+%                                 LIF neuron.
+%   velocity_population_demo    - Encoding/decoding of stimulus velocity with a
+%                                 population of rectifier LIF neurons.
+%   velocity_single_demo        - Encoding/decoding of stimulus velocity with a
+%                                 pair of LIF neurons.
+%
 % Spline Interpolation Demos
 %   iaf_demo_spline             - IAF encoder/decoder.
 %   iaf_demo_spline_mimo        - Multiple input IAF encoder/decoder.

@@ -6,7 +6,7 @@
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Time Encoding and Decoding with Multiple Asynchronous Sigma-Delta Modulators</title><meta name="generator" content="MATLAB 7.11"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2011-02-03"><meta name="DC.source" content="asdm_pop_demo.m"><style type="text/css">
+      --><title>Time Encoding and Decoding with Multiple Asynchronous Sigma-Delta Modulators</title><meta name="generator" content="MATLAB 7.12"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2011-10-11"><meta name="DC.source" content="asdm_pop_demo.m"><style type="text/css">
 
 body {
   background-color: white;
@@ -62,7 +62,7 @@ p.footer {
   color: gray;
 }
 
-  </style></head><body><div class="content"><h1>Time Encoding and Decoding with Multiple Asynchronous Sigma-Delta Modulators</h1><!--introduction--><p>This demo illustrates the time encoding and decoding of a bandlimited signal using multiple asynchronous sigma-delta modulators.</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Generating a Test Signal</a></li><li><a href="#2">Time Encoding</a></li><li><a href="#6">Time Decoding</a></li></ul></div><h2>Generating a Test Signal<a name="1"></a></h2><p>Generate a noiseless signal 0.1 s long sampled at 1 GHz containing 3 components no greater than 32 Hz:</p><pre class="codeinput">dur = 0.1;      <span class="comment">% duration</span>
+  </style></head><body><div class="content"><h1>Time Encoding and Decoding with Multiple Asynchronous Sigma-Delta Modulators</h1><!--introduction--><p>This demo illustrates the time encoding and decoding of a bandlimited signal using multiple asynchronous sigma-delta modulators.</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Generating a Test Signal</a></li><li><a href="#2">Time Encoding</a></li><li><a href="#6">Time Decoding</a></li></ul></div><h2>Generating a Test Signal<a name="1"></a></h2><p>Generate a noiseless signal 0.1 s long sampled at 1 MHz containing 3 components no greater than 32 Hz:</p><pre class="codeinput">dur = 0.1;      <span class="comment">% duration</span>
 fs = 1e6;       <span class="comment">% sampling frequency</span>
 dt = 1/fs;      <span class="comment">% sampling resolution</span>
 f = 32;
@@ -81,7 +81,7 @@ fprintf(1,<span class="string">'%s\n'</span>,fig_title);
 u = func_timer(@gen_test_signal,dur,dt,f,np);
 plot_signal(t,u,fig_title);
 </pre><pre class="codeoutput">ASDM Input Signal with No Noise
-execution time = 0.043 s
+execution time = 0.169 s
 </pre><img vspace="5" hspace="5" src="asdm_pop_demo_01.png" alt=""> <h2>Time Encoding<a name="2"></a></h2><p>In this example, the input signal is encoded using two ASD modulators with different encoding parameters:</p><pre class="codeinput">b1 = 3.5;    <span class="comment">% bias</span>
 d1 = 0.7;    <span class="comment">% threshold</span>
 k1 = 0.01;   <span class="comment">% scaling factor</span>
@@ -99,37 +99,41 @@ k2 = 0.01;   <span class="comment">% scaling factor</span>
 </pre><p>Encode the signal:</p><pre class="codeinput">fig_title = <span class="string">'Signal Encoded Using ASDM Encoder #1'</span>;
 fprintf(1,<span class="string">'%s\n'</span>,fig_title);
 s1 = func_timer(@asdm_encode,u,dt,b1,d1,k1);
+figure
 plot_encoded(t,u,s1,fig_title);
 </pre><pre class="codeoutput">Signal Encoded Using ASDM Encoder #1
-execution time = 0.297 s
+execution time = 0.277 s
 </pre><img vspace="5" hspace="5" src="asdm_pop_demo_02.png" alt=""> <pre class="codeinput">fig_title = <span class="string">'Signal Encoded Using ASDM Encoder #2'</span>;
 fprintf(1,<span class="string">'%s\n'</span>,fig_title);
 s2 = func_timer(@asdm_encode,u,dt,b2,d2,k2);
+figure
 plot_encoded(t,u,s2,fig_title);
 </pre><pre class="codeoutput">Signal Encoded Using ASDM Encoder #2
-execution time = 0.293 s
+execution time = 0.263 s
 </pre><img vspace="5" hspace="5" src="asdm_pop_demo_03.png" alt=""> <h2>Time Decoding<a name="6"></a></h2><p>Decode the encoded signal using several different algorithms:</p><pre class="codeinput">fig_title = <span class="string">'Signal Decoded Using ASDM Population Decoder'</span>;
 fprintf(1,<span class="string">'%s\n'</span>,fig_title);
 u_rec = func_timer(@asdm_decode_pop,{s1,s2},dur,dt,bw, <span class="keyword">...</span>
                    {b1,b2},{d1,d2},{k1,k2});
+figure
 plot_compare(t,u,u_rec,fig_title);
 </pre><pre class="codeoutput">Signal Decoded Using ASDM Population Decoder
-execution time = 0.509 s
+execution time = 0.403 s
 </pre><img vspace="5" hspace="5" src="asdm_pop_demo_04.png" alt=""> <pre class="codeinput">fig_title = <span class="string">'Signal Decoded Using Threshold-Insensitive ASDM Population Decoder'</span>;
 fprintf(1,<span class="string">'%s\n'</span>,fig_title);
 u_rec = func_timer(@asdm_decode_pop_ins,{s1,s2},dur,dt,bw,{b1,b2});
+figure
 plot_compare(t,u,u_rec,fig_title);
 </pre><pre class="codeoutput">Signal Decoded Using Threshold-Insensitive ASDM Population Decoder
-execution time = 0.308 s
+execution time = 0.297 s
 </pre><img vspace="5" hspace="5" src="asdm_pop_demo_05.png" alt=""> <p><i>Author: Lev Givon</i></p><p><i>Copyright 2009-2011 Lev Givon</i></p><p class="footer"><br>
-      Published with MATLAB&reg; 7.11<br></p></div><!--
+      Published with MATLAB&reg; 7.12<br></p></div><!--
 ##### SOURCE BEGIN #####
 %% Time Encoding and Decoding with Multiple Asynchronous Sigma-Delta Modulators
 % This demo illustrates the time encoding and decoding of a bandlimited
 % signal using multiple asynchronous sigma-delta modulators.
 
 %% Generating a Test Signal
-% Generate a noiseless signal 0.1 s long sampled at 1 GHz containing 3
+% Generate a noiseless signal 0.1 s long sampled at 1 MHz containing 3
 % components no greater than 32 Hz:
 dur = 0.1;      % duration
 fs = 1e6;       % sampling frequency
@@ -176,11 +180,13 @@ end
 fig_title = 'Signal Encoded Using ASDM Encoder #1';
 fprintf(1,'%s\n',fig_title);
 s1 = func_timer(@asdm_encode,u,dt,b1,d1,k1);
+figure
 plot_encoded(t,u,s1,fig_title);
 %%
 fig_title = 'Signal Encoded Using ASDM Encoder #2';
 fprintf(1,'%s\n',fig_title);
 s2 = func_timer(@asdm_encode,u,dt,b2,d2,k2);
+figure
 plot_encoded(t,u,s2,fig_title);
 
 %% Time Decoding
@@ -189,11 +195,13 @@ fig_title = 'Signal Decoded Using ASDM Population Decoder';
 fprintf(1,'%s\n',fig_title);
 u_rec = func_timer(@asdm_decode_pop,{s1,s2},dur,dt,bw, ...
                    {b1,b2},{d1,d2},{k1,k2});
+figure
 plot_compare(t,u,u_rec,fig_title);
 %%
 fig_title = 'Signal Decoded Using Threshold-Insensitive ASDM Population Decoder';
 fprintf(1,'%s\n',fig_title);
 u_rec = func_timer(@asdm_decode_pop_ins,{s1,s2},dur,dt,bw,{b1,b2});
+figure
 plot_compare(t,u,u_rec,fig_title);
 
 %%

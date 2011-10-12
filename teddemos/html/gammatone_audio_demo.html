@@ -6,7 +6,7 @@
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Time Encoding and Decoding of an Audio Sinal Using Gammatone Flters and the Trigonometric Polynomial Approximation:</title><meta name="generator" content="MATLAB 7.11"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2011-04-27"><meta name="DC.source" content="gammatone_audio_demo.m"><style type="text/css">
+      --><title>Time Encoding and Decoding of an Audio Sinal Using Gammatone Flters and the Trigonometric Polynomial Approximation:</title><meta name="generator" content="MATLAB 7.12"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2011-10-11"><meta name="DC.source" content="gammatone_audio_demo.m"><style type="text/css">
 
 body {
   background-color: white;
@@ -105,12 +105,15 @@ n_neurons = [2, 6, 10, 16];
 
     <span class="comment">% Resample the normalized recovered signal to 48 kHz and save it as an audio file:</span>
     u_out = interp1(t,u_rec,t_out,<span class="string">'spline'</span>);
-    wavwrite(u_out/max(abs(u_out)),fs_out,sprintf(<span class="string">'sound_%i.wav'</span>,n));
+    u_out = u_out/max(abs(u_out));
+
+    <span class="comment">% Hack to prevent warning about clipping values too close to</span>
+    <span class="comment">% +1.0:</span>
+    u_out(u_out &gt; 0.999984) = 0.999984;
+    wavwrite(u_out,fs_out,sprintf(<span class="string">'sound_%i.wav'</span>,n));
 <span class="keyword">end</span>
-</pre><pre class="codeoutput">Warning: Data clipped during write to file:sound_2.wav 
-Warning: Data clipped during write to file:sound_10.wav 
 </pre><img vspace="5" hspace="5" src="gammatone_audio_demo_02.png" alt=""> <img vspace="5" hspace="5" src="gammatone_audio_demo_03.png" alt=""> <img vspace="5" hspace="5" src="gammatone_audio_demo_04.png" alt=""> <img vspace="5" hspace="5" src="gammatone_audio_demo_05.png" alt=""> <p><i>Author: Lev Givon</i></p><p><i>Copyright 2009-2011 Lev Givon</i></p><p class="footer"><br>
-      Published with MATLAB&reg; 7.11<br></p></div><!--
+      Published with MATLAB&reg; 7.12<br></p></div><!--
 ##### SOURCE BEGIN #####
 %% Time Encoding and Decoding of an Audio Sinal Using Gammatone Flters and the Trigonometric Polynomial Approximation:
 
@@ -176,7 +179,12 @@ for n=n_neurons,
 
     % Resample the normalized recovered signal to 48 kHz and save it as an audio file:
     u_out = interp1(t,u_rec,t_out,'spline');
-    wavwrite(u_out/max(abs(u_out)),fs_out,sprintf('sound_%i.wav',n));
+    u_out = u_out/max(abs(u_out));
+
+    % Hack to prevent warning about clipping values too close to
+    % +1.0:
+    u_out(u_out > 0.999984) = 0.999984;
+    wavwrite(u_out,fs_out,sprintf('sound_%i.wav',n));
 end
 
 %%

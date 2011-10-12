@@ -1,8 +1,9 @@
 %IAF_ENCODE Encode a signal using an integrate-and-fire neuron
-%   S = IAF_ENCODE(U,DT,B,D,R,C,DTE,Y,INT,QM,FOUT) encodes the
+%   S = IAF_ENCODE(U,DT,B,D,SD,R,C,DTE,Y,INT,QM,FOUT) encodes the
 %   signal U sampled at rate 1/DT using an integrate-and-fire neuron
-%   with bias B, firing threshold D, resistance R, and capacitance
-%   C. If DTE is specified and is smaller than DT, U is resampled with
+%   with bias B, Gaussian distributed firing threshold with mean D, 
+%   standard deviation SD, resistance R, and capacitance C. If
+%   DTE is specified and is smaller than DT, U is resampled with
 %   at the sampling frequency 1/DTE Hz prior to being integrated. The
 %   state of the IAF integrator is initially set to Y and the initial
 %   interval since the last spike is set to INT. One may specify the
@@ -33,27 +34,32 @@ quad_method = 'trapz';
 full_output = false;
 
 if nargin >= 5, 
-  R = varargin{1};
+  sd = varargin{1};
+else
+  sd = 0;
 end
-if nargin >= 6,
-  C = varargin{2};
+if nargin >= 6, 
+  R = varargin{2};
 end
 if nargin >= 7,
-  dte = varargin{3};
+  C = varargin{3};
 end
 if nargin >= 8,
-  y = varargin{4};
+  dte = varargin{4};
 end
 if nargin >= 9,
-  interval = varargin{5};
+  y = varargin{5};
 end
 if nargin >= 10,
-  quad_method = varargin{6};
+  interval = varargin{6};
 end
 if nargin >= 11,
-  full_output = varargin{7};
+  quad_method = varargin{7};
 end
 if nargin >= 12,
+  full_output = varargin{8};
+end
+if nargin >= 13,
   error('Too many input arguments.');
 end
 
@@ -108,14 +114,24 @@ end
 % the absolute time so as to avoid overflow problems for very long
 % signals:
 j = 1;
+
+d_new = d + sd * randn;
+while d_new < 0  % force positive threshold
+  d_new = d + sd * randn;
+end
+
 for i=1:last,
   y = compute_y(y,i);
   interval = interval + dt;
-  if y >= d
+  if y >= d_new
     s(j) = interval;
     j = j + 1;
     interval = 0;
-    y = y - d;
+    y = y - d_new;
+    d_new = d + sd * randn;
+    while d_new < 0
+      d_new = d + sd * randn;
+    end
   end
 end
 

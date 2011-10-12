@@ -6,7 +6,7 @@
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Time Encoding and Decoding of an Audio Sinal Using Gammatone Flters, the Trigonometric Polynomial Approximation, and Stitching</title><meta name="generator" content="MATLAB 7.11"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2011-04-27"><meta name="DC.source" content="gammatone_audio_stitch_demo.m"><style type="text/css">
+      --><title>Time Encoding and Decoding of an Audio Sinal Using Gammatone Flters, the Trigonometric Polynomial Approximation, and Stitching</title><meta name="generator" content="MATLAB 7.12"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2011-10-11"><meta name="DC.source" content="gammatone_audio_stitch_demo.m"><style type="text/css">
 
 body {
   background-color: white;
@@ -129,7 +129,7 @@ u2_rec = iaf_decode_filt_trig_pop(s2,N_win2*dt,dt,Omega,M,b,d,h);
 </pre><img vspace="5" hspace="5" src="gammatone_audio_stitch_demo_02.png" alt=""> <p>Resample the normalized recovered signal to 48 kHz and save it as an audio file:</p><pre class="codeinput">u_out = interp1(t,u_rec,t_out,<span class="string">'spline'</span>);
 wavwrite(u_out/max(abs(u_out)),fs_out,<span class="string">'sound_stitched.wav'</span>);
 </pre><p><i>Author: Lev Givon</i></p><p><i>Copyright 2009-2011 Lev Givon</i></p><p class="footer"><br>
-      Published with MATLAB&reg; 7.11<br></p></div><!--
+      Published with MATLAB&reg; 7.12<br></p></div><!--
 ##### SOURCE BEGIN #####
 %% Time Encoding and Decoding of an Audio Sinal Using Gammatone Flters, the Trigonometric Polynomial Approximation, and Stitching
 

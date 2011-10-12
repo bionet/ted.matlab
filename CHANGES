@@ -3,6 +3,10 @@
 Change Log
 ==========
 
+Release 0.051 - ()
+------------------
+* Move various auxiliary functions to utils toolbox.
+
 Release 0.05 - (April 28, 2011)
 -------------------------------
 * Improve performance of IAF encoder.

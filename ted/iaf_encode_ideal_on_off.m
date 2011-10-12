@@ -58,3 +58,22 @@ plot(tk2-dt,-d*ones(1,length(tk2)),'mo');hold on;%y2(find(s2)),'mo'); hold on
 plot(t,d*ones(size(t)),'k--',t,-d*ones(size(t)),'k--'); hold off;
 legend('Input','v^1','v^2','ON spikes','OFF spikes');
 title(['ON-OFF IAF \delta= ' num2str(d)]);
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% auxiliary function to compute cross-feedback
+
+function h = cross_fb(t,n1,n2,tauf,scale)
+%CROSS_FB Compute cross-feedback for ON-OFF IAF neuron pair.
+%   H = CROSS_FB(T,N1,N2,TAUF,SCALE) computes the cross-feedback
+%   term coupling the two components of an ON-OFF IAF neuron
+%   pair over the times T. N1 and N2 denote the exponents for the
+%   positive and negative feedback terms, respectively; TAUF
+%   denotes the time constant, and SCALE the amplitude of the
+%   cross-feedback.
+%
+%   The calculation is described in further detail in Equation 33 of
+%   the Consistent Recovery paper mentioned in the toolbox references.
+
+h = scale/tauf*exp(-t/tauf).*((t/tauf).^n1/factorial(n1)-(t/tauf).^n2/factorial(n2));

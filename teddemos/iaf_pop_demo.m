@@ -4,7 +4,7 @@
 % neurons.
 
 %% Generating a Test Signal
-% Generate a noiseless signal 0.1 s long sampled at 1 GHz containing 3
+% Generate a noiseless signal 0.1 s long sampled at 1 MHz containing 3
 % components no greater than 32 Hz:
 dur = 0.1;      % duration
 fs = 1e6;       % sampling frequency
@@ -23,6 +23,7 @@ end
 rand('twister',0); randn('state',0);
 fprintf(1,'%s\n',fig_title);
 u = func_timer(@gen_test_signal,dur,dt,f,np);
+figure
 plot_signal(t,u,fig_title);
 
 %% Time Encoding
@@ -61,23 +62,27 @@ end
 % Encode the signal using the leaky model:
 fig_title = 'Signal Encoded Using Leaky IAF Encoder #1';
 fprintf(1,'%s\n',fig_title);
-s1_leaky = func_timer(@iaf_encode,u,dt,b1,d1,R1,C1);
+s1_leaky = func_timer(@iaf_encode,u,dt,b1,d1,0,R1,C1);
+figure
 plot_encoded(t,u,s1_leaky,fig_title);
 %%
 fig_title = 'Signal Encoded Using Leaky IAF Encoder #2';
 fprintf(1,'%s\n',fig_title);
-s2_leaky = func_timer(@iaf_encode,u,dt,b2,d2,R2,C2);
+s2_leaky = func_timer(@iaf_encode,u,dt,b2,d2,0,R2,C2);
+figure
 plot_encoded(t,u,s2_leaky,fig_title);
 %%
 % Encode the signal using the ideal model:
 fig_title = 'Signal Encoded Using Ideal IAF Encoder #1';
 fprintf(1,'%s\n',fig_title);
-s1_ideal = func_timer(@iaf_encode,u,dt,b1,d1,inf,C1);
+s1_ideal = func_timer(@iaf_encode,u,dt,b1,d1,0,inf,C1);
+figure
 plot_encoded(t,u,s1_ideal,fig_title);
 %%
 fig_title = 'Signal Encoded Using Ideal IAF Encoder #2';
 fprintf(1,'%s\n',fig_title);
-s2_ideal = func_timer(@iaf_encode,u,dt,b2,d2,inf,C2);
+s2_ideal = func_timer(@iaf_encode,u,dt,b2,d2,0,inf,C2);
+figure
 plot_encoded(t,u,s2_ideal,fig_title);
 
 %% Time Decoding
@@ -86,12 +91,14 @@ fig_title = 'Signal Decoded Using Leaky IAF Decoder';
 fprintf(1,'%s\n',fig_title);
 u_rec_leaky = func_timer(@iaf_decode_pop,{s1_leaky,s2_leaky}, ...
                          dur,dt,bw,{b1,b2},{d1,d2},{R1,R2},{C1,C2});
+figure
 plot_compare(t,u,u_rec_leaky,fig_title);
 %%
 fig_title = 'Signal Decoded Using Ideal IAF Decoder';
 fprintf(1,'%s\n',fig_title);
 u_rec_ideal = func_timer(@iaf_decode_pop,{s1_ideal,s2_ideal}, ...
                    dur,dt,bw,{b1,b2},{d1,d2},{inf,inf},{C1,C2});
+figure
 plot_compare(t,u,u_rec_ideal,fig_title);
 
 %%

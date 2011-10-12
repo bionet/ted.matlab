@@ -3,7 +3,7 @@
 % signal using multiple asynchronous sigma-delta modulators.
 
 %% Generating a Test Signal
-% Generate a noiseless signal 0.1 s long sampled at 1 GHz containing 3
+% Generate a noiseless signal 0.1 s long sampled at 1 MHz containing 3
 % components no greater than 32 Hz:
 dur = 0.1;      % duration
 fs = 1e6;       % sampling frequency
@@ -50,11 +50,13 @@ end
 fig_title = 'Signal Encoded Using ASDM Encoder #1';
 fprintf(1,'%s\n',fig_title);
 s1 = func_timer(@asdm_encode,u,dt,b1,d1,k1);
+figure
 plot_encoded(t,u,s1,fig_title);
 %%
 fig_title = 'Signal Encoded Using ASDM Encoder #2';
 fprintf(1,'%s\n',fig_title);
 s2 = func_timer(@asdm_encode,u,dt,b2,d2,k2);
+figure
 plot_encoded(t,u,s2,fig_title);
 
 %% Time Decoding
@@ -63,11 +65,13 @@ fig_title = 'Signal Decoded Using ASDM Population Decoder';
 fprintf(1,'%s\n',fig_title);
 u_rec = func_timer(@asdm_decode_pop,{s1,s2},dur,dt,bw, ...
                    {b1,b2},{d1,d2},{k1,k2});
+figure
 plot_compare(t,u,u_rec,fig_title);
 %%
 fig_title = 'Signal Decoded Using Threshold-Insensitive ASDM Population Decoder';
 fprintf(1,'%s\n',fig_title);
 u_rec = func_timer(@asdm_decode_pop_ins,{s1,s2},dur,dt,bw,{b1,b2});
+figure
 plot_compare(t,u,u_rec,fig_title);
 
 %%

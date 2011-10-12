@@ -7,7 +7,7 @@
 % Consistent Recovery paper mentioned in the toolbox references.
 
 %% Generating a Test Signal
-% Generate a noiseless signal 0.2 s long sampled at 1 GHz with a
+% Generate a noiseless signal 0.2 s long sampled at 1 MHz with a
 % bandwidth of 100 Hz:
 dur = 0.2;       % duration
 dt = 1e-6;       % sampling resolution
@@ -46,7 +46,7 @@ C = 0.01; % capacitance
 
 %%
 % Encode the signal:
-tk = iaf_encode(u,dt,b,d,R,C);
+tk = iaf_encode(u,dt,b,d,0,R,C);
 
 %% Time Decoding
 % Recover the signal:
