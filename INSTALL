@@ -10,11 +10,19 @@ The Time Encoding and Decoding Toolbox requires several software
 packages to be present in order to be installed (newer versions of
 these packages may also work).
 
-* `Matlab R14 <http://www.mathworks/com>`_
-* `Bionet Matlab Utilities 0.015 <http://bionet.ee.columbia.edu/code>`_
+* `MATLAB R14 <http://www.mathworks.com/>`_
+* `Bionet MATLAB Utilities 0.016 <http://bionet.github.com/>`_
 
-Installation
-------------
+To build the documentation, the following Python packages are also
+required:
+
+* `Docutils <http://docutils.sourceforge.net>`_ 0.5 or later.
+* `Sphinx <http://sphinx.pocoo.org>`_ 1.0.1 or later.
+* `Jinja2 <htt://jinja.pocoo.org>`_ 2.2 or later
+* `Pygments <http://pygments.org>`_ 0.8 or later
+
+Building and Installation
+-------------------------
 
 Unpack the archive into an installation directory of your
 choice. Assuming that Matlab is installed in the directory whose name
@@ -37,3 +45,9 @@ duration of one session by running the commands
 
    addpath(strcat(getenv('MATLAB'),'/toolbox/ted/ted'));
    addpath(strcat(getenv('MATLAB'),'/toolbox/ted/teddemos'));
+
+To rebuild the documentation, run::
+
+   make
+
+from within the ``doc/`` subdirectory and follow the directions.
