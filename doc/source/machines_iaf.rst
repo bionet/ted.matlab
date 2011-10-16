@@ -14,7 +14,7 @@ Encoding with Integrate-and-Fire (IAF) Neurons
   (Gaussian) thresholds is also supported. A signal can be encoded by
   a single IAF encoder (Single-Input Single-Output Encoding), as shown
   in the figure below, or it can be encoded by a population of IAF
-  neurons (Single-Input Single-Output Encoding).
+  neurons (Single-Input Multi-Output Encoding).
 
    .. image:: images/tem-iaf-rt.png
       :scale: 60
