@@ -33,10 +33,7 @@ Contact Information
 
 Please direct all questions and comments pertaining to this software to
 
-* `Lev Givon <lev@columbia.edu>`_
-
-General questions relating to the toolbox should be directed to 
-`Lev Givon <lev@columbia.edu>`_.
+`Lev Givon <lev@columbia.edu>`_
 
 .. [1] http://bionet.github.com/
 .. [2] http://www.ee.columbia.edu/
