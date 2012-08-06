@@ -1,5 +1,5 @@
 NAME = ted
-VERSION = 0.06
+VERSION = 0.061
 LANG = matlab
 
 TAG = $(VERSION)
