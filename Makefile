@@ -10,6 +10,7 @@ TARNAME = $(NAME)-$(LANG)-$(VERSION).tar
 
 package:
 	hg archive -r $(TAG) -t tar -p $(PREFIX) -X Makefile $(TARNAME)
+	cd docs/source && python make_pgf.py 
 	make -C docs html
 	tar uvf $(TARNAME) docs/build/
 	gzip -9 $(TARNAME)
