@@ -29,6 +29,9 @@ This software is licensed under the
 `BSD License <http://www.opensource.org/licenses/bsd-license.php>`_.
 See the included LICENSE file for more information.
 
+The file ``utils/mtit.m`` is redistributed under the license in the file
+``LICENSE.mtit``.
+
 Contact Information
 -------------------
 

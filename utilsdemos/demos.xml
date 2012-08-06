@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <demos>
 
-<name>Bionet Matlab Utilities - Demos</name>
+<name>Bionet MATLAB Utilities - Demos</name>
 <type>toolbox</type>
 <icon>$toolbox/matlab/icons/matlabicon.gif</icon>
-<description>Programs that demonstrate how to use the Bionet Matlab
+<description>Programs that demonstrate how to use the Bionet MATLAB
   Utilities.</description>
 
 <website></website>

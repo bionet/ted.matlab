@@ -3,10 +3,10 @@
 Change Log
 ==========
 
-Release 0.051 - ()
+Release 0.06 - ()
 ------------------
-* Move various auxiliary functions to utils toolbox.
 * Add documentation.
+* Merge with utils toolbox.
 
 Release 0.05 - (April 28, 2011)
 -------------------------------

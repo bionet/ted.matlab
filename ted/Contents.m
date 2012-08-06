@@ -1,5 +1,4 @@
 % Time Encoding and Decoding Toolbox
-% Version 0.05
 %
 % Asynchronous Sigma-Delta Modulator Algorithms
 %   asdm_decode                  - ASDM time decoder.
@@ -37,4 +36,4 @@
 % See also TEDDEMOS
 
 % Author: Lev Givon
-% Copyright 2009-2011 Lev Givon
+% Copyright 2009-2012 Lev Givon

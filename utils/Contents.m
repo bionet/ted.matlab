@@ -1,5 +1,4 @@
-% Bionet Matlab Utilities
-% Version 0.016
+% Bionet MATLAB Utilities
 %
 % Gammatone Filter Functions
 %   gammatone            - Create a gammatone filter bank (for the sinc 
@@ -31,4 +30,4 @@
 %   gen_window           - Generate a tapered window.
 
 % Author: Lev Givon
-% Copyright 2009-2011 Lev Givon
+% Copyright 2009-2012 Lev Givon

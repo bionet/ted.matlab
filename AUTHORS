@@ -4,31 +4,26 @@ Authors & Acknowledgments
 =========================
 
 The implementations in this toolbox were written by the following
-members of the Bionet Group [1]_ at Columbia University's Department of
-Electrical Engineering under the supervision of Prof. Aurel A. Lazar
-[2]_:
+current and past members of the Bionet Group [1]_ at Columbia 
+University's Department of Electrical Engineering under the 
+supervision of Prof. Aurel A. Lazar [2]_:
 
 * Lev Givon
 * Eftychios A. Pnevmatikakis
 * Robert J. Turetsky
 
-Some portions of the code are based (in part) on previous implementations
-written by the following Bionet Group members:
+Some portions of the code are partially based upon older implementations
+written by 
 
 * Robert J. Turetsky
-* Yevgeniy Slutskiy
+* Yevgeniy B. Slutskiy
 
 Documentation for this toolbox was prepared by 
 
 * Lev Givon
 * Yiyin Zhou
 
-Special thanks are due to the following Bionet Group members for 
-reviewing parts of the code and providing useful suggestions:
-
-* Robert J. Turetsky
-* Yiyin Zhou
-
+The software in this toolbox was integrated and packaged by Lev Givon.
 
 .. [1] http://bionet.ee.columbia.edu/
 .. [2] http://www.ee.columbia.edu/~aurel/
