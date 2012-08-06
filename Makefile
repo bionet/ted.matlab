@@ -4,13 +4,15 @@ LANG = matlab
 
 TAG = $(VERSION)
 PREFIX = $(NAME)
-TARNAME = $(NAME)-$(LANG)-$(VERSION).tar.gz
+TARNAME = $(NAME)-$(LANG)-$(VERSION).tar
 
 .PHONY: package
 
 package:
-	hg archive -r $(TAG) -t tgz -p $(PREFIX) -X Makefile $(TARNAME)
+	hg archive -r $(TAG) -t tar -p $(PREFIX) -X Makefile $(TARNAME)
 	make -C docs html
-	tar uvfz $(TARNAME) docs/build/
+	tar uvf $(TARNAME) docs/build/
+	gzip -9 $(TARNAME)
+
 clean:
 	rm -f $(TARNAME)
