@@ -3,7 +3,7 @@ VERSION = 0.06
 LANG = matlab
 
 TAG = $(VERSION)
-PREFIX = $(NAME)-$(VERSION)
+PREFIX = $(NAME)
 TARNAME = $(NAME)-$(LANG)-$(VERSION).tar.gz
 
 .PHONY: package
