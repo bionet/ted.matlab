@@ -9,7 +9,7 @@ Prerequisites
 The Time Encoding and Decoding Toolbox requires a relatively recent version of
 MATLAB (e.g., R14 or later) to run.
 
-To build the documentation, the following Python packages are also
+To rebuild the documentation, the following Python packages are also
 required:
 
 * `Docutils <http://docutils.sourceforge.net>`_ 0.5 or later.
@@ -50,4 +50,4 @@ To rebuild the documentation, run::
 
    make
 
-from within the ``doc/`` subdirectory and follow the directions.
+from within the ``docs/`` subdirectory and follow the directions.

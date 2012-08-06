@@ -9,6 +9,9 @@ TARNAME = $(NAME)-$(LANG)-$(VERSION).tar.gz
 .PHONY: package
 
 package:
+	pushd docs
+	make html
+	popd
 	hg archive -r $(TAG) -t tgz -p $(PREFIX) -X Makefile $(TARNAME)
 
 clean:
