@@ -113,5 +113,5 @@ wavwrite(u_out/max(abs(u_out)),fs_out,'sound_stitched.wav');
 %%
 % _Author: Lev Givon_
 %%
-% _Copyright 2009-2011 Lev Givon_
+% _Copyright 2009-2012 Lev Givon_
 

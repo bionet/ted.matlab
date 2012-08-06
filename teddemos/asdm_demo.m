@@ -71,4 +71,4 @@ plot_compare(t,u,u_rec,fig_title);
 %%
 % _Author: Lev Givon_
 %%
-% _Copyright 2009-2011 Lev Givon_
+% _Copyright 2009-2012 Lev Givon_

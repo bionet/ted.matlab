@@ -201,4 +201,4 @@ text(xlimits(1)-(xlimits(2)-xlimits(1))*0.16, ...
 %%
 % _Author: Eftychios A. Pnevmatikakis_
 %%
-% _Copyright 2009-2011 Lev Givon_
+% _Copyright 2009-2012 Lev Givon_

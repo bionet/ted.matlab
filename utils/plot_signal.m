@@ -8,7 +8,7 @@
 %   PLOT_SIGNAL(T,U,FIG_TITLE,FILENAME) saves the plot in FILENAME.
 
 %   Author: Lev Givon
-%   Copyright 2009-2011 Lev Givon
+%   Copyright 2009-2012 Lev Givon
 
 function plot_signal(t,u,varargin)
 

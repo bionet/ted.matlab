@@ -116,4 +116,4 @@ figure;subplot(1,2,1);plot(tnr,max(snr_s1'),tnr,max(snr_s2'));
 %%
 % _Author: Eftychios A. Pnevmatikakis_
 %%
-% _Copyright 2009-2011 Eftychios A. Pnevmatikakis_
+% _Copyright 2009-2012 Eftychios A. Pnevmatikakis_

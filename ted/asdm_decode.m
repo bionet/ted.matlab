@@ -6,7 +6,7 @@
 %   recovered signal is assumed to be sampled at sampling rate 1/DT Hz.
 
 %   Author: Lev Givon
-%   Copyright 2009-2011 Lev Givon
+%   Copyright 2009-2012 Lev Givon
 
 function u_rec = asdm_decode(s,dur,dt,bw,b,d,k)
 

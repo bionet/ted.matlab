@@ -6,7 +6,7 @@
 %   s. 
 
 %   Author: Lev Givon
-%   Copyright 2009-2011 Lev Givon
+%   Copyright 2009-2012 Lev Givon
 
 function am = get_dirichlet_coeffs(u,dt,Omega,M)
 

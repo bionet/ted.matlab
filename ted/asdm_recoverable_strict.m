@@ -4,7 +4,7 @@
 %   threshold D, bias B, and bandwidth BW (in rad/s).
 
 %   Author: Lev Givon
-%   Copyright 2009-2011 Lev Givon
+%   Copyright 2009-2012 Lev Givon
 
 function result = asdm_recoverable_strict(u,bw,b,d,k)
 

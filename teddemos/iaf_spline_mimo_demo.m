@@ -98,4 +98,4 @@ snr
 %%
 % _Author: Eftychios A. Pnevmatikakis_
 %%
-% _Copyright 2009-2011 Eftychios A. Pnevmatikakis_
+% _Copyright 2009-2012 Eftychios A. Pnevmatikakis_

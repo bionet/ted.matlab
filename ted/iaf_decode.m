@@ -11,7 +11,7 @@
 %   specified.
 
 %   Author: Lev Givon
-%   Copyright 2009-2011 Lev Givon
+%   Copyright 2009-2012 Lev Givon
 
 function u_rec = iaf_decode(s,dur,dt,bw,b,d,varargin)
 
