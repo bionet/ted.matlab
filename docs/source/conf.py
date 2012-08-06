@@ -48,7 +48,7 @@ copyright = u'2011-2012, Lev Givon and Yiyin Zhou'
 # built documents.
 #
 # The short X.Y version.
-version = '0.051'
+version = '0.06'
 # The full version, including alpha/beta/rc tags.
 release = '0.051'
 
