@@ -1,0 +1,179 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Generate and Display a Gammatone Filter Bank</title><meta name="generator" content="MATLAB 7.12"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2011-10-11"><meta name="DC.source" content="gammatone_fb_demo.m"><style type="text/css">
+
+body {
+  background-color: white;
+  margin:10px;
+}
+
+h1 {
+  color: #990000; 
+  font-size: x-large;
+}
+
+h2 {
+  color: #990000;
+  font-size: medium;
+}
+
+/* Make the text shrink to fit narrow windows, but not stretch too far in 
+wide windows. */ 
+p,h1,h2,div.content div {
+  max-width: 600px;
+  /* Hack for IE6 */
+  width: auto !important; width: 600px;
+}
+
+pre.codeinput {
+  background: #EEEEEE;
+  padding: 10px;
+}
+@media print {
+  pre.codeinput {word-wrap:break-word; width:100%;}
+} 
+
+span.keyword {color: #0000FF}
+span.comment {color: #228B22}
+span.string {color: #A020F0}
+span.untermstring {color: #B20000}
+span.syscmd {color: #B28C00}
+
+pre.codeoutput {
+  color: #666666;
+  padding: 10px;
+}
+
+pre.error {
+  color: red;
+}
+
+p.footer {
+  text-align: right;
+  font-size: xx-small;
+  font-weight: lighter;
+  font-style: italic;
+  color: gray;
+}
+
+  </style></head><body><div class="content"><h1>Generate and Display a Gammatone Filter Bank</h1><!--introduction--><!--/introduction--><p>Generate the filter bank:</p><pre class="codeinput">dt = 1e-5;
+t = [0:dt:0.1];
+N = 16;
+h = make_gammatone_fb(t,N);
+</pre><p>Magnify the impulse responses a bit so that they are visible when plotted:</p><pre class="codeinput">fig_count = 0;
+</pre><p>Plot the impulse responses:</p><pre class="codeinput">figure();
+<span class="keyword">for</span> i=[1:N],
+    plot(t,i+h(i,:)*100,<span class="string">'LineWidth'</span>,1.5);
+    hold <span class="string">on</span>;
+<span class="keyword">end</span>
+axis([min(t) max(t) 0 N+1]);
+pos = get(gcf,<span class="string">'Position'</span>);
+set(gcf,<span class="string">'Position'</span>,[pos(1),pos(2)-pos(2)/2,pos(3),pos(4)*1.5]);
+title(sprintf(<span class="string">'Gammatone Filterbank Impulse Responses (N=%i)'</span>,N));
+xlabel(<span class="string">'t (s)'</span>);
+ylabel(<span class="string">'Filter #'</span>);
+
+N_fft = length(t);
+H = fft(h,N_fft,2);
+fs = 1/dt;
+f = (fs/2)*linspace(0,1,N_fft/2+1);
+if_max = floor(N_fft/30)+1;
+</pre><img vspace="5" hspace="5" src="gammatone_fb_demo_01.png" alt=""> <p>Plot the spectrum:</p><pre class="codeinput">figure();
+colors = [<span class="string">'b'</span>,<span class="string">'g'</span>,<span class="string">'r'</span>,<span class="string">'c'</span>,<span class="string">'m'</span>,<span class="string">'k'</span>];
+<span class="keyword">for</span> i=[1:N],
+    c = colors(mod(i,length(colors))+1);
+    plot(f(1:if_max),20*log10(abs(H(i,1:if_max))),c);
+    hold <span class="string">on</span>;
+<span class="keyword">end</span>
+plot([200 200], ylim,<span class="string">':'</span>);
+plot([1400 1400], ylim,<span class="string">':'</span>);
+xlim([f(1) f(if_max)]);
+title(sprintf(<span class="string">'Gammatone Filterbank Magnitude Spectrum (N=%i)'</span>,N));
+xlabel(<span class="string">'F (Hz)'</span>);
+ylabel(<span class="string">'|H| (dB)'</span>);
+</pre><img vspace="5" hspace="5" src="gammatone_fb_demo_02.png" alt=""> <p>Plot the support:</p><pre class="codeinput">figure();
+plot(f(1:if_max),20*log10(sum(abs(H(:,1:if_max).^2))));
+hold <span class="string">on</span>;
+plot([200 200], ylim,<span class="string">':'</span>);
+plot([1400 1400], ylim,<span class="string">':'</span>);
+xlim([f(1) f(if_max)]);
+title(sprintf(<span class="string">'Gammatone Filterbank Support (N=%i)'</span>,N));
+xlabel(<span class="string">'F (Hz)'</span>);
+ylabel(<span class="string">'$\mathsf{\sum|H^i(f)|^2}$'</span>,<span class="string">'Interpreter'</span>,<span class="string">'latex'</span>);
+</pre><img vspace="5" hspace="5" src="gammatone_fb_demo_03.png" alt=""> <p><i>Author: Lev Givon</i></p><p><i>Copyright 2009-2011 Lev Givon</i></p><p class="footer"><br>
+      Published with MATLAB&reg; 7.12<br></p></div><!--
+##### SOURCE BEGIN #####
+%% Generate and Display a Gammatone Filter Bank
+
+%%
+% Generate the filter bank:
+dt = 1e-5;
+t = [0:dt:0.1];
+N = 16;
+h = make_gammatone_fb(t,N);
+
+%%
+% Magnify the impulse responses a bit so that they are visible when plotted:
+fig_count = 0;
+
+%%
+% Plot the impulse responses:
+figure();
+for i=[1:N],
+    plot(t,i+h(i,:)*100,'LineWidth',1.5);
+    hold on;
+end
+axis([min(t) max(t) 0 N+1]);
+pos = get(gcf,'Position');
+set(gcf,'Position',[pos(1),pos(2)-pos(2)/2,pos(3),pos(4)*1.5]);
+title(sprintf('Gammatone Filterbank Impulse Responses (N=%i)',N));
+xlabel('t (s)');
+ylabel('Filter #');
+
+N_fft = length(t);
+H = fft(h,N_fft,2);
+fs = 1/dt;
+f = (fs/2)*linspace(0,1,N_fft/2+1);
+if_max = floor(N_fft/30)+1;
+
+%%
+% Plot the spectrum:
+figure();
+colors = ['b','g','r','c','m','k'];
+for i=[1:N],
+    c = colors(mod(i,length(colors))+1);
+    plot(f(1:if_max),20*log10(abs(H(i,1:if_max))),c);
+    hold on;
+end
+plot([200 200], ylim,':');
+plot([1400 1400], ylim,':');
+xlim([f(1) f(if_max)]);
+title(sprintf('Gammatone Filterbank Magnitude Spectrum (N=%i)',N));
+xlabel('F (Hz)');
+ylabel('|H| (dB)');
+
+%% 
+% Plot the support:
+figure();
+plot(f(1:if_max),20*log10(sum(abs(H(:,1:if_max).^2))));
+hold on;
+plot([200 200], ylim,':');
+plot([1400 1400], ylim,':');
+xlim([f(1) f(if_max)]);
+title(sprintf('Gammatone Filterbank Support (N=%i)',N));
+xlabel('F (Hz)');
+ylabel('$\mathsf{\sum|H^i(f)|^2}$','Interpreter','latex');
+
+%%
+% _Author: Lev Givon_
+%%
+% _Copyright 2009-2011 Lev Givon_
+
+##### SOURCE END #####
+--></body></html>

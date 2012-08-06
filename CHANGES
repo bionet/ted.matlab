@@ -1,0 +1,40 @@
+.. -*- rst -*-
+
+Change Log
+==========
+
+Release 0.051 - ()
+------------------
+* Move various auxiliary functions to utils toolbox.
+* Add documentation.
+
+Release 0.05 - (April 28, 2011)
+-------------------------------
+* Improve performance of IAF encoder.
+* Fix incorrect signs in delayed IAF algorithms.
+* Add gammatone trigonometric polynomail demos.
+* Update license.
+
+Release 0.04 - (April 16, 2010)
+-------------------------------
+* Add gammatone filter algorithms.
+* Add delayed IAF algorithms.
+* Add spline interpolation algorithms.
+
+Release 0.03 - (January 07, 2010)
+---------------------------------
+* Add IAF population decoding algorithms.
+* Speed up decoding algorithms with faster sine integral approximation.
+
+Release 0.02 - (October 26, 2009)
+---------------------------------
+* Add ASDM population decoding algorithms.
+* Make time array construction consistently use a fixed time step.
+
+Release 0.011 - (May 08, 2009)
+------------------------------
+* Change package name to Time Encoding and Decoding Toolbox.
+
+Release 0.01 - (May 08, 2009)
+-----------------------------
+* First public release.

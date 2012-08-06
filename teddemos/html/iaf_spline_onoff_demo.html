@@ -1,0 +1,189 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML is auto-generated from an M-file.
+To make changes, update the M-file and republish this document.
+      --><title>Time Encoding and Decoding Using ON/OFF Integrate-and-Fire Neurons</title><meta name="generator" content="MATLAB 7.9"><meta name="date" content="2011-10-11"><meta name="m-file" content="iaf_spline_onoff_demo"><style type="text/css">
+
+body {
+  background-color: white;
+  margin:10px;
+}
+
+h1 {
+  color: #990000; 
+  font-size: x-large;
+}
+
+h2 {
+  color: #990000;
+  font-size: medium;
+}
+
+/* Make the text shrink to fit narrow windows, but not stretch too far in 
+wide windows. */ 
+p,h1,h2,div.content div {
+  max-width: 600px;
+  /* Hack for IE6 */
+  width: auto !important; width: 600px;
+}
+
+pre.codeinput {
+  background: #EEEEEE;
+  padding: 10px;
+}
+@media print {
+  pre.codeinput {word-wrap:break-word; width:100%;}
+} 
+
+span.keyword {color: #0000FF}
+span.comment {color: #228B22}
+span.string {color: #A020F0}
+span.untermstring {color: #B20000}
+span.syscmd {color: #B28C00}
+
+pre.codeoutput {
+  color: #666666;
+  padding: 10px;
+}
+
+pre.error {
+  color: red;
+}
+
+p.footer {
+  text-align: right;
+  font-size: xx-small;
+  font-weight: lighter;
+  font-style: italic;
+  color: gray;
+}
+
+  </style></head><body><div class="content"><h1>Time Encoding and Decoding Using ON/OFF Integrate-and-Fire Neurons</h1><!--introduction--><p>This demo illustrates the time encoding of a bandlimited signal using interconnected ON/OFF integrate-and-fire neurons and recovery of the signal using spline interpolation. The input signal in this case can be thought of as the temporal contrast of a positive input photocurrent.</p><p>The demo corresponds to the example presented in Section 3.3 of the Consistent Recovery paper mentioned in the toolbox references.</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Generating a Test Signal</a></li><li><a href="#8">Time Encoding</a></li><li><a href="#10">Time Decoding</a></li></ul></div><h2>Generating a Test Signal<a name="1"></a></h2><p>Generate a noiseless signal 0.2 s long sampled at 1 GHz with a bandwidth of 100 Hz:</p><pre class="codeinput">dur = 0.2;       <span class="comment">% duration</span>
+dt = 1e-6;       <span class="comment">% sampling resolution</span>
+fmax = 100;      <span class="comment">% bandwidth (Hz)</span>
+t = [dt:dt:dur]; <span class="comment">% time support</span>
+</pre><p>Truncate the time vector:</p><pre class="codeinput">tr_vc = round(0.05*length(t)):round(0.95*length(t));
+</pre><p>Add a constant bias to the signal to ensure that it is positive:</p><pre class="codeinput">b_p = 8;
+</pre><p>Use the maximum possible number of frequency components:</p><pre class="codeinput">mc = floor(floor(t(end)/dt)*fmax*dt);
+rand(<span class="string">'twister'</span>,0); randn(<span class="string">'state'</span>,0);
+v = b_p + gen_test_signal(t(end)+2*round(0.1*length(t))*dt,dt,fmax,-Inf,mc);
+</pre><p>Truncate first 100 values to eliminate discontinuities:</p><pre class="codeinput">v = v((round(0.1*length(t))+1):end-round(0.1*length(t)));
+</pre><p>Normalize the generated signal:</p><pre class="codeinput">u = (diff(v)/dt)./v(2:end);
+u = u/max(abs(u));
+</pre><pre class="codeinput">figure;subplot(1,2,1);plot([0,t],v)
+xlabel(<span class="string">'t (seconds)'</span>);
+ylabel(<span class="string">'I(t)'</span>);
+title(<span class="string">'Input Stimulus'</span>)
+subplot(1,2,2); plot(t,u)
+xlabel(<span class="string">'t (seconds)'</span>);
+ylabel(<span class="string">'v(t)'</span>);
+title(<span class="string">'Temporal Contrast'</span>)
+</pre><img vspace="5" hspace="5" src="iaf_spline_onoff_demo_01.png" alt=""> <h2>Time Encoding<a name="8"></a></h2><p>Set the encoding parameters:</p><pre class="codeinput">b = 4;          <span class="comment">% bias</span>
+d = 0.75;       <span class="comment">% threshold</span>
+C = 0.01;       <span class="comment">% capacitance</span>
+tauf = 0.015;   <span class="comment">% cross-feedback time constant</span>
+scale = 0.005;  <span class="comment">% amplitude scaling factor</span>
+</pre><p>Encode the signal:</p><pre class="codeinput">[tk1 tk2]  = iaf_encode_ideal_on_off(u,t,b,d,C,tauf,scale);
+</pre><img vspace="5" hspace="5" src="iaf_spline_onoff_demo_02.png" alt=""> <h2>Time Decoding<a name="10"></a></h2><p>Recover the signal:</p><pre class="codeinput">u_rec = consistent_decoding_IF_ONOFF(tk1,tk2,t,b,d,C,tauf,scale);
+
+figure;plot(t(tr_vc),u(tr_vc),t(tr_vc),u_rec(tr_vc));
+xlabel(<span class="string">'t (seconds)'</span>); ylabel(<span class="string">'u(t)'</span>);
+title(<span class="string">'Reconstructed Signal'</span>);
+legend(<span class="string">'original'</span>,<span class="string">'reconstructed'</span>);
+</pre><img vspace="5" hspace="5" src="iaf_spline_onoff_demo_03.png" alt=""> <p>Compute the SNR of the recovered signal:</p><pre class="codeinput">snr = 10*log10(sum(u(tr_vc).^2)/sum((u(tr_vc)-u_rec(tr_vc)).^2))
+</pre><pre class="codeoutput">
+snr =
+
+   34.6599
+
+</pre><p><i>Author: Eftychios A. Pnevmatikakis</i></p><p><i>Copyright 2009-2011 Eftychios A. Pnevmatikakis</i></p><p class="footer"><br>
+      Published with MATLAB&reg; 7.9<br></p></div><!--
+##### SOURCE BEGIN #####
+%% Time Encoding and Decoding Using ON/OFF Integrate-and-Fire Neurons
+% This demo illustrates the time encoding of a bandlimited signal
+% using interconnected ON/OFF integrate-and-fire neurons and recovery
+% of the signal using spline interpolation. The input signal in this
+% case can be thought of as the temporal contrast of a positive input
+% photocurrent.
+%
+% The demo corresponds to the example presented in Section 3.3 of
+% the Consistent Recovery paper mentioned in the toolbox
+% references.
+
+%% Generating a Test Signal
+% Generate a noiseless signal 0.2 s long sampled at 1 GHz with a
+% bandwidth of 100 Hz:
+dur = 0.2;       % duration
+dt = 1e-6;       % sampling resolution
+fmax = 100;      % bandwidth (Hz)
+t = [dt:dt:dur]; % time support
+
+%%
+% Truncate the time vector:
+tr_vc = round(0.05*length(t)):round(0.95*length(t));
+
+%%
+% Add a constant bias to the signal to ensure that it is positive:
+b_p = 8;
+
+%%
+% Use the maximum possible number of frequency components:
+mc = floor(floor(t(end)/dt)*fmax*dt); 
+rand('twister',0); randn('state',0);
+v = b_p + gen_test_signal(t(end)+2*round(0.1*length(t))*dt,dt,fmax,-Inf,mc);
+    
+%%    
+% Truncate first 100 values to eliminate discontinuities:
+v = v((round(0.1*length(t))+1):end-round(0.1*length(t))); 
+
+%%
+% Normalize the generated signal:
+u = (diff(v)/dt)./v(2:end);
+u = u/max(abs(u));
+
+%%
+figure;subplot(1,2,1);plot([0,t],v)
+xlabel('t (seconds)');
+ylabel('I(t)');
+title('Input Stimulus')
+subplot(1,2,2); plot(t,u)
+xlabel('t (seconds)');
+ylabel('v(t)');
+title('Temporal Contrast')
+    
+%% Time Encoding
+% Set the encoding parameters:
+b = 4;          % bias
+d = 0.75;       % threshold
+C = 0.01;       % capacitance
+tauf = 0.015;   % cross-feedback time constant
+scale = 0.005;  % amplitude scaling factor
+
+%%
+% Encode the signal:
+[tk1 tk2]  = iaf_encode_ideal_on_off(u,t,b,d,C,tauf,scale);
+
+%% Time Decoding
+% Recover the signal:
+u_rec = consistent_decoding_IF_ONOFF(tk1,tk2,t,b,d,C,tauf,scale);
+
+figure;plot(t(tr_vc),u(tr_vc),t(tr_vc),u_rec(tr_vc)); 
+xlabel('t (seconds)'); ylabel('u(t)'); 
+title('Reconstructed Signal');
+legend('original','reconstructed');
+  
+%%  
+% Compute the SNR of the recovered signal:
+snr = 10*log10(sum(u(tr_vc).^2)/sum((u(tr_vc)-u_rec(tr_vc)).^2)) 
+                                                                 
+%%
+% _Author: Eftychios A. Pnevmatikakis_
+%%
+% _Copyright 2009-2011 Eftychios A. Pnevmatikakis_
+
+##### SOURCE END #####
+--></body></html>
