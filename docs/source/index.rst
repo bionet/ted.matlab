@@ -12,7 +12,7 @@ The Time Encoding and Decoding Toolbox (TED) is a library of MATLAB
 functions and demos that implement time encoding and decoding algorithms. 
 A `Python <http://www.python.org/>`_/`PyCUDA <http://mathema.tician.de/software/pycuda/>`_ 
 implementation is also available from the Bionet Group's 
-`code repository page <http://bionet.github.com/>`_. 
+`code repository page <http://bionet.github.io/>`_. 
 
 To get started using the toolbox, go to the :doc:`installation <install>` page and 
 try running the demos. Check out the :doc:`machines <machines>` page for a 
