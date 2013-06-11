@@ -26,6 +26,7 @@ Contents
 
    install
    machines
+   publications
    authors
    license
    changes
