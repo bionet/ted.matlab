@@ -33,7 +33,7 @@ search path so that the functions comprised by the toolbox may be
 easily accessed. For example, if the software is installed in
 ``$MATLAB/toolbox``, one may add the following lines to the list of
 paths in ``$MATLAB/toolbox/local/pathdef.m`` and restart Matlab to make 
-the toolbox contents available:
+the toolbox contents available: ::
 
    matlabroot,'/toolbox/ted/ted:', ...
    matlabroot,'/toolbox/ted/teddemos:', ...
@@ -41,14 +41,14 @@ the toolbox contents available:
    matlabroot,'/toolbox/utilsdemos:', ...
 
 Alternatively, one may also add the path to the toolbox for the
-duration of one session by running the commands
+duration of one session by running the commands ::
 
    addpath(strcat(getenv('MATLAB'),'/toolbox/ted/ted'));
    addpath(strcat(getenv('MATLAB'),'/toolbox/ted/teddemos'));
    addpath(strcat(getenv('MATLAB'),'/toolbox/utils/utils'));
    addpath(strcat(getenv('MATLAB'),'/toolbox/utils/utilsdemos'));
 
-To rebuild the documentation, run::
+To rebuild the documentation, run: ::
 
    make
 
