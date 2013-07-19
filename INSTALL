@@ -13,9 +13,11 @@ To rebuild the documentation, the following Python packages are also
 required:
 
 * `Docutils <http://docutils.sourceforge.net>`_ 0.5 or later.
-* `Sphinx <http://sphinx.pocoo.org>`_ 1.0.1 or later.
 * `Jinja2 <htt://jinja.pocoo.org>`_ 2.2 or later
 * `Pygments <http://pygments.org>`_ 0.8 or later
+* `Sphinx <http://sphinx.pocoo.org>`_ 1.0.1 or later.
+* `Sphinx Bootstrap Theme
+  <https://github.com/ryan-roemer/sphinx-bootstrap-theme>`_ 0.2.6 or later.
 
 Building and Installation
 -------------------------
