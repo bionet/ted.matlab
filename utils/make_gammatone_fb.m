@@ -6,7 +6,7 @@
 %   spectrum is 0 dB.
 
 %   Author: Lev Givon
-%   Copyright 2009-2012 Lev Givon
+%   Copyright 2009-2014 Lev Givon
 
 function h = make_gammatone_fb(t,N)
 

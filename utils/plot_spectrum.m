@@ -9,7 +9,7 @@
 %   between FMIN and FMAX Hz.
 
 %   Author: Lev Givon
-%   Copyright 2009-2012 Lev Givon
+%   Copyright 2009-2014 Lev Givon
 
 function plot_spectrum(u,fs,varargin)
 

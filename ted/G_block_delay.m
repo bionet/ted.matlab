@@ -6,7 +6,7 @@
 %   j, respectively; D1 and D2 contain the delays of neurons i and j.
 
 %   Author: Eftychios A. Pnevmatikakis
-%   Copyright 2009-2012 Eftychios A. Pnevmatikakis
+%   Copyright 2009-2014 Eftychios A. Pnevmatikakis
 
 function G = G_block_delay(tk1,tk2,d1,d2,W,dt)
 

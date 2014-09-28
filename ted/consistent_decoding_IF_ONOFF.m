@@ -10,7 +10,7 @@
 %   references. 
 
 %   Author: Eftychios A. Pnevmatikakis
-%   Copyright 2009-2012 Eftychios A. Pnevmatikakis
+%   Copyright 2009-2014 Eftychios A. Pnevmatikakis
 
 function u_rec = consistent_decoding_IF_ONOFF(tk1, tk2, t, b, d, C, tauf, scale)
 

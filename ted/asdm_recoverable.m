@@ -6,7 +6,7 @@
 %   that described in most of Prof. Lazar's papers.
 
 %   Author: Lev Givon
-%   Copyright 2009-2012 Lev Givon
+%   Copyright 2009-2014 Lev Givon
 
 function result = asdm_recoverable(u,bw,b,d,k)
 

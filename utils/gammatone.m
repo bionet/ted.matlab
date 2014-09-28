@@ -13,7 +13,7 @@
 %   default, PAD_BW == 2; if PAD_BW == 1, then FC(end) == FMAX.
 
 %   Authors: Eftychios A. Pnevmatikakis and Robert J. Turetsky
-%   Copyright 2009-2012 Eftychios A. Pnevmatikakis and Robert J. Turetsky
+%   Copyright 2009-2014 Eftychios A. Pnevmatikakis and Robert J. Turetsky
 
 function [h,fc,t,f] = gammatone(num,len,fmin,fmax,fs,pad_bw)
 

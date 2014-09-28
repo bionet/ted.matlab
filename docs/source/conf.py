@@ -49,9 +49,9 @@ copyright = u'2011-2014, Lev Givon and Yiyin Zhou'
 # built documents.
 #
 # The short X.Y version.
-version = '0.061'
+version = '0.07'
 # The full version, including alpha/beta/rc tags.
-release = '0.061'
+release = '0.07'
 
 print 'TED version: ', version, release
 
@@ -276,7 +276,7 @@ man_pages = [
 #  dir menu entry, description, category)
 texinfo_documents = [
   ('index', 'TED', u'TED Documentation',
-   u'Lev Givon, Yiyin Zhou', 'TED', 'Time Encoding and Decoding Toolbox.',
+   u'Lev Givon, Yiyin Zhou', 'TED', 'Time Encoding and Decoding Toolkit.',
    'Miscellaneous'),
 ]
 

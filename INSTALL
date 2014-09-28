@@ -6,7 +6,7 @@ Installation Instructions
 Prerequisites
 -------------
 
-The Time Encoding and Decoding Toolbox requires a relatively recent version of
+The Time Encoding and Decoding Toolkit requires a relatively recent version of
 MATLAB (e.g., R14 or later) to run.
 
 To rebuild the documentation, the following Python packages are also

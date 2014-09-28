@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <demos>
 
-<name>Time Encoding and Decoding Toolbox - Demos</name>
+<name>Time Encoding and Decoding Toolkit - Demos</name>
 <type>toolbox</type>
 <icon>$toolbox/matlab/icons/matlabicon.gif</icon>
 <description>Programs that demonstrate how to use the
-  Time Encoding and Decoding Toolbox.</description>
+  Time Encoding and Decoding Toolkit.</description>
 
 <website></website>
 

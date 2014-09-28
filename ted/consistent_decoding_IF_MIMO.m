@@ -13,7 +13,7 @@
 %   references.
 
 %   Author: Eftychios A. Pnevmatikakis
-%   Copyright 2009-2012 Eftychios A. Pnevmatikakis
+%   Copyright 2009-2014 Eftychios A. Pnevmatikakis
 
 function u_rec = consistent_decoding_IF_MIMO(TK,LN,t,b,d,C,N,M,delay,scale)
 

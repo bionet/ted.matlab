@@ -18,7 +18,7 @@
 %   used. The capacitances are all assumed to be 1 if not specified.
 
 %   Author: Lev Givon
-%   Copyright 2009-2012 Lev Givon
+%   Copyright 2009-2014 Lev Givon
 
 function u_rec = iaf_decode_filt_trig_pop(s,dur,dt,Omega,M,b,d,varargin)
 

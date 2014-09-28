@@ -4,7 +4,7 @@
 %   resistance R, capacitance C, and bandwidth W (in rad/s).
 %
 %   Author: Lev Givon
-%   Copyright 2009-2012 Lev Givon
+%   Copyright 2009-2014 Lev Givon
 
 function res = iaf_recoverable(u,W,b,d,R,C)
 

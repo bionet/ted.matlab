@@ -30,4 +30,4 @@
 %   gen_window           - Generate a tapered window.
 
 % Author: Lev Givon
-% Copyright 2009-2012 Lev Givon
+% Copyright 2009-2014 Lev Givon

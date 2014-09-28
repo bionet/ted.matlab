@@ -12,7 +12,7 @@
 %   differ from the number contributed by other neurons.
 
 %   Author: Lev Givon
-%   Copyright 2009-2012 Lev Givon
+%   Copyright 2009-2014 Lev Givon
 
 function u_rec = asdm_decode_pop(s_list,dur,dt,bw,b_list,d_list, ...
                                  k_list)

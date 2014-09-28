@@ -73,4 +73,4 @@ end
 %%
 % _Author: Lev Givon_
 %%
-% _Copyright 2009-2012 Lev Givon_
+% _Copyright 2009-2014 Lev Givon_

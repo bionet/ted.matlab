@@ -156,4 +156,4 @@ figure;errorbar(1:N,mean(snr_p'),std(snr_p')/sqrt(Nrep)); hold all;
 %%
 % _Author: Eftychios A. Pnevmatikakis_
 %%
-% _Copyright 2009-2012 Eftychios A. Pnevmatikakis_
+% _Copyright 2009-2014 Eftychios A. Pnevmatikakis_
