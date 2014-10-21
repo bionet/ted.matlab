@@ -12,15 +12,14 @@ time intervals between fixed-amplitude spikes. Sample code and
 documentation demonstrating the use of the implementations is
 included.
 
-Future releases of this package may be obtained from the Bionet
-Group's online code repository [1]_.
+Development
+-----------
+The latest source code can be obtained from
+`<http://github.com/bionet/ted.matlab>`_.
 
 Authors & Acknowledgments
 -------------------------
-This software was written by members of the Bionet Group [2]_ at Columbia
-University.
-
-See the included AUTHORS file for more information and acknowledgements.
+See the included AUTHORS file for more information.
 
 License
 -------
@@ -36,8 +35,6 @@ References
 The algorithms implemented in this package are described in the papers
 listed in the attached BibTeX bibliography. Further research on
 time domain coding and processing may be obtained from the Bionet Group
-publication server [3]_.
+publication server [1]_.
 
-.. [1] http://bionet.github.io/
-.. [2] http://www.bionet.ee.columbia.edu/
-.. [3] http://www.bionet.ee.columbia.edu/publications/
+.. [1] http://www.bionet.ee.columbia.edu/publications/
