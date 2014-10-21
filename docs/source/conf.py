@@ -49,9 +49,9 @@ copyright = u'2011-2014, Lev Givon and Yiyin Zhou'
 # built documents.
 #
 # The short X.Y version.
-version = '0.07'
+version = '0.7'
 # The full version, including alpha/beta/rc tags.
-release = '0.07'
+release = '0.7'
 
 print 'TED version: ', version, release
 
