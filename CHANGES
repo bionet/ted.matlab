@@ -3,10 +3,11 @@
 Change Log
 ==========
 
-Release 0.7 - ()
------------------
+Release 0.7 - (Under Development)
+---------------------------------
 * Change package name to Time Encoding and Decoding Toolkit.
 * Change to PEP 440 version numbering.
+* Use ReadTheDocs theme in HTML docs.
 
 Release 0.061 - (August 6, 2012)
 --------------------------------
