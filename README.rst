@@ -12,6 +12,10 @@ time intervals between fixed-amplitude spikes. Sample code and
 documentation demonstrating the use of the implementations is
 included.
 
+Documentation
+-------------
+Package documentation is available at `<https://ted-matlab.readthedocs.org/>`_.
+
 Development
 -----------
 The latest source code can be obtained from
