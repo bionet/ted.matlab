@@ -3,6 +3,10 @@
 Time Encoding and Decoding Toolkit
 ==================================
 
+.. image:: https://zenodo.org/badge/6233/bionet/ted.matlab.svg
+   :target: http://dx.doi.org/10.5281/zenodo.16260
+   :alt: 0.7.0
+
 Package Description
 -------------------
 The Time Encoding and Decoding Toolkit contains MATLAB implementations
