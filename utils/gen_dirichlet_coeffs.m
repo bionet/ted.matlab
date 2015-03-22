@@ -4,7 +4,7 @@
 %   the complex conjugates of the last M coefficients reversed.
 
 %   Author: Lev Givon
-%   Copyright 2009-2014 Lev Givon
+%   Copyright 2009-2015 Lev Givon
 
 function am = gen_dirichlet_coeffs(M)
 

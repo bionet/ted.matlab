@@ -25,7 +25,7 @@ function u_rec = LIF_pop_decode_S1(s_list, dur, dt, b, delta, R, C, n, lamda, N)
 %         function for a different choice of the smoothing parameter  
 %
 % Author: Eftychios A. Pnevmatikakis
-% Copyright 2009-2014 Eftychios A. Pnevmatikakis
+% Copyright 2009-2015 Eftychios A. Pnevmatikakis
 
 t = [0:dt:dur];
 RC = R.*C;

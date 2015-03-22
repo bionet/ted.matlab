@@ -7,7 +7,7 @@
 %   using the 2*M+1 Dirichlet coefficients in AM.
 
 %   Author: Lev Givon
-%   Copyright 2009-2014 Lev Givon
+%   Copyright 2009-2015 Lev Givon
 
 function u = gen_trig_poly(T,dt,am)
 

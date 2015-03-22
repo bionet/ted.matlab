@@ -128,7 +128,7 @@ u2_rec = iaf_decode_filt_trig_pop(s2,N_win2*dt,dt,Omega,M,b,d,h);
 </pre><pre>Plot the recovered signal:</pre><pre class="codeinput">plot_compare(t,u,u_rec,<span class="string">'Recovery with 16 Neurons and Stitching'</span>);
 </pre><img vspace="5" hspace="5" src="gammatone_audio_stitch_demo_02.png" alt=""> <p>Resample the normalized recovered signal to 48 kHz and save it as an audio file:</p><pre class="codeinput">u_out = interp1(t,u_rec,t_out,<span class="string">'spline'</span>);
 wavwrite(u_out/max(abs(u_out)),fs_out,<span class="string">'sound_stitched.wav'</span>);
-</pre><p><i>Author: Lev Givon</i></p><p><i>Copyright 2009-2014 Lev Givon</i></p><p class="footer"><br>
+</pre><p><i>Author: Lev Givon</i></p><p><i>Copyright 2009-2015 Lev Givon</i></p><p class="footer"><br>
       Published with MATLAB&reg; 7.12<br></p></div><!--
 ##### SOURCE BEGIN #####
 %% Time Encoding and Decoding of an Audio Sinal Using Gammatone Flters, the Trigonometric Polynomial Approximation, and Stitching
@@ -246,7 +246,7 @@ wavwrite(u_out/max(abs(u_out)),fs_out,'sound_stitched.wav');
 %%
 % _Author: Lev Givon_
 %%
-% _Copyright 2009-2014 Lev Givon_
+% _Copyright 2009-2015 Lev Givon_
 
 
 ##### SOURCE END #####

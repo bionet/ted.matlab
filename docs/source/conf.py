@@ -50,7 +50,7 @@ copyright = u'2011-2014, Lev Givon and Yiyin Zhou'
 # The short X.Y version.
 version = '0.7'
 # The full version, including alpha/beta/rc tags.
-release = '0.7'
+release = '0.7.0'
 
 print 'TED version: ', version, release
 

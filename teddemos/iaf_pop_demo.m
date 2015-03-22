@@ -104,4 +104,4 @@ plot_compare(t,u,u_rec_ideal,fig_title);
 %%
 % _Author: Lev Givon_
 %%
-% _Copyright 2009-2014 Lev Givon_
+% _Copyright 2009-2015 Lev Givon_

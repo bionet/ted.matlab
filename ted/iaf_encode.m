@@ -21,7 +21,7 @@
 %   the last emitted spike.
 
 %   Author: Lev Givon
-%   Copyright 2009-2014 Lev Givon
+%   Copyright 2009-2015 Lev Givon
 
 function [varargout] = iaf_encode(u,dt,b,d,varargin)
 

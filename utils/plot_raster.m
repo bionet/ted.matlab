@@ -3,7 +3,7 @@
 %   rasters. The sequences must be specified as elements of a cell array.
 
 %   Author: Lev Givon
-%   Copyright 2009-2014 Lev Givon
+%   Copyright 2009-2015 Lev Givon
 
 function plot_raster(t_list)
 

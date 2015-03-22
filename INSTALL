@@ -5,7 +5,6 @@ Installation Instructions
 
 Prerequisites
 -------------
-
 The Time Encoding and Decoding Toolkit requires a relatively recent version of
 MATLAB (e.g., R14 or later) to run.
 
@@ -21,11 +20,10 @@ required:
 
 Building and Installation
 -------------------------
-
-Unpack the archive into an installation directory of your
-choice. Assuming that Matlab is installed in the directory whose name
-is stored in the environmental variable ``$MATLAB``, one may wish to
-install the software in ``$MATLAB/toolbox/ted`` if one has
+Unpack the archive (or check out the project GitHub repository) into an 
+installation directory of your choice. Assuming that Matlab is installed in the 
+directory whose name is stored in the environmental variable ``$MATLAB``, one 
+may wish to install the software in ``$MATLAB/toolbox/ted`` if one has
 administrative access to the machine.
 
 Add the subdirectories of the installation directory to Matlab's

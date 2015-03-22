@@ -8,7 +8,7 @@
 %   specified file.
 
 %   Author: Lev Givon
-%   Copyright 2009-2014 Lev Givon
+%   Copyright 2009-2015 Lev Givon
 
 function plot_compare(t,u,v,varargin)
 

@@ -9,7 +9,7 @@
 %   of the Consistent Recovery paper mentioned in the toolbox references.
 
 %   Author: Eftychios A. Pnevmatikakis
-%   Copyright 2009-2014 Eftychios A. Pnevmatikakis
+%   Copyright 2009-2015 Eftychios A. Pnevmatikakis
 
 function [tk1 tk2]  = iaf_encode_ideal_on_off(u,t,b,d,k,tauf,scale)
 

@@ -13,7 +13,7 @@
 %   is -inf or pure filtered Gaussian white noise otherwise.
 
 %   Author: Lev Givon
-%   Copyright 2009-2014 Lev Givon
+%   Copyright 2009-2015 Lev Givon
 
 function u = gen_test_signal(dur,dt,fmax,varargin)
 

@@ -14,7 +14,7 @@
 %   -inf or filtered pure Gaussian white noise otherwise.
 
 %   Authors: Lev Givon and Eftychios A. Pnevmatikakis 
-%   Copyright 2009-2014 Lev Givon and Eftychios A. Pnevmatikakis
+%   Copyright 2009-2015 Lev Givon and Eftychios A. Pnevmatikakis
 
 function u = gen_test_bp_signal(dur,dt,fmin,fmax,varargin)
 

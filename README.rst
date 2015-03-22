@@ -15,7 +15,7 @@ included.
 Development
 -----------
 The latest source code can be obtained from
-`<http://github.com/bionet/ted.matlab>`_.
+`<https://github.com/bionet/ted.matlab>`_.
 
 Authors & Acknowledgments
 -------------------------

@@ -15,7 +15,7 @@
 %   tapered portion.
 
 %   Author: Lev Givon
-%   Copyright 2009-2014 Lev Givon
+%   Copyright 2009-2015 Lev Givon
 
 function y = gen_window(N,O,Z,varargin)
 

@@ -9,7 +9,7 @@
 %   sampled at sampling rate 1/DT Hz. 
 
 %   Author: Eftychios A. Pnevmatikakis
-%   Copyright 2009-2014 Eftychios A. Pnevmatikakis
+%   Copyright 2009-2015 Eftychios A. Pnevmatikakis
 
 function u_rec = iaf_decode_pop_delay(TK,LN,t,W,b,d,kd,G,N,delay,dt)
 
